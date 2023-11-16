@@ -14,6 +14,12 @@ const routes: Routes = [
     canLoad: [ AuthGuard ]
   },
   {
+    path: 'formularios',
+    loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule),
+    //canActivate: [ AuthGuard ],
+    //canLoad: [ AuthGuard ]
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
