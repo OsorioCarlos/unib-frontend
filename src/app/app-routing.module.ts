@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { PrivateAppComponent } from './private-app/private-app.component';
 
 const routes: Routes = [
   {
@@ -8,20 +9,15 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    path: 'app',
+    component: PrivateAppComponent,
+    loadChildren: () => import('./private-app/private-app.module').then(m => m.PrivateAppModule),
     canActivate: [ AuthGuard ],
     canLoad: [ AuthGuard ]
   },
   {
-    path: 'formularios',
-    loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule),
-    //canActivate: [ AuthGuard ],
-    //canLoad: [ AuthGuard ]
-  },
-  {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'app'
   }
 ];
 

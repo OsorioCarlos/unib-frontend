@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from '../../environment/environment';
-import { AuthService } from '../auth/servicios/auth.service';
+import { environment } from 'src/environment/environment';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

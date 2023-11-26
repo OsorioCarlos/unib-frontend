@@ -1,28 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, CanLoad, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { Router, CanActivateFn } from '@angular/router';
 
-import { AuthService } from '../auth/servicios/auth.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, CanLoad {
+class PermissionsService{
     constructor (
         private router: Router,
         private authService: AuthService
     ) {  }
 
-    canActivate(): boolean {
+    checkUserToken(): boolean {
         const token = this.authService.checkToken();
         if (!token) {
             this.router.navigateByUrl('/auth');
         }
         return token;
     }
-
-    canLoad(): boolean {
-        const token = this.authService.checkToken();
-        if (!token) {
-            this.router.navigateByUrl('/auth');
-        }
-        return token;
-    }
+}
+export const AuthGuard: CanActivateFn = (): boolean => {
+    return inject(PermissionsService).checkUserToken();
 }
