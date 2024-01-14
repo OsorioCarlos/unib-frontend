@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 import { Credencial } from '../../interfaces/credencial';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-login',
@@ -13,26 +14,28 @@ import { Credencial } from '../../interfaces/credencial';
 })
 export class LoginComponent {
 
-  formularioLogin: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
-  });
+  formularioLogin: FormGroup;
 
   constructor (
     private fb: FormBuilder,
     private authService: AuthService,
+    private appService: AppService,
     private router: Router
-  ) { }
+  ) {
+    this.formularioLogin = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+  }
 
   login (): void {
     const credencial: Credencial = this.formularioLogin.value;
 
     this.authService.login(credencial).subscribe(data => {
       if (data.estado == 'ok') {
-        alert('Credenciales correctas');
         this.router.navigateByUrl('/home');
       } else {
-        alert(data.mensaje);
+        this.appService.alertaError('Error de Autenticación', 'El correo o contraseña ingresados no son válidos');
       }
     });    
   }

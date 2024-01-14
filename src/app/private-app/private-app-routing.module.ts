@@ -13,6 +13,10 @@ const routes: Routes = [
         path: 'formularios',
         loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule)
     },
+    { 
+        path: 'reportes',
+        loadChildren: () => import('./reportes/reportes.module').then(m => m.ReportesModule)
+    },
     {
         path: '**',
         redirectTo: 'home'

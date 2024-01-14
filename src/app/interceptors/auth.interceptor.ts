@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    private apiUrl: string = environment.apiUrl;
+    private apiUrl: string = environment.apiUrl + '/api';
 
     constructor (private authService: AuthService) { }
 

@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center text-warning">Informe sobre las prácticas pre-profesionlaes<br>por parte del estudiante</h1>
+        </div>
+    </div>
+    <form [formGroup]="formularioVSO005">
+        <div class="row mb-3" formGroupName="informacion_estudiante">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-header">DATOS DEL ESTUDIANTE</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="cedulaEstudianteInput" class="form-label">Cédula:</label>
+                                <input type="text" class="form-control" id="cedulaEstudianteInput" formControlName="cedula" (blur)="buscarEstudiante()">
+                            </div>
+                            <div class="col">
+                                <label for="nombreEstudianteInput" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreEstudianteInput" formControlName="nombre">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label">Carrera:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="carrera">
+                                    <option disabled>Selecciona una carrera</option>
+                                    <option *ngFor="let opcion of carreraOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Nivel/Ciclo:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="nivel">
+                                    <option disabled>Selecciona un nivel/ciclo</option>
+                                    <option *ngFor="let opcion of nivelOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="areaPracticasInput" class="form-label">Organización, entidad o persona jurídica de la práctica:</label>
+                                <input type="text" class="form-control" id="areaPracticasInput" formControlName="area_practica">
+                            </div>
+                            <div class="col">
+                                <label for="horasPracicasInput" class="form-label">Número de horas de prácticas realizadas:</label>
+                                <input type="number" class="form-control" id="horasPracicasInput" formControlName="horas_practica">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="inicioPracticasInput" class="form-label">Fecha de inicio:</label>
+                                <input type="date" class="form-control" id="inicioPracticasInput" formControlName="fecha_inicio">
+                            </div>
+                            <div class="col">
+                                <label for="finPracicasInput" class="form-label">Fecha de finalización:</label>
+                                <input type="date" class="form-control" id="finPracicasInput" formControlName="fecha_fin">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3" formGroupName="informe">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-header">INFORME</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="cumplimientoObjetivosTextarea" class="form-label">Cumplimiento de los objetivos de las prácticas:</label>
+                                <textarea class="form-control" id="cumplimientoObjetivosTextarea" rows="3" formControlName="cumplimiento_objetivos"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="beneficiosFormacionTextarea" class="form-label">Beneficios para su formación profesional:</label>
+                                <textarea class="form-control" id="beneficiosFormacionTextarea" rows="3" formControlName="beneficios"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="nuevosAprendizajesTextarea" class="form-label">Nuevos aprendizajes:</label>
+                                <textarea class="form-control" id="nuevosAprendizajesTextarea" rows="3" formControlName="aprendizajes"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="desarrolloPersonalTextarea" class="form-label">Incidencia en su desarrollo personal:</label>
+                                <textarea class="form-control" id="desarrolloPersonalTextarea" rows="3" formControlName="desarrollo_personal"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="comentariosTextarea" class="form-label">Comentarios:</label>
+                                <textarea class="form-control" id="comentariosTextarea" rows="3" formControlName="comentarios"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="recomendacionesTextarea" class="form-label">Recomendaciones:</label>
+                                <textarea class="form-control" id="recomendacionesTextarea" rows="3" formControlName="recomendaciones"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioVSO005.invalid">Guardar</button>
+        </div>
+    </form>
+</div>
