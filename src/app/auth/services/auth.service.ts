@@ -14,7 +14,7 @@ import { AuthResponse } from '../interfaces/auth-response';
 })
 export class AuthService {
 
-  private apiUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl + '/api/auth';
 
   constructor(private http: HttpClient) { }
 

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center text-warning">Carta de Compromiso</h1>
+    </div>
+  </div>
+  <div class="alert alert-danger">
+    ¡Antes de generar la carta de compromiso, por favor, valide que la información sea correcta!
+  </div>
+  <p>
+    Señor/a<br>
+    <b>DIRECTOR DE LA CARRERA DE {{formularioCartaCompromiso.get('carrera')?.value}}</b>
+    <br>
+    <b>UNIB.E</b><br>
+    Presente.-
+  </p>
+  <p class="text-justify">
+    Yo, {{formularioCartaCompromiso.get('nombre_estudiante')?.value}}, estudiante, portador de la cédula de ciudadanía /
+    identidad No. {{formularioCartaCompromiso.get('cedula_estudiante')?.value}}, de la Carrera de {{formularioCartaCompromiso.get('carrera')?.value}},
+    en la que actualmente me estoy matriculando en el semestre Nº {{formularioCartaCompromiso.get('semestre')?.value}}, por medio del
+    presente, dejo constancia escrita de mi compromiso a cumplir de manera irrestricta con las
+    disposiciones contenidas en el protocolo de bioseguridad de la institución
+    {{formularioCartaCompromiso.get('empresa')?.value}}, durante el desarrollo de mis prácticas pre profesionales /
+    actividades de vinculación con la sociedad. 
+  </p>
+  <p class="text-justify">
+    En caso de incumplir con una o varias disposiciones contenidas en el referido protocolo, deslindo a
+    la institución {{formularioCartaCompromiso.get('empresa')?.value}} y a la Universidad Iberoamericana del Ecuador de
+    cualquier responsabilidad en caso de registrarse cualquier complicación o contagio producto de
+    ese imcumplimiento.
+  </p>
+  <p class="text-end">
+    Quito, D.M, {{fechaActualTexto}}
+  </p>
+  <br><br><br>
+  <p>
+    Srta./Sr {{formularioCartaCompromiso.get('nombre_estudiante')?.value}}<br>
+    ESTUDIANTE DE LA CARRERA DE: {{formularioCartaCompromiso.get('carrera')?.value}}<br>
+    CC: {{formularioCartaCompromiso.get('cedula_estudiante')?.value}}
+  </p>
+  <div class="d-grid gap-2 mb-3">
+    <button class="btn btn-primary btn-lg" type="button" (click)="generarCartaCompromiso()" [disabled]="formularioCartaCompromiso.invalid">Generar Acta de Compromiso</button>
+  </div>
+</div>
