@@ -54,7 +54,11 @@ export class ReporteEstudiantesComponent {
     filter = filter.replace('&', '?');
 
     this.privateAppService.obtener(`reportes${filter}`).subscribe(res => {
-      window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      if (res.mensaje === 'OK') {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      } else {
+        this.appService.alertaAviso('AVISO', res.data);
+      }
     }, error => {
       this.appService.alertaError('ERROR', 'Error al generar el reporte');
       console.error(error);
