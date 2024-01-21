@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthUser } from 'src/app/private-app/interfaces/auth-user';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-carta-compromiso',
@@ -11,7 +12,7 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class CartaCompromisoComponent {
   formularioCartaCompromiso: FormGroup;
-  fechaActualTexto: string;
+  apiUrl: string = environment.apiUrl;
   meses: string[];
   niveles: any;
 
@@ -21,7 +22,8 @@ export class CartaCompromisoComponent {
       nombre_estudiante: ['', Validators.required],
       carrera: ['', Validators.required],
       semestre: ['', Validators.required],
-      empresa: ['', Validators.required]
+      empresa: ['', Validators.required],
+      fecha_texto: ['', Validators.required]
     });
 
     this.meses = [
@@ -51,15 +53,18 @@ export class CartaCompromisoComponent {
       'NOVENO NIVEL': '9',
       'DÉCIMO NIVEL': '10'
     };
-    this.fechaActualTexto = this.devolverFechaTexto();
     this.completarCartaComprmiso();
   }
 
   public generarCartaCompromiso(): void {
     if (this.formularioCartaCompromiso.valid) {
       const datos = this.formularioCartaCompromiso.value;
-      console.log('DATOS', datos);
-      console.log('Fecha', this.fechaActualTexto);
+      this.privateAppService.crear('formularios/generar_carta_compromiso', datos).subscribe(res => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      }, error => {
+        this.appService.alertaError('ERROR', 'Error al generar la carta de compromiso');
+        console.error(error);
+      });
     } else {
       this.appService.alertaError('ERROR', 'Falta información en la carta de compromiso');
     }
@@ -74,7 +79,8 @@ export class CartaCompromisoComponent {
           nombre_estudiante: `${authUser.nombres} ${authUser.apellidos}`,
           carrera: authUser.carrera,
           semestre: this.niveles[authUser.nivel],
-          empresa: authUser.empresa
+          empresa: authUser.empresa,
+          fecha_texto: this.devolverFechaTexto()
         });
       } else {
         this.appService.alertaError('ERROR', 'Error al completar la información');
@@ -87,6 +93,6 @@ export class CartaCompromisoComponent {
 
   private devolverFechaTexto(): string {
     const fechaActual = new Date();
-    return `${fechaActual.getDay()} de ${this.meses[fechaActual.getMonth()]} del ${fechaActual.getFullYear()}`;
+    return `${fechaActual.getDate()} de ${this.meses[fechaActual.getMonth()]} del ${fechaActual.getFullYear()}`;
   }
 }

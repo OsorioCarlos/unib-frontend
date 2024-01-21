@@ -24,7 +24,7 @@
             </div>
             <div class="col">
                 <label class="form-label">Estado Prácticas PreProfesionales:</label>
-                <select class="form-select" aria-label="Default select example" formControlName="nivel">
+                <select class="form-select" aria-label="Default select example" formControlName="estado">
                     <option disabled>Selecciona un estado</option>
                     <option value="">TODOS</option>
                     <option *ngFor="let opcion of estadoOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
