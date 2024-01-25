@@ -1,30 +1,15 @@
 <nav class="navbar bg-primary navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
-        <span class="navbar-brand">
-            <span class="navbar-brand mb-0 h1">Unibe</span>
-        </span>
+            <a class="navbar-brand mb-0 h1" routerLink="home"><img src="../../../../assets/img/logo-unibejpeg.jpeg" alt="" class="logo-unibe"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="home">Home</a>
-                </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Formularios
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="formularios/carta-compromiso">Carta Compromiso</a></li>
-                        <li><a class="dropdown-item" routerLink="formularios/vso-001">VS0-001</a></li>
-                        <li><a class="dropdown-item" routerLink="formularios/vso-002">VS0-002</a></li>
-                        <li><a class="dropdown-item" routerLink="formularios/vso-003">VS0-003</a></li>
-                        <li><a class="dropdown-item" routerLink="formularios/vso-004">VS0-004</a></li>
-                        <li><a class="dropdown-item" routerLink="formularios/vso-005">VS0-005</a></li>
-                    </ul>
+                    <a class="nav-link" routerLink="/app/home" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Formularios</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
