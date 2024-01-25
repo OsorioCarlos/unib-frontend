@@ -1,164 +1,453 @@
 <div class="container">
-    <!-- <img src="../../../../assets/img/logoUnibe.png" alt="" class="logo-unibe d-flex justify-content-center mb-3"> -->
-    <form class="card p-4 mt-5">
-        <h4 class="text-center text-primary">COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</h4>
-        <hr>
-        <h5 class="mb-3">DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</h5>
-        <div class="row">
-            <div class="mb-3 col-6">
-                <label for="areaInput" class="form-label"><span style="color: red;">*</span> Nombre / Razón Social:</label>
-                <input type="text" class="form-control" id="areaInput" placeholder="" required>
-            </div>
-            <div class="mb-3 col-6">
-                <label for="areaInput" class="form-label"><span style="color: red;">*</span> Representante Legal:</label>
-                <input type="text" class="form-control" id="areaInput" placeholder="" required>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Área de dedicación:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Teléfono de la organización, entidad o persona jurídica:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Dirección:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="row">
-        <div class="mb-3 col-6">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Días Hábiles: </label>
-            <br>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-lun-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btn-check-lun-outlined">Lun</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-mar-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btn-check-mar-outlined">Mar</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-mie-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btn-check-mie-outlined">Mie</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-jue-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btn-check-jue-outlined">Jue</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-vie-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="btn-check-vie-outlined">Vie</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-sab-outlined" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btn-check-sab-outlined">Sab</label><br>
-            </div>
-            <div class="form-check-inline">
-                <input type="checkbox" class="btn-check" id="btn-check-dom-outlined" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btn-check-dom-outlined">Dom</label><br>
-            </div>
-        </div>
-        <div class="mb-3 col-6">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Horario:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Representante para la práctica del estudiante:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Función del representante de la práctica:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Teléfono del representante de la práctica:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-        <div class="mb-3">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> E-mail del representante de la práctica:</label>
-            <input type="text" class="form-control" id="areaInput" placeholder="" required>
-        </div>
-    <hr>
-    <h5 class="mb-3">COMPROMISO EN RELACIÓN CON EL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES:</h5>
-    <div class="mb-3">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Nombre del estudiante:</label>
-        <input type="text" class="form-control" id="areaInput" placeholder="" required>
+  <!-- <img src="../../../../assets/img/logoUnibe.png" alt="" class="logo-unibe d-flex justify-content-center mb-3"> -->
+  <form class="card p-4 mt-5">
+    <h4 class="text-center text-primary">
+      COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR
+      PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+    </h4>
+    <hr />
+    <h5 class="mb-3">DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</h5>
+    <div class="row">
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Nombre / Razón Social:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Representante Legal:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Área de dedicación:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Área de la práctica pre profesional:</label>
-        <input type="text" class="form-control" id="areaInput" placeholder="" required>
+
+    <div class="row">
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Teléfono:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Dirección:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Días Hábiles:
+        </label>
+        <br />
+        <div class="d-flex justify-content-around">
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-lun-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-lun-outlined"
+              >Lun</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-mar-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-mar-outlined"
+              >Mar</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-mie-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-mie-outlined"
+              >Mie</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-jue-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-jue-outlined"
+              >Jue</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-vie-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-vie-outlined"
+              >Vie</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-sab-outlined"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-primary" for="btn-check-sab-outlined"
+              >Sab</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-dom-outlined"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-primary" for="btn-check-dom-outlined"
+              >Dom</label
+            ><br />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Objetivos de la práctica pre profesional:</label>
-        <textarea class="form-control" id="areaInput" name="" id="" cols="30" rows="10"></textarea>
+
+    <div class="row">
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Horario:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Representante para la práctica del
+          estudiante:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Función del representante de la
+          práctica:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
     </div>
-    <div class="mb-3">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Tareas:</label>
-        <textarea class="form-control" id="areaInput" name="" id="" cols="30" rows="10"></textarea>
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Teléfono del representante de la
+          práctica:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> E-mail del representante de la
+          práctica:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
     </div>
-    <hr>
+
+    <hr />
+    <h5 class="mb-3">
+      COMPROMISO EN RELACIÓN CON EL ESTUDIANTE DE PRÁCTICAS PRE PROFESIONALES:
+    </h5>
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Nombre del estudiante:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Área de la práctica pre
+          profesional:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Objetivos de la práctica pre
+          profesional:</label
+        >
+        <textarea
+          class="form-control"
+          id="areaInput"
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <div class="mb-3 col-6">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Tareas:</label
+        >
+        <textarea
+          class="form-control"
+          id="areaInput"
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+    </div>
+    <hr />
     <h5 class="mb-3">DURACIÓN</h5>
     <div class="row">
-        <div class="mb-3 col-6">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Fecha de Inicio:</label>
-            <input type="date" class="form-control" id="areaInput" placeholder="" required>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Fecha de Inicio:</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Fecha de Finalización:</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
+      </div>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Días Laborales de las prácticas pre
+          profesionales:
+        </label>
+        <br />
+        <div class="d-flex justify-content-around">
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-lun-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-lun-outlined"
+              >Lun</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-mar-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-mar-outlined"
+              >Mar</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-mie-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-mie-outlined"
+              >Mie</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-jue-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-jue-outlined"
+              >Jue</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-vie-outlined"
+              autocomplete="off"
+              checked
+            />
+            <label class="btn btn-outline-primary" for="btn-check-vie-outlined"
+              >Vie</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-sab-outlined"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-primary" for="btn-check-sab-outlined"
+              >Sab</label
+            ><br />
+          </div>
+          <div class="form-check-inline m-0">
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btn-check-dom-outlined"
+              autocomplete="off"
+            />
+            <label class="btn btn-outline-primary" for="btn-check-dom-outlined"
+              >Dom</label
+            ><br />
+          </div>
         </div>
-        <div class="mb-3 col-6">
-            <label for="areaInput" class="form-label"><span style="color: red;">*</span> Fecha de Finalización:</label>
-            <input type="date" class="form-control" id="areaInput" placeholder="" required>
-        </div>
+      </div>
     </div>
     <div class="row">
-    <div class="mb-3 col-6">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Días Laborales de las prácticas pre profesionales: </label>
-        <br>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-lun-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btn-check-lun-outlined">Lun</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-mar-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btn-check-mar-outlined">Mar</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-mie-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btn-check-mie-outlined">Mie</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-jue-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btn-check-jue-outlined">Jue</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-vie-outlined" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="btn-check-vie-outlined">Vie</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-sab-outlined" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btn-check-sab-outlined">Sab</label><br>
-        </div>
-        <div class="form-check-inline">
-            <input type="checkbox" class="btn-check" id="btn-check-dom-outlined" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btn-check-dom-outlined">Dom</label><br>
-        </div>
-    </div>
-    <div class="mb-3 col-6">
-        <label for="areaInput" class="form-label"><span style="color: red;">*</span> Horario:</label>
-        <input type="text" class="form-control" id="areaInput" placeholder="" required>
-    </div>
-    </div>
-    <hr>
-      <h5 class="mb-3">COMPROMISO DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</h5>
-        <p>Me comprometo en realizar el seguimiento y las evaluaciones respectivas, y recibir a la autoridad de la Universidad para la supervisión al estudiante.</p>
-      <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" required>
-        <label class="" for="flexCheckChecked" class="">
-        <b><span style="color: red;">*</span> Aceptar Compromiso</b>
-        </label>
+      <div class="mb-3 col-4">
+        <label for="areaInput" class="form-label"
+          ><span style="color: red">*</span> Horario:</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="areaInput"
+          placeholder=""
+          required
+        />
       </div>
-      <hr>
-      <br>
+    </div>
+    <hr />
+    <h5 class="mb-3">
+      COMPROMISO DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:
+    </h5>
+    <p>
+      Me comprometo en realizar el seguimiento y las evaluaciones respectivas, y
+      recibir a la autoridad de la Universidad para la supervisión al
+      estudiante.
+    </p>
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="flexCheckChecked"
+        required
+      />
+      <label class="" for="flexCheckChecked" class="">
+        <b><span style="color: red">*</span> Aceptar Compromiso</b>
+      </label>
+    </div>
+    <hr />
+    <br />
     <button class="btn btn-primary col-4 m-auto">Guardar</button>
-</form>
+  </form>
 </div>
