@@ -92,7 +92,7 @@ export class VSO003Component {
           razon_social: practicaPreProfesional.organization?.razon_social,
           representante_legal: practicaPreProfesional.organization?.representante_legal,
           area_dedicacion: practicaPreProfesional.organization?.area_dedicacion,
-          representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
+          // representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
           area_practica: practicaPreProfesional.area_practicas
         },
         calificacion: {

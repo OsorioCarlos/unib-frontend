@@ -9,7 +9,6 @@ import { ApiResponse } from '../interfaces/api-response';
   providedIn: 'root',
 })
 export class PrivateAppService {
-
   private apiUrl: string = environment.apiUrl + '/api';
 
   constructor(private http: HttpClient) { }

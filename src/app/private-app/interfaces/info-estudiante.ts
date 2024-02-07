@@ -1,4 +1,4 @@
-export interface AuthUser {
+export interface InfoEstudiante {
     cedula: string;
     nombres: string;
     apellidos: string;

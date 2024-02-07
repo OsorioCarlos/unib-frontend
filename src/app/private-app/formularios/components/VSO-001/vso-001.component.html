@@ -1,147 +1,304 @@
 <div class="container">
-  <!-- <img src="../../../../assets/img/logoUnibe.png" alt="" class="logo-unibe d-flex justify-content-center mb-3"> -->
-  <form class="card p-4 mt-5"
-  [formGroup]="formGroupSolicitudPracticas"
-  (ngSubmit)="onSubmit($event)"
-  novalidate
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center text-primary">
+        SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
+      </h1>
+      <div class="alert alert-warning" role="alert">Para iniciar tus prácticas preprofesionales, es crucial que proporciones el área y las horas de tu práctica pre-profesional y los detalles relacionados con la organización. Asimismo, asumes el compromiso de cumplir con los objetivos y responsabilidades establecidos por la entidad.</div>
+    </div>
+  </div>
+  <form
+    [formGroup]="formGroupSolicitudPracticas"
+    (ngSubmit)="onSubmit($event)"
+    novalidate
   >
-    <div class="row">
-      <div class="col">
-        <h4 class="text-center text-primary">
-          SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
-        </h4>
-      </div>
-    </div>
-    <hr/>
-    <div class="row mb-3" formGroupName="informacion_estudiante">
-      <div class="col">
-        <div class="row mb-3">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">Práctica pre-profesional</div>
+      <div class="card-body">
+        <div class="row mb-3" formGroupName="practicaPreprofesional">
           <div class="col">
-            <h5>DATOS DEL ESTUDIANTE:</h5>
+            <label for="areaEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Área propuesta para la
+              práctica:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="areaEstudianteInput"
+              formControlName="areaPropuesta"
+            />
+          </div>
+          <div class="col">
+            <label for="numeroHorasEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Número de horas solicitadas:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="numeroHorasEstudianteInput"
+              formControlName="horasSolicitadas"
+            />
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" formGroupName="practicaPreprofesional">
           <div class="col">
-            <label for="cedulaEstudianteInput" class="form-label"><span style="color: red">*</span> Cédula:</label>
-            <input type="text" class="form-control" id="cedulaEstudianteInput" formControlName="cedula" (blur)="buscarEstudiante()">
-          </div>
-          <div class="col">
-            <label for="nombreEstudianteInput" class="form-label"><span style="color: red">*</span> Nombre:</label>
-            <input type="text" class="form-control" id="nombreEstudianteInput" formControlName="nombre">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label"><span style="color: red">*</span> Escuela:</label>
-            <select class="form-select" aria-label="Selecciona carrera" formControlName="carrera">
-              <option disabled>Selecciona una carrera</option>
-              <option value="">TODOS</option>
-              <option *ngFor="let opcion of carreraOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
-            </select>
-          </div>
-          <div class="col">
-            <label class="form-label"><span style="color: red">*</span> Nivel/Ciclo:</label>
-            <select class="form-select" aria-label="Selecciona nivel" formControlName="nivel">
-              <option disabled>Selecciona un nivel</option>
-              <option value="">TODOS</option>
-              <option *ngFor="let opcion of nivelOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col">
-            <label for="areaEstudianteInput" class="form-label"><span style="color: red">*</span> Área propuesta para la
-              práctica:</label>
-            <input type="text" class="form-control" id="areaEstudianteInput" formControlName="area">
-          </div>
-          <div class="col">
-            <label for="numeroHorasEstudianteInput" class="form-label"><span style="color: red">*</span> Número de horas solicitadas para la
-              práctica:</label>
-            <input type="text" class="form-control" id="numeroHorasEstudianteInput" formControlName="numero_horas">
+            <label for="areaEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Representante para la práctica preprofesional:</label
+            >
+            <select
+            class="form-select"
+            aria-label="Selecciona representante"
+            formControlName="representante"
+          >
+            <option disabled>Selecciona un representante</option>
+            <option
+              *ngFor="let opcion of organizacion.internship_representatives"
+              value="{{ opcion.id }}"
+            >
+              {{ opcion.user.nombre_completo}}
+            </option>
+          </select>
           </div>
         </div>
       </div>
     </div>
-    <hr/>
-    <div class="row mb-3" formGroupName="informacion_organizacion">
-      <div class="col">
+    <div class="card shadow-sm mb-3" formGroupName="organizacion">
+      <div class="card-header">
+        Organización, entidad o persona jurídica
+      </div>
+      <div class="card-body">
         <div class="row mb-3">
           <div class="col">
-            <h5>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</h5>
+            <label for="nombreOrganizacionInput" class="form-label"
+              >Nombre / Razón Social:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nombreOrganizacionInput"
+              formControlName="nombreRazonSocial"
+              readonly
+            />
+          </div>
+          <div class="col">
+            <label for="representanteOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> Representante Legal:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="representanteOrganizacionInput"
+              formControlName="representanteLegal"
+            />
           </div>
         </div>
         <div class="row mb-3">
           <div class="col">
-            <label for="cedulaRepresentanteInput" class="form-label"><span style="color: red">*</span> Cédula del representante para la práctica del
-              estudiante:</label>
-            <input type="text" class="form-control" id="cedulaRepresentanteInput" formControlName="cedula_representante" (blur)="buscarRepresentantePracticas()">
+            <label for="areaOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> Área de Dedicación:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="areaOrganizacionInput"
+              formControlName="areaDedicacion"
+            />
           </div>
           <div class="col">
-            <label for="nombreRepresentanteInput" class="form-label"><span style="color: red">*</span> Representante para la práctica del
-              estudiante:</label>
-            <input type="text" class="form-control" id="nombreRepresentanteInput" formControlName="nombre_representante">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col">
-            <label for="rucOrganizacionInput" class="form-label"><span style="color: red">*</span> RUC:</label>
-            <input type="text" class="form-control" id="rucOrganizacionInput" formControlName="ruc">
-          </div>
-          <div class="col">
-            <label for="nombreOrganizacionInput" class="form-label"><span style="color: red">*</span> Nombre / Razón Social:</label>
-            <input type="text" class="form-control" id="nombreOrganizacionInput" formControlName="razon_social">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col">
-            <label for="representanteOrganizacionInput" class="form-label"><span style="color: red">*</span> Rrepresentante Legal:</label>
-            <input type="text" class="form-control" id="representanteOrganizacionInput" formControlName="representante_legal">
-          </div>
-          <div class="col">
-            <label for="areaOrganizacionInput" class="form-label"><span style="color: red">*</span> Rrepresentante Legal:</label>
-            <input type="text" class="form-control" id="areaOrganizacionInput" formControlName="area_dedicacion">
+            <label for="direccionOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> Dirección:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="direccionOrganizacionInput"
+              formControlName="direccion"
+            />
           </div>
         </div>
         <div class="row mb-3">
           <div class="col">
-            <label for="direccionOrganizacionInput" class="form-label"><span style="color: red">*</span> Dirección:</label>
-            <input type="text" class="form-control" id="direccionOrganizacionInput" formControlName="direccion">
+            <label for="telefonoOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> Télefono:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="telefonoOrganizacionInput"
+              formControlName="telefono"
+            />
+          </div>
+          <div class="col">
+            <label for="emailOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> E-mail:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="emailOrganizacionInput"
+              formControlName="email"
+            />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
-            <label for="telefonoOrganizacionInput" class="form-label"><span style="color: red">*</span> Télefono:</label>
-            <input type="text" class="form-control" id="telefonoOrganizacionInput" formControlName="telefono">
+        <div class="row">
+          <div class="mb-3 col">
+            <label for="areaInput" class="form-label"
+              ><span style="color: red">*</span> Días Hábiles:
+            </label>
+            <br />
+            <div class="d-flex justify-content-around">
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-lun-outlined"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-lun-outlined"
+                  >Lun</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-mar-outlined"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-mar-outlined"
+                  >Mar</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-mie-outlined"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-mie-outlined"
+                  >Mie</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-jue-outlined"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-jue-outlined"
+                  >Jue</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-vie-outlined"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-vie-outlined"
+                  >Vie</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-sab-outlined"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-sab-outlined"
+                  >Sab</label
+                ><br />
+              </div>
+              <div class="form-check-inline m-0">
+                <input
+                  type="checkbox"
+                  class="btn-check"
+                  id="btn-check-dom-outlined"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btn-check-dom-outlined"
+                  >Dom</label
+                ><br />
+              </div>
+            </div>
           </div>
-          <div class="col">
-            <label for="emailOrganizacionInput" class="form-label"><span style="color: red">*</span> E-mail:</label>
-            <input type="text" class="form-control" id="emailOrganizacionInput" formControlName="email">
+          <div class="mb-3 col">
+            <label for="areaInput" class="form-label"
+              ><span style="color: red">*</span> Horario:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="areaInput"
+              placeholder=""
+              formControlName="horario"
+              required
+            />
           </div>
         </div>
       </div>
     </div>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col">
-        <h5>COMPROMISO DEL ESTUDIANTE:</h5>
-        <p style="text-align: justify;">
-          Me comprometo a cumplir con el Reglamento de Prácticas Pre profesionales
-          de la Universidad, así como los objetivos, actividades, horarios y más
-          responsabilidades exigidas por la organización, entidad o persona jurídica
-          en la que realizaré mis practicas preprofesionales. Mi conducta, en todo
-          momento, será de responsabilidad, honestidad, puntualidad y colaboración.
-        </p>
-        <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" formControlName="aceptar_compromiso" id="aceptarCompromisoCheckbox"/>
-          <label for="aceptarCompromisoCheckbox">
-            <b><span style="color: red">*</span> Aceptar Compromiso</b>
-          </label>
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">
+        COMPROMISO DEL ESTUDIANTE
+      </div>
+      <div class="card-body">
+        <div class="row mb-3" formGroupName="compromisoEstudiante">
+          <div class="col">
+            <p style="text-align: justify">
+              Me comprometo a cumplir con el Reglamento de Prácticas Pre
+              profesionales de la Universidad, así como los objetivos,
+              actividades, horarios y más responsabilidades exigidas por la
+              organización, entidad o persona jurídica en la que realizaré mis
+              practicas preprofesionales. Mi conducta, en todo momento, será de
+              responsabilidad, honestidad, puntualidad y colaboración.
+            </p>
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                formControlName="acepta"
+                id="aceptarCompromisoCheckbox"
+              />
+              <label for="aceptarCompromisoCheckbox">
+                <p><span style="color: red">*</span> Aceptar Compromiso</p>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <hr/>
     <div class="d-grid gap-2 mb-3">
-      <button class="btn btn-primary btn-lg" type="button" [disabled]="formGroupSolicitudPracticas.invalid || formGroupSolicitudPracticas.get('aceptar_compromiso')?.value == false">Solicitar</button>
+      <button
+        class="btn btn-primary btn-lg"
+        [disabled]="formGroupSolicitudPracticas.invalid || formGroupSolicitudPracticas.get('aceptar_compromiso')?.value == false"
+      >
+        Solicitar Prácticas Pre-Profesionales
+      </button>
+
     </div>
   </form>
 </div>

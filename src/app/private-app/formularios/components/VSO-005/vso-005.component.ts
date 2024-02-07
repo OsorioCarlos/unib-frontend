@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
@@ -16,19 +17,8 @@ export class VSO005Component {
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
 
-  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService) {
+  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService, private route : Router) {
     this.formularioVSO005 = this.fb.group({
-      id: ['', Validators.required],
-      informacion_estudiante: this.fb.group({
-        cedula: ['', Validators.required],
-        nombre: ['', Validators.required],
-        carrera: ['', Validators.required],
-        nivel: ['', Validators.required],
-        area_practica: ['', Validators.required],
-        horas_practica: ['', Validators.required],
-        fecha_inicio: ['', Validators.required],
-        fecha_fin: ['', Validators.required]
-      }),
       informe: this.fb.group({
         cumplimiento_objetivos: ['', Validators.required],
         beneficios: ['', Validators.required],
@@ -46,10 +36,12 @@ export class VSO005Component {
     this.obtenerNiveles();
   }
 
+
   public guardarInformacion(): void {
     const datos = this.formularioVSO005.value;
-    this.privateAppService.actualizar('practicas_preprofesionales', datos.id, datos).subscribe(res => {
+    this.privateAppService.crear('estudiantes/enviarInformeFinal', datos).subscribe(res => {
       this.appService.alertaExito('OK', 'Se ha guardado la información correctamente');
+      this.route.navigateByUrl('/app/student');
     }, err => {
       this.appService.alertaError('ERROR', 'Error al buscar información del estudiante');
       console.error(err);

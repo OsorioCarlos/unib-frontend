@@ -8,6 +8,7 @@ import { environment } from 'src/environment/environment';
 
 import { Credencial } from '../interfaces/credencial';
 import { AuthResponse } from '../interfaces/auth-response';
+import { ApiResponse } from 'src/app/private-app/interfaces/api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -58,4 +59,13 @@ export class AuthService {
     return false;
   }
 
+  getRol():Observable<string>{
+    return this.http.get<ApiResponse>(`${this.apiUrl}/authUser`).pipe(
+      tap(res => {
+        res;
+      }),
+      map(res => res.data.tipo_usuario),
+      catchError(err => of(err.error))
+    );
+  }
 }

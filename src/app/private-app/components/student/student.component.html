@@ -1,0 +1,49 @@
+<div class="container mt-2">
+  <h1 class="text-center text-primary">
+    MÓDULO DE ESTUDIANTE
+  </h1>
+    <div class="alert alert-warning" role="alert">En esta sección podrás encontrar los procesos que debes completar para realizar tus prácticas preprofesionales.</div>
+  <table class="table table-hover mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Documento</th>
+        <th scope="col">Procesos</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td>CARTA DE COMPROMISO</td>
+        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente'">{{estadosProcesos.cartaCompromiso}}<br></span><button class="btn btn-primary p-2" routerLink="/app/formularios/carta-compromiso" *ngIf="estadosProcesos.cartaCompromiso=='Pendiente'">Completar</button></td>
+        </tr>
+      <tr>
+        <th scope="row">VSO-001</th>
+        <td>SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES</td>
+        <td><span *ngIf="estadosProcesos.solicitud!='Pendiente'">{{estadosProcesos.solicitud}}<br></span><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-001" *ngIf="estadosProcesos.cartaCompromiso=='Completado' && estadosProcesos.solicitud=='Pendiente'">Completar</button></td>
+        <button class="btn btn-primary p-2" routerLink="/app/formularios/vso-001">Completar</button>
+      </tr>
+      <tr>
+        <th scope="row">VSO-002</th>
+        <td>COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</td>
+        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente' && estadosProcesos.solicitud!='Pendiente'"></span></td>
+      </tr>
+      <tr>
+        <th scope="row">VSO-003</th>
+        <td>SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE LA DIRECCIÓN DE CARRERA</td>
+        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente' && estadosProcesos.solicitud!='Pendiente'">  </span></td>
+      </tr>
+      <tr>
+        <th scope="row">VSO-004</th>
+        <td>SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</td>
+        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente' && estadosProcesos.solicitud!='Pendiente'"></span></td>
+      </tr>
+      <tr>
+        <th scope="row">VSO-005</th>
+        <td>INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL ESTUDIANTE</td>
+        <td><span *ngIf="estadosProcesos.informeFinal!='Pendiente'">{{estadosProcesos.informeFinal}}<br></span><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-005" *ngIf="estadosProcesos.cartaCompromiso=='Completado' && estadosProcesos.solicitud=='Completado' && estadosProcesos.informeFinal=='Pendiente'">Completar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

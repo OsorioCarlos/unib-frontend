@@ -20,23 +20,23 @@ export class VSO004Component {
     this.formularioVSO004 = this.fb.group({
       id: ['', Validators.required],
       formulario: ['VSO-004', Validators.required],
-      informacion_organizacion: this.fb.group({
-        ruc: ['', Validators.required],
-        razon_social: ['', Validators.required],
-        representante_legal: ['', Validators.required],
-        area_dedicacion: ['', Validators.required],
-        representante_estudiante: ['', Validators.required],
-        area_practica: ['', Validators.required]
-      }),
-      informacion_estudiante: this.fb.group({
-        nombre: ['', Validators.required],
-        carrera: ['', Validators.required],
-        nivel: ['', Validators.required],
-        area_practica: ['', Validators.required],
-        horas_practica: ['', Validators.required],
-        fecha_inicio: ['', Validators.required],
-        fecha_fin: ['', Validators.required]
-      }),
+      // informacion_organizacion: this.fb.group({
+      //   ruc: ['', Validators.required],
+      //   razon_social: ['', Validators.required],
+      //   representante_legal: ['', Validators.required],
+      //   area_dedicacion: ['', Validators.required],
+      //   representante_estudiante: ['', Validators.required],
+      //   area_practica: ['', Validators.required]
+      // }),
+      // informacion_estudiante: this.fb.group({
+      //   nombre: ['', Validators.required],
+      //   carrera: ['', Validators.required],
+      //   nivel: ['', Validators.required],
+      //   area_practica: ['', Validators.required],
+      //   horas_practica: ['', Validators.required],
+      //   fecha_inicio: ['', Validators.required],
+      //   fecha_fin: ['', Validators.required]
+      // }),
       calificacion: this.fb.group({
         criterios: this.fb.array([]),
         nota_promedio: [0, Validators.required],
@@ -80,11 +80,10 @@ export class VSO004Component {
           fecha_fin: practicaPreProfesional.fecha_fin
         },
         informacion_organizacion: {
-          ruc: practicaPreProfesional.organization?.ruc,
           razon_social: practicaPreProfesional.organization?.razon_social,
           representante_legal: practicaPreProfesional.organization?.representante_legal,
           area_dedicacion: practicaPreProfesional.organization?.area_dedicacion,
-          representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
+          // representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
           area_practica: practicaPreProfesional.area_practicas
         },
         calificacion: {

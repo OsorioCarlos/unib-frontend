@@ -10,6 +10,12 @@ import { PrivateAppService } from 'src/app/private-app/services/private-app.serv
 import { AppService } from 'src/app/services/app.service';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
 import { Usuario } from 'src/app/private-app/interfaces/usuario';
+import { InfoEstudiante } from 'src/app/private-app/interfaces/info-estudiante';
+import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
+import { Router } from '@angular/router';
+import { RepresentantePracticas } from 'src/app/private-app/interfaces/representante-practicas';
+import { User } from 'src/app/private-app/interfaces/user';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-vso-001',
@@ -20,12 +26,20 @@ export class VSO001Component {
   formGroupSolicitudPracticas!: FormGroup;
   nivelOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
+  organizacion!: Organizacion;
+  apiUrl: string = environment.apiUrl;
 
-  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService) {
+  constructor(
+    private fb: FormBuilder,
+    private privateAppService: PrivateAppService,
+    private appService: AppService,
+    private router: Router
+  ) {
     this.buildformGroupSolicitudPracticas();
 
     this.nivelOpciones = [];
     this.carreraOpciones = [];
+    this.buscarOrganizacion();
   }
 
   ngOnInit(): void {
@@ -33,143 +47,104 @@ export class VSO001Component {
     this.obtenerNiveles();
   }
 
-  solicitarPractica(solicitarPracticaIn: SolicitarPracticaIn) {
-    this.privateAppService
-      .post('/estudiantes/solicitarPractica', solicitarPracticaIn)
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Solicitud enviada con éxito!',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        },
-        error: (error) => {
-          // throw error;
-          alert(error.error.mensaje);
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Ha ocurrido un error intentalo más tarde',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        },
-      });
-  }
-
-  obtenerVso001(identificacion : string) {
-    this.privateAppService
-      .get('/estudiantes/solicitarPractica/'+identificacion)
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-        }
-      });
-  }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    if (this.formGroupSolicitudPracticas.valid) {
-        console.log('entro aca');
-        let solicitarPracticaIn: SolicitarPracticaIn = {
-          usuarioId: '1751592013',
-          nivelId: this.formGroupSolicitudPracticas.get('nivelId')?.value,
-          carreraId: this.formGroupSolicitudPracticas.get('carreraId')?.value,
-          practicaPreprofesional: {
-            area: this.formGroupSolicitudPracticas.get('area')?.value,
-            estudianteCompromiso: this.formGroupSolicitudPracticas.get('estudianteCompromiso')?.value,
-            numeroHoras: this.formGroupSolicitudPracticas.get('numeroHOras')?.value,
-          },
-        };
-        console.log(this.formGroupSolicitudPracticas);
-        this.solicitarPractica(solicitarPracticaIn);
-      }
-  }
-
-  buscarEstudiante(): void {
-    this.privateAppService.obtener(`estudiantes/buscarPorCedula/${this.formGroupSolicitudPracticas.get('informacion_estudiante.cedula')!.value}`).subscribe(res => {
-      const usuario: Usuario = res.data;
-      this.formGroupSolicitudPracticas.get('informacion_estudiante')?.setValue({
-        cedula: usuario.identificacion,
-        nombre: `${usuario.primer_nombre} ${usuario.segundo_nombre} ${usuario.primer_apellido} ${usuario.segundo_apellido}`,
-        carrera: usuario.student?.carrera_id,
-        nivel: usuario.student?.nivel_id,
-        area: 'SIN ASIGNAR',
-        numero_horas: '120'
-      });
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al buscar estudiante');
-      console.error(error);
-    });
-  }
-
-  buscarRepresentantePracticas(): void {
-    this.privateAppService.obtener(`representantes_practicas/buscarPorCedula/${this.formGroupSolicitudPracticas.get('informacion_organizacion.cedula_representante')!.value}`).subscribe(res => {
-      const usuario: Usuario = res.data;
-      this.formGroupSolicitudPracticas.get('informacion_organizacion')?.setValue({
-        cedula_representante: usuario.identificacion,
-        nombre_representante: `${usuario.primer_nombre} ${usuario.segundo_nombre} ${usuario.primer_apellido} ${usuario.segundo_apellido}`,
-        ruc: usuario.internship_representative?.organization?.ruc,
-        razon_social: usuario.internship_representative?.organization?.razon_social,
-        representante_legal: usuario.internship_representative?.organization?.representante_legal,
-        area_dedicacion: usuario.internship_representative?.organization?.area_dedicacion,
-        direccion: usuario.internship_representative?.organization?.direccion,
-        telefono: usuario.internship_representative?.organization?.telefono,
-        email: usuario.email
-      });
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al buscar estudiante');
-      console.error(error);
-    });
-  }
-
   private buildformGroupSolicitudPracticas(): void {
     this.formGroupSolicitudPracticas = this.fb.group({
-      informacion_estudiante: this.fb.group({
-        cedula: ['', Validators.required],
-        nombre: ['', Validators.required],
-        carrera: ['', Validators.required],
-        nivel: ['', Validators.required],
-        area: ['', Validators.required],
-        numero_horas: ['', Validators.required]
+      practicaPreprofesional: this.fb.group({
+        areaPropuesta: ['', Validators.required],
+        horasSolicitadas: ['', Validators.required],
+        representante: ['', Validators.required],
       }),
-      informacion_organizacion: this.fb.group({
-        ruc: ['', Validators.required],
-        razon_social: ['', Validators.required],
-        representante_legal: ['', Validators.required],
-        area_dedicacion: ['', Validators.required],
-        cedula_representante: ['', Validators.required],
-        nombre_representante: ['', Validators.required],
+      organizacion: this.fb.group({
+        nombreRazonSocial: ['', Validators.required],
+        representanteLegal: ['', Validators.required],
+        areaDedicacion: ['', Validators.required],
         direccion: ['', Validators.required],
         telefono: ['', Validators.required],
-        email: ['', Validators.required]
+        email: ['', Validators.required],
+        horario: ['', Validators.required],
       }),
-      aceptar_compromiso: ['', [Validators.required]]
+      compromisoEstudiante: this.fb.group({
+        acepta: ['', [Validators.required]],
+      }),
     });
   }
 
   private obtenerCarreras(): void {
     this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(res => {
-      this.carreraOpciones = res.data;
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al obtener carreras');
-      console.error(error);
-    });
+    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
+      (res) => {
+        this.carreraOpciones = res.data;
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al obtener carreras');
+        console.error(error);
+      }
+    );
   }
 
   private obtenerNiveles(): void {
     this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(res => {
-      this.nivelOpciones = res.data;
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al obtener niveles');
-      console.error(error);
-    });
+    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
+      (res) => {
+        this.nivelOpciones = res.data;
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al obtener niveles');
+        console.error(error);
+      }
+    );
+  }
+
+  onSubmit(event: Event) {
+    event.preventDefault();
+    if (this.formGroupSolicitudPracticas.valid) {
+      const datos = this.formGroupSolicitudPracticas.value;
+      datos.organizacion.diasHabiles = 'lun / mar';
+
+      this.privateAppService
+        .crear('estudiantes/solicitarPracticas', datos)
+        .subscribe(
+          (res) => {
+            this.appService.alertaExito('OK', res.mensaje);
+            this.generarVso001('1751592013');
+          },
+          (err) => {
+            console.log(err);
+            this.appService.alertaError('ERROR', err.error.mensaje);
+          }
+        );
+    }
+  }
+
+  buscarOrganizacion(): void {
+    this.privateAppService
+      .obtener('estudiantes/consultarOrganizacionAsignada')
+      .subscribe((res) => {
+        this.organizacion = res.data;
+        console.log(this.organizacion);
+        this.formGroupSolicitudPracticas.get('organizacion')?.setValue({
+          nombreRazonSocial: this.organizacion?.razon_social,
+          representanteLegal: this.organizacion?.representante_legal,
+          areaDedicacion: this.organizacion?.area_dedicacion,
+          direccion: this.organizacion?.direccion,
+          telefono: this.organizacion?.telefono,
+          email: this.organizacion?.email,
+          horario: this.organizacion?.horario,
+        });
+      });
+  }
+
+  public generarVso001(identificacionEstudiante:string): void {
+    const datos = {
+      'identificacionEstudiante': identificacionEstudiante
+    };
+        this.privateAppService.crear('formularios/generarVso001', datos).subscribe(res => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        }, error => {
+          this.appService.alertaError('ERROR', 'Error al generar la carta de compromiso');
+          console.error(error);
+        });
+      this.router.navigateByUrl('/app/student');
   }
 
 }
