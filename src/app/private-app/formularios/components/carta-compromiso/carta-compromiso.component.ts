@@ -77,7 +77,6 @@ export class CartaCompromisoComponent {
     this.obtenerNiveles();
     this.obtenerOrganizaciones();
     this.buildformGroupInformacionEstudiante();
-    this.completarCartaComprmiso();
   }
 
 
@@ -103,7 +102,9 @@ export class CartaCompromisoComponent {
   public generarCartaCompromiso(): void {
     if (this.formularioCartaCompromiso.valid) {
       this.privateAppService.obtener('estudiantes/aceptarCompromisoBioseguridad').subscribe(res => {
-        const datos = this.formularioCartaCompromiso.value;
+        const datos = {
+          'identificacionEstudiante': "1751592013"
+        };
         this.privateAppService.crear('formularios/generar_carta_compromiso', datos).subscribe(res => {
           window.open(`${this.apiUrl}/${res.data}`, '_blank');
         }, error => {

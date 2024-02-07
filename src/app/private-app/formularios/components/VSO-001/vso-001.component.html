@@ -40,26 +40,6 @@
             />
           </div>
         </div>
-        <div class="row mb-3" formGroupName="practicaPreprofesional">
-          <div class="col">
-            <label for="areaEstudianteInput" class="form-label"
-              ><span style="color: red">*</span> Representante para la práctica preprofesional:</label
-            >
-            <select
-            class="form-select"
-            aria-label="Selecciona representante"
-            formControlName="representante"
-          >
-            <option disabled>Selecciona un representante</option>
-            <option
-              *ngFor="let opcion of organizacion.internship_representatives"
-              value="{{ opcion.id }}"
-            >
-              {{ opcion.user.nombre_completo}}
-            </option>
-          </select>
-          </div>
-        </div>
       </div>
     </div>
     <div class="card shadow-sm mb-3" formGroupName="organizacion">
@@ -257,6 +237,26 @@
               formControlName="horario"
               required
             />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="areaEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Representante para la práctica del estudiante:</label
+            >
+            <select
+            class="form-select"
+            aria-label="Selecciona representante"
+            formControlName="representante"
+          >
+            <option disabled>Selecciona un representante</option>
+            <option
+              *ngFor="let opcion of organizacion?.internship_representatives"
+              value="{{ opcion.id }}"
+            >
+              {{ opcion.user.nombre_completo}}
+            </option>
+          </select>
           </div>
         </div>
       </div>

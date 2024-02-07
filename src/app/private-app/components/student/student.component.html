@@ -21,7 +21,6 @@
         <th scope="row">VSO-001</th>
         <td>SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES</td>
         <td><span *ngIf="estadosProcesos.solicitud!='Pendiente'">{{estadosProcesos.solicitud}}<br></span><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-001" *ngIf="estadosProcesos.cartaCompromiso=='Completado' && estadosProcesos.solicitud=='Pendiente'">Completar</button></td>
-        <button class="btn btn-primary p-2" routerLink="/app/formularios/vso-001">Completar</button>
       </tr>
       <tr>
         <th scope="row">VSO-002</th>

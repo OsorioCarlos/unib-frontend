@@ -5,6 +5,7 @@ import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-vso-005',
@@ -16,6 +17,7 @@ export class VSO005Component {
   formularioVSO005: FormGroup;
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
+  apiUrl: string = environment.apiUrl;
 
   constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService, private route : Router) {
     this.formularioVSO005 = this.fb.group({
@@ -41,9 +43,9 @@ export class VSO005Component {
     const datos = this.formularioVSO005.value;
     this.privateAppService.crear('estudiantes/enviarInformeFinal', datos).subscribe(res => {
       this.appService.alertaExito('OK', 'Se ha guardado la información correctamente');
-      this.route.navigateByUrl('/app/student');
+      this.generarVso005("1751592013");
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al buscar información del estudiante');
+      this.appService.alertaError('ERROR', err.error.message);
       console.error(err);
     });
   }
@@ -65,7 +67,7 @@ export class VSO005Component {
         }
       });
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al buscar información del estudiante');
+      this.appService.alertaError('ERROR', err.error.message);
       console.error(err);
     });
   }
@@ -89,4 +91,18 @@ export class VSO005Component {
       console.error(err);
     });
   }
+
+  public generarVso005(identificacionEstudiante:string): void {
+    const datos = {
+      'identificacionEstudiante': identificacionEstudiante
+    };
+        this.privateAppService.crear('formularios/generarVso005', datos).subscribe(res => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        }, error => {
+          this.appService.alertaError('ERROR', 'Error al generar la solicitud');
+          console.error(error);
+        });
+      this.route.navigateByUrl('/app/student');
+  }
+
 }

@@ -52,7 +52,6 @@ export class VSO001Component {
       practicaPreprofesional: this.fb.group({
         areaPropuesta: ['', Validators.required],
         horasSolicitadas: ['', Validators.required],
-        representante: ['', Validators.required],
       }),
       organizacion: this.fb.group({
         nombreRazonSocial: ['', Validators.required],
@@ -62,6 +61,7 @@ export class VSO001Component {
         telefono: ['', Validators.required],
         email: ['', Validators.required],
         horario: ['', Validators.required],
+        representante: ['', Validators.required]
       }),
       compromisoEstudiante: this.fb.group({
         acepta: ['', [Validators.required]],
@@ -130,6 +130,7 @@ export class VSO001Component {
           telefono: this.organizacion?.telefono,
           email: this.organizacion?.email,
           horario: this.organizacion?.horario,
+          representante: null
         });
       });
   }
@@ -141,7 +142,7 @@ export class VSO001Component {
         this.privateAppService.crear('formularios/generarVso001', datos).subscribe(res => {
           window.open(`${this.apiUrl}/${res.data}`, '_blank');
         }, error => {
-          this.appService.alertaError('ERROR', 'Error al generar la carta de compromiso');
+          this.appService.alertaError('ERROR', 'Error al generar la solicitud');
           console.error(error);
         });
       this.router.navigateByUrl('/app/student');
