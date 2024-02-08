@@ -1,28 +1,151 @@
 <div class="container mt-2">
-  <h1 class="text-center text-primary">
-    MÓDULO DE REPRESENTANTE DE PRÁCTICAS
-  </h1>
-  <p class="text-center">
-    En esta sección podrás encontrar los procesos que debes realizar como representante de prácticas</p>
-  <table class="table table-hover mt-4">
-    <thead>
-      <tr>
-        <th scope="col">Documento</th>
-        <th scope="col">Procesos</th>
-        <th scope="col">Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">VSO-002</th>
-        <td>COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</td>
-        <td><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-002">Completar</button></td>
-      </tr>
-      <tr>
-        <th scope="row">VSO-004</th>
-        <td>SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</td>
-        <td><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-004">Completar</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <h1 class="text-center text-primary">MÓDULO DE REPRESENTANTE DE PRÁCTICAS</h1>
+  <form *ngIf="representanteCompletoInformacionBasica === false" novalidate [formGroup]="formGroupInformacionRepresentante" (ngSubmit)="onSubmit($event)">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">
+        Datos del representante de prácticas preprofesionales
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="row mb-3" formGroupName="representante">
+            <div class="col">
+              <label for="funcionReprensentanteInput" class="form-label"
+                ><span style="color: red">*</span> Función del representante de
+                la práctica:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="funcionReprensentanteInput"
+                formControlName="funcionRepresentante"
+              />
+            </div>
+            <div class="col">
+              <label for="telefonoInput" class="form-label"
+                ><span style="color: red">*</span> Teléfono:</label
+              >
+              <input type="text" class="form-control" id="telefonoInput" formControlName="telefono"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-lg w-100">Continuar</button>
+  </form>
+
+  <div *ngIf="representanteCompletoInformacionBasica === true">
+    <div class="alert alert-warning" role="alert">En esta sección podrás encontrar todas las solicitudes</div>
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">VSO-002 COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
+      <div class="card-body">
+        <table class="table table-hover mt-0">
+          <thead>
+            <tr>
+              <th scope="col">Identificación</th>
+              <th scope="col">Nombre del estudiante</th>
+              <th scope="col">Área propuesta para la práctica</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1751592013</th>
+              <td>
+                DELGADO LANDA BYRON DANIEL
+              </td>
+              <td>
+                SOFTWARE
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary p-2"
+                  routerLink="/app/formularios/vso-002"
+                >
+                  Completar
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">1751592013</th>
+              <td>
+                MOLINA RIVERA JOSUE DAVID
+              </td>
+              <td>
+                BASE DE DATOS
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary p-2"
+                  routerLink="/app/formularios/vso-002"
+                >
+                Completar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="representanteCompletoInformacionBasica === true">
+    <div class="alert alert-warning" role="alert">En esta sección evaluar a los estudiantes</div>
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">VSO-004 SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
+      <div class="card-body">
+        <table class="table table-hover mt-0">
+          <thead>
+            <tr>
+              <th scope="col">Identificación</th>
+              <th scope="col">Nombre del estudiante</th>
+              <th scope="col">Área propuesta para la práctica</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1751592013</th>
+              <td>
+                DELGADO LANDA BYRON DANIEL
+              </td>
+              <td>
+                SOFTWARE
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary p-2"
+                  routerLink="/app/formularios/vso-004"
+                >
+                  Completar
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">1751592013</th>
+              <td>
+                MOLINA RIVERA JOSUE DAVID
+              </td>
+              <td>
+                BASE DE DATOS
+              </td>
+              <td>
+                <button
+                  class="btn btn-primary p-2"
+                  routerLink="/app/formularios/vso-004"
+                >
+                Completar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div>
+
+
+  </div>
+
