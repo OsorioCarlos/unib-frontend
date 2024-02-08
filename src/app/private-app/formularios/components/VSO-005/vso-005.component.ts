@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-vso-005',
@@ -15,20 +17,10 @@ export class VSO005Component {
   formularioVSO005: FormGroup;
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
+  apiUrl: string = environment.apiUrl;
 
-  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService) {
+  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService, private route : Router) {
     this.formularioVSO005 = this.fb.group({
-      id: ['', Validators.required],
-      informacion_estudiante: this.fb.group({
-        cedula: ['', Validators.required],
-        nombre: ['', Validators.required],
-        carrera: ['', Validators.required],
-        nivel: ['', Validators.required],
-        area_practica: ['', Validators.required],
-        horas_practica: ['', Validators.required],
-        fecha_inicio: ['', Validators.required],
-        fecha_fin: ['', Validators.required]
-      }),
       informe: this.fb.group({
         cumplimiento_objetivos: ['', Validators.required],
         beneficios: ['', Validators.required],
@@ -46,12 +38,14 @@ export class VSO005Component {
     this.obtenerNiveles();
   }
 
+
   public guardarInformacion(): void {
     const datos = this.formularioVSO005.value;
-    this.privateAppService.actualizar('practicas_preprofesionales', datos.id, datos).subscribe(res => {
+    this.privateAppService.crear('estudiantes/enviarInformeFinal', datos).subscribe(res => {
       this.appService.alertaExito('OK', 'Se ha guardado la información correctamente');
+      this.generarVso005("1751592013");
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al buscar información del estudiante');
+      this.appService.alertaError('ERROR', err.error.message);
       console.error(err);
     });
   }
@@ -73,7 +67,7 @@ export class VSO005Component {
         }
       });
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al buscar información del estudiante');
+      this.appService.alertaError('ERROR', err.error.message);
       console.error(err);
     });
   }
@@ -97,4 +91,18 @@ export class VSO005Component {
       console.error(err);
     });
   }
+
+  public generarVso005(identificacionEstudiante:string): void {
+    const datos = {
+      'identificacionEstudiante': identificacionEstudiante
+    };
+        this.privateAppService.crear('formularios/generarVso005', datos).subscribe(res => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        }, error => {
+          this.appService.alertaError('ERROR', 'Error al generar la solicitud');
+          console.error(error);
+        });
+      this.route.navigateByUrl('/app/student');
+  }
+
 }

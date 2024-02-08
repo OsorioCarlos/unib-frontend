@@ -1,11 +1,15 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-center text-warning">Seguimiento y evaluación de prácticas pre-profesionlaes<br>por parte de la organizacón, entidad o persona jurídica</h1>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center text-primary">
+        SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+      </h1>
+      <div class="alert alert-warning" role="alert">La evaluación comprende diversos aspectos del rendimiento estudiantil en prácticas preprofesionales, incluyendo el cumplimiento de objetivos, competencias, responsabilidad, creatividad, adaptación, cooperación, honestidad y puntualidad, con un promedio general. También se evalúa la asistencia en porcentaje y se incluye espacio para observaciones detalladas. Las recomendaciones finales buscan guiar el desarrollo continuo del estudiante en áreas específicas. Este enfoque integral brinda una visión completa del desempeño estudiantil durante las prácticas.
+      </div>
     </div>
+  </div>
     <form [formGroup]="formularioVSO004">
-        <div class="row mb-3" formGroupName="informacion_organizacion">
+        <!-- <div class="row mb-3" formGroupName="informacion_organizacion">
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-header">DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
@@ -94,7 +98,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row mb-3" formGroupName="calificacion">
             <div class="col">
                 <div class="card shadow-sm">
@@ -149,7 +153,7 @@
             </div>
         </div>
         <div class="d-grid gap-2 mb-3">
-            <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioVSO004.invalid">Guardar</button>
+            <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" >Guardar</button>
         </div>
     </form>
 </div>

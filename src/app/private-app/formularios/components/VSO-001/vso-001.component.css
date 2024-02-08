@@ -1,4 +1,8 @@
 .logo-unibe{
     margin: auto;
-    width: 200px;   
+    width: 200px;
+}
+
+.cedulaEstudiante{
+  display: none;
 }

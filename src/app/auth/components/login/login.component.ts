@@ -24,19 +24,39 @@ export class LoginComponent {
   ) {
     this.formularioLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
-  login (): void {
+  login(): void {
     const credencial: Credencial = this.formularioLogin.value;
 
-    this.authService.login(credencial).subscribe(data => {
+    this.authService.login(credencial).subscribe((data) => {
       if (data.estado == 'ok') {
-        this.router.navigateByUrl('/home');
+        switch (data.rol) {
+          case 'ADMINISTRADOR':
+            this.router.navigateByUrl('/app/admin');
+            break;
+          case 'ESTUDIANTE':
+            this.router.navigateByUrl('/app/student');
+            break;
+          case 'REPRESENTANTE PRÁCTICAS':
+            this.router.navigateByUrl('/app/organization');
+            break;
+          default:
+            this.router.navigateByUrl('/auth/login');
+            this.appService.alertaError(
+              'Error de Autenticación',
+              `No se ha parametrizado pantalla para el rol ${data.rol}`
+            );
+            break;
+        }
       } else {
-        this.appService.alertaError('Error de Autenticación', 'El correo o contraseña ingresados no son válidos');
+        this.appService.alertaError(
+          'Error de Autenticación',
+          'El correo o contraseña ingresados no son válidos'
+        );
       }
-    });    
+    });
   }
 }

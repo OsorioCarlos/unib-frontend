@@ -11,13 +11,11 @@ const routes: Routes = [
   {
     path: 'app',
     component: PrivateAppComponent,
-    loadChildren: () => import('./private-app/private-app.module').then(m => m.PrivateAppModule),
-    canActivate: [ AuthGuard ],
-    canLoad: [ AuthGuard ]
+    loadChildren: () => import('./private-app/private-app.module').then(m => m.PrivateAppModule)
   },
   {
     path: '**',
-    redirectTo: 'app'
+    redirectTo: 'auth'
   }
 ];
 
