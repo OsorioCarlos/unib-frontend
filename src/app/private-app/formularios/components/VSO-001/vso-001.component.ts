@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 import { RepresentantePracticas } from 'src/app/private-app/interfaces/representante-practicas';
 import { User } from 'src/app/private-app/interfaces/user';
 import { environment } from 'src/environment/environment';
+import { Estudiante } from 'src/app/private-app/interfaces/estudiante';
+import { EstudianteInfo } from 'src/app/private-app/interfaces/estudiante-info';
 
 @Component({
   selector: 'app-vso-001',
@@ -27,6 +29,7 @@ export class VSO001Component {
   nivelOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
   organizacion!: Organizacion;
+  estudiante!: EstudianteInfo;
   apiUrl: string = environment.apiUrl;
 
   constructor(
@@ -40,9 +43,29 @@ export class VSO001Component {
     this.nivelOpciones = [];
     this.carreraOpciones = [];
     this.buscarOrganizacion();
+    this.buscarEstudiante();
   }
 
   ngOnInit(): void {
+    this.estudiante = {
+      escuela: '',
+      nivel: '',
+      nombre: '',
+    };
+    this.organizacion = {
+      id:0,
+      razon_social: '',
+      representante_legal: '',
+      direccion: '',
+      telefono: '',
+      email: '',
+      area_dedicacion: '',
+      horario: '',
+      dias_laborables: '',
+      created_at: new Date,
+      updated_at: new Date,
+      internship_representatives: []
+    };
     this.obtenerCarreras();
     this.obtenerNiveles();
   }
@@ -54,13 +77,6 @@ export class VSO001Component {
         horasSolicitadas: ['', Validators.required],
       }),
       organizacion: this.fb.group({
-        nombreRazonSocial: ['', Validators.required],
-        representanteLegal: ['', Validators.required],
-        areaDedicacion: ['', Validators.required],
-        direccion: ['', Validators.required],
-        telefono: ['', Validators.required],
-        email: ['', Validators.required],
-        horario: ['', Validators.required],
         representante: ['', Validators.required]
       }),
       compromisoEstudiante: this.fb.group({
@@ -116,22 +132,21 @@ export class VSO001Component {
     }
   }
 
+  buscarEstudiante(): void {
+    this.privateAppService
+      .obtener('estudiantes/obtenerEstudiante')
+      .subscribe((res) => {
+        this.estudiante = res.data;
+        console.log(this.estudiante);
+      });
+  }
+
   buscarOrganizacion(): void {
     this.privateAppService
       .obtener('estudiantes/consultarOrganizacionAsignada')
       .subscribe((res) => {
         this.organizacion = res.data;
         console.log(this.organizacion);
-        this.formGroupSolicitudPracticas.get('organizacion')?.setValue({
-          nombreRazonSocial: this.organizacion?.razon_social,
-          representanteLegal: this.organizacion?.representante_legal,
-          areaDedicacion: this.organizacion?.area_dedicacion,
-          direccion: this.organizacion?.direccion,
-          telefono: this.organizacion?.telefono,
-          email: this.organizacion?.email,
-          horario: this.organizacion?.horario,
-          representante: null
-        });
       });
   }
 

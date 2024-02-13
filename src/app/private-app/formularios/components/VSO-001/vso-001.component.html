@@ -12,39 +12,81 @@
     (ngSubmit)="onSubmit($event)"
     novalidate
   >
-    <div class="card shadow-sm mb-3">
-      <div class="card-header">Práctica pre-profesional</div>
-      <div class="card-body">
-        <div class="row mb-3" formGroupName="practicaPreprofesional">
-          <div class="col">
-            <label for="areaEstudianteInput" class="form-label"
-              ><span style="color: red">*</span> Área propuesta para la
-              práctica:</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="areaEstudianteInput"
-              formControlName="areaPropuesta"
-            />
-          </div>
-          <div class="col">
-            <label for="numeroHorasEstudianteInput" class="form-label"
-              ><span style="color: red">*</span> Número de horas solicitadas:</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="numeroHorasEstudianteInput"
-              formControlName="horasSolicitadas"
-            />
-          </div>
+  <div class="card shadow-sm mb-3">
+    <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
+    <div class="card-body">
+      <div>
+      <div class="row mb-3" >
+        <div class="col-6">
+          <label for="nombreInput" class="form-label">Nombre:</label
+          >
+          <input
+            type="text"
+            class="form-control input-readonly inputCompletado"
+            id="nombreInput"
+            readonly
+            [value]="estudiante.nombre"
+          />
+        </div>
+      </div>
+      <div class="row mb-3" >
+        <div class="col">
+          <label for="escuelaInput" class="form-label">Escuela:</label
+          >
+          <input
+            type="text"
+            class="form-control input-readonly inputCompletado"
+            id="escuelaInput"
+            readonly
+            [value]="estudiante.escuela"
+          />
+        </div>
+        <div class="col">
+          <label for="nivelInput" class="form-label">Nivel/Ciclo:</label
+          >
+          <input
+            type="text"
+            class="form-control input-readonly inputCompletado"
+            id="nivelInput"
+            readonly
+            [value]="estudiante.nivel"
+          />
         </div>
       </div>
     </div>
+
+      <div class="row mb-3" formGroupName="practicaPreprofesional">
+        <div class="col">
+          <label for="areaEstudianteInput" class="form-label"
+            ><span style="color: red">*</span> Área propuesta para la
+            práctica:</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="areaEstudianteInput"
+            formControlName="areaPropuesta"
+          />
+        </div>
+        <div class="col">
+          <label for="numeroHorasEstudianteInput" class="form-label"
+            ><span style="color: red">*</span> Número de horas solicitadas:</label
+          >
+          <input
+            type="number"
+            min="0"
+            max="400"
+            class="form-control"
+            id="numeroHorasEstudianteInput"
+            formControlName="horasSolicitadas"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="card shadow-sm mb-3" formGroupName="organizacion">
-      <div class="card-header">
-        Organización, entidad o persona jurídica
+      <div class="card-header"><b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
       </div>
       <div class="card-body">
         <div class="row mb-3">
@@ -54,191 +96,78 @@
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="nombreOrganizacionInput"
-              formControlName="nombreRazonSocial"
+              [value]="organizacion.razon_social"
               readonly
             />
           </div>
           <div class="col">
             <label for="representanteOrganizacionInput" class="form-label"
-              ><span style="color: red">*</span> Representante Legal:</label
+              >Representante Legal:</label
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="representanteOrganizacionInput"
-              formControlName="representanteLegal"
+              [value]="organizacion.representante_legal"
+              readonly
             />
           </div>
         </div>
         <div class="row mb-3">
           <div class="col">
             <label for="areaOrganizacionInput" class="form-label"
-              ><span style="color: red">*</span> Área de Dedicación:</label
+              >Área de Dedicación:</label
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="areaOrganizacionInput"
-              formControlName="areaDedicacion"
+              [value]="organizacion.area_dedicacion"
+              readonly
             />
           </div>
           <div class="col">
             <label for="direccionOrganizacionInput" class="form-label"
-              ><span style="color: red">*</span> Dirección:</label
+              >Dirección:</label
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="direccionOrganizacionInput"
-              formControlName="direccion"
+              [value]="organizacion.direccion"
+              readonly
             />
           </div>
         </div>
         <div class="row mb-3">
           <div class="col">
             <label for="telefonoOrganizacionInput" class="form-label"
-              ><span style="color: red">*</span> Télefono:</label
+              >Télefono:</label
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="telefonoOrganizacionInput"
-              formControlName="telefono"
+              [value]="organizacion.telefono"
+              readonly
             />
           </div>
           <div class="col">
             <label for="emailOrganizacionInput" class="form-label"
-              ><span style="color: red">*</span> E-mail:</label
+              >E-mail:</label
             >
             <input
               type="text"
-              class="form-control"
+              class="form-control inputCompletado"
               id="emailOrganizacionInput"
-              formControlName="email"
+              [value]="organizacion.email"
+              readonly
             />
           </div>
         </div>
-        <div class="row">
-          <div class="mb-3 col">
-            <label for="areaInput" class="form-label"
-              ><span style="color: red">*</span> Días Hábiles:
-            </label>
-            <br />
-            <div class="d-flex justify-content-around">
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-lun-outlined"
-                  autocomplete="off"
-                  checked
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-lun-outlined"
-                  >Lun</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-mar-outlined"
-                  autocomplete="off"
-                  checked
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-mar-outlined"
-                  >Mar</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-mie-outlined"
-                  autocomplete="off"
-                  checked
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-mie-outlined"
-                  >Mie</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-jue-outlined"
-                  autocomplete="off"
-                  checked
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-jue-outlined"
-                  >Jue</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-vie-outlined"
-                  autocomplete="off"
-                  checked
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-vie-outlined"
-                  >Vie</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-sab-outlined"
-                  autocomplete="off"
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-sab-outlined"
-                  >Sab</label
-                ><br />
-              </div>
-              <div class="form-check-inline m-0">
-                <input
-                  type="checkbox"
-                  class="btn-check"
-                  id="btn-check-dom-outlined"
-                  autocomplete="off"
-                />
-                <label
-                  class="btn btn-outline-primary"
-                  for="btn-check-dom-outlined"
-                  >Dom</label
-                ><br />
-              </div>
-            </div>
-          </div>
-          <div class="mb-3 col">
-            <label for="areaInput" class="form-label"
-              ><span style="color: red">*</span> Horario:</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="areaInput"
-              placeholder=""
-              formControlName="horario"
-              required
-            />
-          </div>
-        </div>
+
         <div class="row">
           <div class="col">
             <label for="areaEstudianteInput" class="form-label"
@@ -251,7 +180,7 @@
           >
             <option disabled>Selecciona un representante</option>
             <option
-              *ngFor="let opcion of organizacion?.internship_representatives"
+              *ngFor="let opcion of organizacion.internship_representatives"
               value="{{ opcion.id }}"
             >
               {{ opcion.user.nombre_completo}}

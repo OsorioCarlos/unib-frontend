@@ -5,44 +5,142 @@
             <div class="alert alert-warning" role="alert">Para finalizar tus prácticas preprofesoinales, debes enviar el informe final donde debes explicar cómo lograste tus objetivos, qué aprendiste para tu carrera, cómo afectó a tu crecimiento personal, y también compartir tus comentarios y recomendaciones.</div>
     </div>
     <form [formGroup]="formularioVSO005">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
+        <div class="card-body">
+          <div>
+          <div class="row mb-3" >
+            <div class="col-6">
+              <label for="nombreInput" class="form-label">Nombre:</label
+              >
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nombreInput"
+                readonly
+                value="Byron Daniel Delgado Landa"
+              />
+            </div>
+          </div>
+          <div class="row mb-3" >
+            <div class="col">
+              <label for="escuelaInput" class="form-label">Escuela:</label
+              >
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="escuelaInput"
+                readonly
+                value="UNIBE"
+              />
+            </div>
+            <div class="col">
+              <label for="nivelInput" class="form-label">Nivel/Ciclo:</label
+              >
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nivelInput"
+                readonly
+                value="Segundo semestre"
+              />
+            </div>
+          </div>
+        </div>
+
+          <div class="row mb-3" formGroupName="practicaPreprofesional">
+            <div class="col">
+              <label for="areaEstudianteInput" class="form-label"
+                >Organización, entidad o persona jurídica de la práctica:</label
+              >
+              <input
+                type="text"
+                class="form-control inputCompletado"
+                id="areaEstudianteInput"
+                formControlName="areaPropuesta"
+              />
+            </div>
+            <div class="col">
+              <label for="numeroHorasEstudianteInput" class="form-label"
+                >Número de horas de prácticas realizadas:</label
+              >
+              <input
+                type="number"
+                min="0"
+                max="400"
+                class="form-control inputCompletado"
+                id="numeroHorasEstudianteInput"
+                formControlName="horasSolicitadas"
+              />
+            </div>
+          </div>
+
+          <div class="row mb-3" formGroupName="practicaPreprofesional">
+            <div class="col">
+              <label for="fechaInicioInput" class="form-label"
+                >Fecha de inicio:</label
+              >
+              <input
+                type="text"
+                class="form-control inputCompletado"
+                id="fechaInicioInput"
+                formControlName="fechaInicio"
+              />
+            </div>
+            <div class="col">
+              <label for="fechaFinalizacionInput" class="form-label"
+                >Fecha de finalización:</label
+              >
+              <input
+                type="number"
+                min="0"
+                max="400"
+                class="form-control inputCompletado"
+                id="fechaFinalizacionInput"
+                formControlName="fechaFinalizacion"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="row mb-3" formGroupName="informe">
             <div class="col">
                 <div class="card shadow-sm">
-                    <div class="card-header">INFORME</div>
+                    <div class="card-header"><b>INFORME:</b></div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="cumplimientoObjetivosTextarea" class="form-label">Cumplimiento de los objetivos de las prácticas:</label>
+                                <label for="cumplimientoObjetivosTextarea" class="form-label"><span style="color: red">*</span> Cumplimiento de los objetivos de las prácticas:</label>
                                 <textarea class="form-control" id="cumplimientoObjetivosTextarea" rows="3" formControlName="cumplimiento_objetivos"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="beneficiosFormacionTextarea" class="form-label">Beneficios para su formación profesional:</label>
+                                <label for="beneficiosFormacionTextarea" class="form-label"><span style="color: red">*</span> Beneficios para su formación profesional:</label>
                                 <textarea class="form-control" id="beneficiosFormacionTextarea" rows="3" formControlName="beneficios"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="nuevosAprendizajesTextarea" class="form-label">Nuevos aprendizajes:</label>
+                                <label for="nuevosAprendizajesTextarea" class="form-label"><span style="color: red">*</span> Nuevos aprendizajes:</label>
                                 <textarea class="form-control" id="nuevosAprendizajesTextarea" rows="3" formControlName="aprendizajes"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="desarrolloPersonalTextarea" class="form-label">Incidencia en su desarrollo personal:</label>
+                                <label for="desarrolloPersonalTextarea" class="form-label"><span style="color: red">*</span> Incidencia en su desarrollo personal:</label>
                                 <textarea class="form-control" id="desarrolloPersonalTextarea" rows="3" formControlName="desarrollo_personal"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="comentariosTextarea" class="form-label">Comentarios:</label>
+                                <label for="comentariosTextarea" class="form-label"><span style="color: red">*</span> Comentarios:</label>
                                 <textarea class="form-control" id="comentariosTextarea" rows="3" formControlName="comentarios"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="recomendacionesTextarea" class="form-label">Recomendaciones:</label>
+                                <label for="recomendacionesTextarea" class="form-label"><span style="color: red">*</span> Recomendaciones:</label>
                                 <textarea class="form-control" id="recomendacionesTextarea" rows="3" formControlName="recomendaciones"></textarea>
                             </div>
                         </div>

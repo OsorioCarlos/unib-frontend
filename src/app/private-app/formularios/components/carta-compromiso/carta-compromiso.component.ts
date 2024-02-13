@@ -116,7 +116,7 @@ export class CartaCompromisoComponent {
       });
       }
       this.router.navigateByUrl('/app/student');
-      this.appService.alertaExito('OK', 'Haz completado la carta de compromiso correctamente');
+      this.appService.alertaExito('OK', 'Carta de compromiso aceptada');
   }
 
   private completarCartaComprmiso(): void {
