@@ -18,7 +18,9 @@ const routes: Routes = [
     },
     {
         path: 'formularios',
-        loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule)
+        loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule),
+        canLoad:[AuthGuard],
+        data: { expectedRoles: 'ESTUDIANTE,REPRESENTANTE PRÁCTICAS' }
     },
     {
         path: 'reportes',
