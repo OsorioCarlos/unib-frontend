@@ -60,6 +60,7 @@ export class OrganizationComponent {
         .subscribe(
           (res) => {
             this.appService.alertaExito('OK', res.mensaje);
+            this.representanteCompletoInformacionBasica = true;
             this.router.navigateByUrl('/app/organization');
           },
           (err) => {

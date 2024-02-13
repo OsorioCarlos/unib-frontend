@@ -8,7 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VSO002Component {
   constructor(private route: ActivatedRoute) {
-    console.log(this.route.snapshot.paramMap.get('id'));
+    // console.log(this.route.snapshot.paramMap.get('id'));
   }
 
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      console.log(params.get('id'));
+    });
+  }
 }
