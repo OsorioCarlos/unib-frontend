@@ -222,7 +222,8 @@
         class="btn btn-primary btn-lg"
         [disabled]="
           formGroupSolicitudPracticas.invalid ||
-          formGroupSolicitudPracticas.get('aceptar_compromiso')?.value == false
+          formGroupSolicitudPracticas.get('compromisoEstudiante.acepta')
+            ?.value == false
         "
       >
         Solicitar Prácticas Pre-Profesionales

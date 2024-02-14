@@ -192,6 +192,7 @@
       </div>
       <div class="d-grid gap-2 mb-3">
         <button
+          [disabled]="formularioVSO005.invalid"
           class="btn btn-primary btn-lg"
           type="button"
           (click)="guardarInformacion()"
