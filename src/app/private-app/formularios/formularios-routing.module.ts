@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: 'vso-001', component: VSO001Component },
       { path: 'vso-002/:id', component: VSO002Component },
       { path: 'vso-003', component: VSO003Component },
-      { path: 'vso-004', component: VSO004Component },
+      { path: 'vso-004/:id', component: VSO004Component },
       { path: 'vso-005', component: VSO005Component },
     ],
   },

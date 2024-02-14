@@ -16,6 +16,7 @@ export class OrganizationComponent {
   formGroupInformacionRepresentante!: FormGroup;
   representante: AuthUser;
   estudiantes: User[] = [];
+  evaluacionesPendientes: User[] = [];
   constructor(
     private privateAppService: PrivateAppService,
     private appService: AppService,
@@ -33,6 +34,7 @@ export class OrganizationComponent {
     this.consultarInformaciónRepresentante();
     this.mostrarBienvenida();
     this.consultarSolicitudesPracticas();
+    this.consultarEvaluacionesPendientes();
   }
   mostrarBienvenida() {
     this.privateAppService.obtener('auth/authUser').subscribe(
@@ -95,6 +97,19 @@ export class OrganizationComponent {
       .subscribe(
         (res) => {
           this.estudiantes = res.data;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
+  consultarEvaluacionesPendientes(): void {
+    this.privateAppService
+      .obtener('representante/obtenerEvaluacionesPendientes')
+      .subscribe(
+        (res) => {
+          this.evaluacionesPendientes = res.data;
         },
         (err) => {
           console.log(err);

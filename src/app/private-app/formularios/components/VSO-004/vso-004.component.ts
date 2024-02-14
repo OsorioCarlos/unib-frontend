@@ -6,7 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
+import { InfoEvaluacionRepresentante } from 'src/app/private-app/interfaces/info-evaluacion-representante';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
@@ -20,32 +22,32 @@ export class VSO004Component {
   formularioVSO004: FormGroup;
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
-
+  identificacionEstudiante: string = '';
+  infoEvaluacionRepresentante: InfoEvaluacionRepresentante;
   constructor(
     private fb: FormBuilder,
     private privateAppService: PrivateAppService,
-    private appService: AppService
+    private appService: AppService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    this.infoEvaluacionRepresentante = {
+      razon_social: '',
+      representante_legal: '',
+      area_dedicacion: '',
+      representante: '',
+      nombre_estudiante: '',
+      escuela: '',
+      nivel: '',
+      area_practicas: '',
+      horas_practicas: 0,
+      fecha_inicio: '',
+      fecha_fin: '',
+    };
+
     this.formularioVSO004 = this.fb.group({
-      id: ['', Validators.required],
+      id: [''],
       formulario: ['VSO-004', Validators.required],
-      // informacion_organizacion: this.fb.group({
-      //   ruc: ['', Validators.required],
-      //   razon_social: ['', Validators.required],
-      //   representante_legal: ['', Validators.required],
-      //   area_dedicacion: ['', Validators.required],
-      //   representante_estudiante: ['', Validators.required],
-      //   area_practica: ['', Validators.required]
-      // }),
-      // informacion_estudiante: this.fb.group({
-      //   nombre: ['', Validators.required],
-      //   carrera: ['', Validators.required],
-      //   nivel: ['', Validators.required],
-      //   area_practica: ['', Validators.required],
-      //   horas_practica: ['', Validators.required],
-      //   fecha_inicio: ['', Validators.required],
-      //   fecha_fin: ['', Validators.required]
-      // }),
       calificacion: this.fb.group({
         criterios: this.fb.array([]),
         nota_promedio: [0, Validators.required],
@@ -67,66 +69,35 @@ export class VSO004Component {
     this.obtenerCriteriosCalificacion();
   }
 
-  public guardarInformacion(): void {
-    const datos = this.formularioVSO004.value;
-    this.privateAppService.crear('calificaciones', datos).subscribe(
-      (res) => {
-        this.appService.alertaExito(
-          'OK',
-          'Se ha guardado la información correctamente'
-        );
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
-      }
-    );
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.identificacionEstudiante = params.get('id') ?? '';
+      this.obtenerInformacionEvaluacion();
+    });
   }
 
-  public buscarOrganizacion(): void {
-    this.privateAppService
-      .obtener(
-        `formularios/informacionVSO004/${
-          this.formularioVSO004.get('informacion_organizacion.ruc')!.value
-        }`
-      )
-      .subscribe(
+  public guardarInformacion(): void {
+    console.log(this.formularioVSO004);
+    if (this.formularioVSO004.valid) {
+      let datos = this.formularioVSO004.value;
+      datos.id = this.identificacionEstudiante;
+      this.privateAppService.crear('calificaciones', datos).subscribe(
         (res) => {
-          const practicaPreProfesional: PracticaPreProfesional = res.data;
-          this.formularioVSO004.patchValue({
-            id: practicaPreProfesional.id,
-            informacion_estudiante: {
-              nombre: `${practicaPreProfesional.student?.user?.primer_nombre} ${practicaPreProfesional.student?.user?.segundo_nombre} ${practicaPreProfesional.student?.user?.primer_apellido} ${practicaPreProfesional.student?.user?.segundo_apellido}`,
-              carrera: practicaPreProfesional.student?.carrera_id,
-              nivel: practicaPreProfesional.student?.nivel_id,
-              area_practica: practicaPreProfesional.area_practicas,
-              horas_practica: practicaPreProfesional.numero_horas_practicas,
-              fecha_inicio: practicaPreProfesional.fecha_inicio,
-              fecha_fin: practicaPreProfesional.fecha_fin,
-            },
-            informacion_organizacion: {
-              razon_social: practicaPreProfesional.organization?.razon_social,
-              representante_legal:
-                practicaPreProfesional.organization?.representante_legal,
-              area_dedicacion:
-                practicaPreProfesional.organization?.area_dedicacion,
-              // representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
-              area_practica: practicaPreProfesional.area_practicas,
-            },
-            calificacion: {
-              numero_horas_practicas:
-                practicaPreProfesional.numero_horas_practicas,
-            },
-          });
+          this.appService.alertaExito(
+            'OK',
+            'Se ha guardado la información correctamente'
+          );
+          this.router.navigateByUrl('/app/organization');
         },
         (err) => {
           this.appService.alertaError(
             'ERROR',
-            'Error al buscar información del estudiante'
+            'Error al guardar la información'
           );
           console.error(err);
         }
       );
+    }
   }
 
   public calcularNotaPromedio(): void {
@@ -205,6 +176,20 @@ export class VSO004Component {
             'ERROR',
             'Error al obtener criterios calificación'
           );
+          console.error(err);
+        }
+      );
+  }
+  obtenerInformacionEvaluacion() {
+    this.privateAppService
+      .obtener(
+        `representante/obtenerInformacionEvaluacion/${this.identificacionEstudiante}`
+      )
+      .subscribe(
+        (res) => {
+          this.infoEvaluacionRepresentante = res.data;
+        },
+        (err) => {
           console.error(err);
         }
       );
