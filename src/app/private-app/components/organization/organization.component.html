@@ -60,7 +60,9 @@
             estudiantes, especificando la duración completa con días y horarios.
             También, adquiere un compromiso con el estudiante y la universidad.
           </p>
-          <h6>No tienes estudiantes pendientes</h6>
+          <h6 *ngIf="estudiantes.length == 0">
+            No tienes estudiantes pendientes
+          </h6>
           <table class="table table-hover mt-5" *ngIf="estudiantes.length > 0">
             <thead>
               <tr>
@@ -92,7 +94,7 @@
     </div>
   </div>
 
-  <!-- <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
+  <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
     <div class="col">
       <div class="card">
         <div class="card-body">
@@ -100,46 +102,39 @@
             SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES
           </h5>
           <p class="card-text">
-            El representante delinea metas y responsabilidades para sus
-            estudiantes, precisando la duración completa desde el comienzo hasta
-            la finalización, incluyendo los días laborables y el horario
-            específico. Además, asume un compromiso con el estudiante y la
-            universidad.
+            El director de carrera evalua el desempeño estudiantil considerando
+            aspectos como objetivos, competencias, responsabilidad y asistencia.
+            Se dan recomendaciones finales para orientar el desarrollo del
+            estudiante.
           </p>
-          <table class="table table-hover mt-0">
+          <h6 *ngIf="evaluacionesPendientes.length == 0">
+            No tienes evaluaciones pendientes
+          </h6>
+          <table
+            class="table table-hover mt-5"
+            *ngIf="evaluacionesPendientes.length > 0"
+          >
             <thead>
               <tr>
                 <th scope="col">Identificación</th>
                 <th scope="col">Nombre del estudiante</th>
-                <th scope="col">Área propuesta para la práctica</th>
                 <th scope="col">Estado</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1751592013</th>
-                <td>DELGADO LANDA BYRON DANIEL</td>
-                <td>SOFTWARE</td>
+              <tr *ngFor="let estudiante of evaluacionesPendientes">
+                <th scope="row">{{ estudiante.identificacion }}</th>
+                <td>{{ estudiante.nombre_completo }}</td>
                 <td>
-                  <button
+                  <a
                     class="btn btn-primary p-2"
-                    routerLink="/app/formularios/vso-004"
+                    [routerLink]="[
+                      '/app/formularios/vso-004',
+                      estudiante.identificacion
+                    ]"
                   >
                     Completar
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">1751592013</th>
-                <td>MOLINA RIVERA JOSUE DAVID</td>
-                <td>BASE DE DATOS</td>
-                <td>
-                  <button
-                    class="btn btn-primary p-2"
-                    routerLink="/app/formularios/vso-004"
-                  >
-                    Completar
-                  </button>
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -147,5 +142,5 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

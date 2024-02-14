@@ -5,110 +5,173 @@
         SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA
         ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
       </h1>
-      <div class="alert alert-warning" role="alert">
-        La evaluación comprende diversos aspectos del rendimiento estudiantil en
-        prácticas preprofesionales, incluyendo el cumplimiento de objetivos,
-        competencias, responsabilidad, creatividad, adaptación, cooperación,
-        honestidad y puntualidad, con un promedio general. También se evalúa la
-        asistencia en porcentaje y se incluye espacio para observaciones
-        detalladas. Las recomendaciones finales buscan guiar el desarrollo
-        continuo del estudiante en áreas específicas. Este enfoque integral
-        brinda una visión completa del desempeño estudiantil durante las
-        prácticas.
-      </div>
     </div>
   </div>
   <form [formGroup]="formularioVSO004">
-    <!-- <div class="row mb-3" formGroupName="informacion_organizacion">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <div class="card-header">DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="rucEmpresaInput" class="form-label">RUC:</label>
-                                <input type="text" class="form-control" id="rucEmpresaInput" formControlName="ruc" (blur)="buscarOrganizacion()">
-                            </div>
-                            <div class="col">
-                                <label for="nombreEmpresaInput" class="form-label">Nombre / Razón social:</label>
-                                <input type="text" class="form-control" id="nombreEmpresaInput" formControlName="razon_social">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="representanteEmpresaInput" class="form-label">Representante legal:</label>
-                                <input type="text" class="form-control" id="representanteEmpresaInput" formControlName="representante_legal">
-                            </div>
-                            <div class="col">
-                                <label for="areaEmpresaInput" class="form-label">Área de dedicación:</label>
-                                <input type="text" class="form-control" id="areaEmpresaInput" formControlName="area_dedicacion">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="representantePracticaEmpresaInput" class="form-label">Representante para la práctica del estudiante:</label>
-                                <input type="text" class="form-control" id="representantePracticaEmpresaInput" formControlName="representante_estudiante">
-                            </div>
-                            <div class="col">
-                                <label for="areaPracticaEmpresaInput" class="form-label">Área de las prácticas:</label>
-                                <input type="text" class="form-control" id="areaPracticaEmpresaInput" formControlName="area_practica">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-6">
+                <label for="nombreEmpresaInput" class="form-label"
+                  >Nombre / Razón social:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="nombreEmpresaInput"
+                  [value]="infoEvaluacionRepresentante.razon_social"
+                />
+              </div>
             </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="representanteEmpresaInput" class="form-label"
+                  >Representante legal:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="representanteEmpresaInput"
+                  [value]="infoEvaluacionRepresentante.representante_legal"
+                />
+              </div>
+              <div class="col">
+                <label for="areaEmpresaInput" class="form-label"
+                  >Área de dedicación:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="areaEmpresaInput"
+                  [value]="infoEvaluacionRepresentante.area_dedicacion"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label
+                  for="representantePracticaEmpresaInput"
+                  class="form-label"
+                  >Representante para la práctica del estudiante:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="representantePracticaEmpresaInput"
+                  [value]="infoEvaluacionRepresentante.representante"
+                />
+              </div>
+              <div class="col">
+                <label for="areaPracticaEmpresaInput" class="form-label"
+                  >Área de las prácticas:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="areaPracticaEmpresaInput"
+                  [value]="infoEvaluacionRepresentante.area_practicas"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row mb-3" formGroupName="informacion_estudiante">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <div class="card-header">DATOS DEL ESTUDIANTE</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="nombreEstudianteInput" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombreEstudianteInput" formControlName="nombre">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label class="form-label">Carrera:</label>
-                                <select class="form-select" aria-label="Default select example" formControlName="carrera">
-                                    <option disabled>Selecciona una carrera</option>
-                                    <option *ngFor="let opcion of carreraOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label class="form-label">Nivel/Ciclo:</label>
-                                <select class="form-select" aria-label="Default select example" formControlName="nivel">
-                                    <option disabled>Selecciona un nivel/ciclo</option>
-                                    <option *ngFor="let opcion of nivelOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="areaPracticasInput" class="form-label">Área de la práctica pre-profesional:</label>
-                                <input type="text" class="form-control" id="areaPracticasInput" formControlName="area_practica">
-                            </div>
-                            <div class="col">
-                                <label for="horasPracicasInput" class="form-label">Número de horas de prácticas realizadas:</label>
-                                <input type="number" class="form-control" id="horasPracicasInput" formControlName="horas_practica">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="inicioPracticasInput" class="form-label">Fecha de inicio:</label>
-                                <input type="date" class="form-control" id="inicioPracticasInput" formControlName="fecha_inicio">
-                            </div>
-                            <div class="col">
-                                <label for="finPracicasInput" class="form-label">Fecha de finalización:</label>
-                                <input type="date" class="form-control" id="finPracicasInput" formControlName="fecha_fin">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-6">
+                <label for="nombreEstudianteInput" class="form-label"
+                  >Nombre:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="nombreEstudianteInput"
+                  [value]="infoEvaluacionRepresentante.nombre_estudiante"
+                />
+              </div>
             </div>
-        </div> -->
+            <div class="row mb-3">
+              <div class="col">
+                <label class="form-label">Escuela:</label>
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="escuelaInput"
+                  [value]="infoEvaluacionRepresentante.escuela"
+                />
+              </div>
+              <div class="col">
+                <label class="form-label">Nivel/Ciclo:</label>
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="nivelInput"
+                  [value]="infoEvaluacionRepresentante.nivel"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="areaPracticasInput" class="form-label"
+                  >Área de la práctica pre-profesional:</label
+                >
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="areaPracticasInput"
+                  [value]="infoEvaluacionRepresentante.area_practicas"
+                />
+              </div>
+              <div class="col">
+                <label for="horasPracicasInput" class="form-label"
+                  >Número de horas de prácticas realizadas:</label
+                >
+                <input
+                  type="number"
+                  class="form-control inputCompletado"
+                  id="horasPracicasInput"
+                  [value]="infoEvaluacionRepresentante.horas_practicas"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="inicioPracticasInput" class="form-label"
+                  >Fecha de inicio:</label
+                >
+                <input
+                  type="date"
+                  class="form-control inputCompletado"
+                  id="inicioPracticasInput"
+                  [value]="infoEvaluacionRepresentante.fecha_inicio"
+                />
+              </div>
+              <div class="col">
+                <label for="finPracicasInput" class="form-label"
+                  >Fecha de finalización:</label
+                >
+                <input
+                  type="date"
+                  class="form-control inputCompletado"
+                  id="finPracicasInput"
+                  [value]="infoEvaluacionRepresentante.fecha_fin"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row mb-3" formGroupName="calificacion">
       <div class="col">
         <div class="card shadow-sm">
@@ -221,6 +284,7 @@
     </div>
     <div class="d-grid gap-2 mb-3">
       <button
+        [disabled]="formularioVSO004.invalid"
         class="btn btn-primary btn-lg"
         type="button"
         (click)="guardarInformacion()"

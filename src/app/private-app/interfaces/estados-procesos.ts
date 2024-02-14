@@ -3,4 +3,5 @@ export interface EstadosProcesos {
   solicitud: string;
   informeFinal: string;
   compromisoRecepcion: string;
+  evaluacionRepresentante: string;
 }
