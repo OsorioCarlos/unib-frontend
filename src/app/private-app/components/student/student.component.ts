@@ -29,6 +29,7 @@ export class StudentComponent {
       cartaCompromiso: 'Pendiente',
       solicitud: 'Pendiente',
       informeFinal: 'Pendiente',
+      compromisoRecepcion: 'Pendiente',
     };
     this.estudiante = {
       cedula: '',
@@ -113,6 +114,45 @@ export class StudentComponent {
           this.appService.alertaError(
             'ERROR',
             'Error al generar solicitud de prácticas preprofesionales'
+          );
+          console.error(error);
+        }
+      );
+  }
+
+  descargarCompromisoRecepcion(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService
+      .crear('formularios/generarVso002', datos)
+      .subscribe(
+        (res) => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        },
+        (error) => {
+          this.appService.alertaError(
+            'ERROR',
+            'Error al generar compromiso de recepcion'
+          );
+          console.error(error);
+        }
+      );
+  }
+  descargarInformeFinal(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService
+      .crear('formularios/generarVso005', datos)
+      .subscribe(
+        (res) => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        },
+        (error) => {
+          this.appService.alertaError(
+            'ERROR',
+            'Error al generar informe final'
           );
           console.error(error);
         }

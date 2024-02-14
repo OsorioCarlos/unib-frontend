@@ -23,6 +23,8 @@ export class OrganizationComponent {
     private router: Router,
 
   ) {
+    this.representanteCompletoInformacionBasica = false;
+
     this.representante = {
       cedula: '',
       nombre: '',

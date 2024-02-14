@@ -7,7 +7,10 @@
       </h1>
     </div>
   </div>
-  <form>
+  <form
+  [formGroup]="formCompromisoRecepcion"
+    (ngSubmit)="onSubmit($event)"
+    novalidate>
     <div class="card shadow-sm mb-3">
       <div class="card-header">
         <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
@@ -22,6 +25,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="razonSocialInput"
+              [value]="infoCompromisoRecepcion.razon_social"
               readonly
             />
           </div>
@@ -35,6 +39,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="representanteInput"
+              [value]="infoCompromisoRecepcion.representante_legal"
               readonly
             />
           </div>
@@ -44,6 +49,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="areaInput"
+              [value]="infoCompromisoRecepcion.area_dedicacion"
               readonly
             />
           </div>
@@ -57,6 +63,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="telefonoInput"
+              [value]="infoCompromisoRecepcion.telefono"
               readonly
             />
           </div>
@@ -66,6 +73,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="direccionInput"
+              [value]="infoCompromisoRecepcion.direccion"
               readonly
             />
           </div>
@@ -79,6 +87,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="diasHabilesInput"
+              [value]="infoCompromisoRecepcion.dias_habiles"
               readonly
             />
           </div>
@@ -88,6 +97,7 @@
               type="text"
               class="form-control input-readonly inputCompletado"
               id="horarioInput"
+              [value]="infoCompromisoRecepcion.horario"
               readonly
             />
           </div>
@@ -107,6 +117,7 @@
                 type="text"
                 class="form-control input-readonly inputCompletado"
                 id="nombreInput"
+                [value]="infoCompromisoRecepcion.nombre_representante"
                 readonly
               />
             </div>
@@ -116,6 +127,7 @@
                 type="text"
                 class="form-control input-readonly inputCompletado"
                 id="funcionInput"
+                [value]="infoCompromisoRecepcion.funcion"
                 readonly
               />
             </div>
@@ -127,6 +139,7 @@
                 type="text"
                 class="form-control input-readonly inputCompletado"
                 id="telefonoInput"
+                [value]="infoCompromisoRecepcion.telefono_representante"
                 readonly
               />
             </div>
@@ -136,6 +149,7 @@
                 type="text"
                 class="form-control input-readonly inputCompletado"
                 id="emailInput"
+                [value]="infoCompromisoRecepcion.email_representante"
                 readonly
               />
             </div>
@@ -143,6 +157,7 @@
         </div>
       </div>
     </div>
+    <div formGroupName="compromisoRecepcion">
     <div class="card shadow-sm mb-3">
       <div class="card-header">
         <b
@@ -151,6 +166,30 @@
         >
       </div>
       <div class="card-body">
+        <div class="row mb-3">
+          <div class="col">
+            <label for="nombreEstudianteInput" class="form-label"
+              >Nombre del estudiante:</label
+            >
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="nombreEstudianteInput"
+              [value]="infoCompromisoRecepcion.nombre_estudiante"
+              readonly
+            />
+          </div>
+          <div class="col">
+            <label for="areaPracticaInput" class="form-label">Área de la práctica pre profesional:</label>
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="areaPracticaInput"
+              [value]="infoCompromisoRecepcion.area_estudiante"
+              readonly
+            />
+          </div>
+        </div>
         <div class="row">
           <div class="mb-3">
             <label for="areaInput" class="form-label"
@@ -162,6 +201,7 @@
               id="areaInput"
               name=""
               id=""
+              formControlName="objetivos"
               cols="30"
               rows="3"
             ></textarea>
@@ -176,6 +216,7 @@
                 id="areaInput"
                 name=""
                 id=""
+                formControlName="tareas"
                 cols="30"
                 rows="4"
               ></textarea>
@@ -191,6 +232,7 @@
               type="date"
               class="form-control"
               id="areaInput"
+              formControlName="fechaInicio"
               placeholder=""
               required
             />
@@ -203,6 +245,7 @@
               type="date"
               class="form-control"
               id="areaInput"
+              formControlName="fechaFin"
               placeholder=""
               required
             />
@@ -322,6 +365,7 @@
               type="text"
               class="form-control"
               id="areaInput"
+              formControlName="horario"
               placeholder=""
               required
             />
@@ -345,15 +389,16 @@
             type="checkbox"
             value=""
             id="flexCheckChecked"
+            formControlName="aceptarCompromiso"
             required
           />
           <label class="" for="flexCheckChecked" class="">
             <b><span style="color: red">*</span> Aceptar Compromiso</b>
           </label>
         </div>
-        <br />
-        <button class="btn btn-primary col-4 m-auto">Guardar</button>
       </div>
     </div>
+  </div>
+    <button [disabled]="formCompromisoRecepcion.invalid || formCompromisoRecepcion.get('aceptarCompromiso')?.value == false" class="btn btn-primary w-100 mb-3">Recibir Estudiante</button>
   </form>
 </div>
