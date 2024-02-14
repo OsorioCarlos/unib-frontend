@@ -1,6 +1,16 @@
 <div class="container mt-2">
-  <h1 class="text-center text-primary">MÓDULO DE REPRESENTANTE DE PRÁCTICAS</h1>
-  <form *ngIf="representanteCompletoInformacionBasica === false" novalidate [formGroup]="formGroupInformacionRepresentante" (ngSubmit)="onSubmit($event)">
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br /><span class="titulo-bienvenida"
+      >REPRESENTANTE DE PRÁCTICAS: {{ representante.nombre }}</span
+    >
+  </h1>
+  <br />
+  <form
+    *ngIf="representanteCompletoInformacionBasica === false"
+    novalidate
+    [formGroup]="formGroupInformacionRepresentante"
+    (ngSubmit)="onSubmit($event)"
+  >
     <div class="card shadow-sm mb-3">
       <div class="card-header">
         Datos del representante de prácticas preprofesionales
@@ -24,7 +34,12 @@
               <label for="telefonoInput" class="form-label"
                 ><span style="color: red">*</span> Teléfono:</label
               >
-              <input type="text" class="form-control" id="telefonoInput" formControlName="telefono"/>
+              <input
+                type="text"
+                class="form-control"
+                id="telefonoInput"
+                formControlName="telefono"
+              />
             </div>
           </div>
         </div>
@@ -33,119 +48,104 @@
     <button class="btn btn-primary btn-lg w-100">Continuar</button>
   </form>
 
-  <div *ngIf="representanteCompletoInformacionBasica === true">
-    <div class="alert alert-warning" role="alert">En esta sección podrás encontrar todas las solicitudes</div>
-    <div class="card shadow-sm mb-3">
-      <div class="card-header">VSO-002 COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
-      <div class="card-body">
-        <table class="table table-hover mt-0">
-          <thead>
-            <tr>
-              <th scope="col">Identificación</th>
-              <th scope="col">Nombre del estudiante</th>
-              <th scope="col">Área propuesta para la práctica</th>
-              <th scope="col">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1751592013</th>
-              <td>
-                DELGADO LANDA BYRON DANIEL
-              </td>
-              <td>
-                SOFTWARE
-              </td>
-              <td>
-                <button
-                  class="btn btn-primary p-2"
-                  routerLink="/app/formularios/vso-002"
-                >
-                  Completar
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1751592013</th>
-              <td>
-                MOLINA RIVERA JOSUE DAVID
-              </td>
-              <td>
-                BASE DE DATOS
-              </td>
-              <td>
-                <button
-                  class="btn btn-primary p-2"
-                  routerLink="/app/formularios/vso-002"
-                >
-                Completar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES
+          </h5>
+          <p class="card-text">
+            El representante establece metas y responsabilidades para los
+            estudiantes, especificando la duración completa con días y horarios.
+            También, adquiere un compromiso con el estudiante y la universidad.
+          </p>
+          <h6>No tienes estudiantes pendientes</h6>
+          <table class="table table-hover mt-5" *ngIf="estudiantes.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">Identificación</th>
+                <th scope="col">Nombre del estudiante</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let estudiante of estudiantes">
+                <th scope="row">{{ estudiante.identificacion }}</th>
+                <td>{{ estudiante.nombre_completo }}</td>
+                <td>
+                  <a
+                    class="btn btn-primary p-2"
+                    [routerLink]="[
+                      '/app/formularios/vso-002',
+                      estudiante.identificacion
+                    ]"
+                  >
+                    Completar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="representanteCompletoInformacionBasica === true">
-    <div class="alert alert-warning" role="alert">En esta sección evaluar a los estudiantes</div>
-    <div class="card shadow-sm mb-3">
-      <div class="card-header">VSO-004 SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</div>
-      <div class="card-body">
-        <table class="table table-hover mt-0">
-          <thead>
-            <tr>
-              <th scope="col">Identificación</th>
-              <th scope="col">Nombre del estudiante</th>
-              <th scope="col">Área propuesta para la práctica</th>
-              <th scope="col">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1751592013</th>
-              <td>
-                DELGADO LANDA BYRON DANIEL
-              </td>
-              <td>
-                SOFTWARE
-              </td>
-              <td>
-                <button
-                  class="btn btn-primary p-2"
-                  routerLink="/app/formularios/vso-004"
-                >
-                  Completar
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">1751592013</th>
-              <td>
-                MOLINA RIVERA JOSUE DAVID
-              </td>
-              <td>
-                BASE DE DATOS
-              </td>
-              <td>
-                <button
-                  class="btn btn-primary p-2"
-                  routerLink="/app/formularios/vso-004"
-                >
-                Completar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES
+          </h5>
+          <p class="card-text">
+            El representante delinea metas y responsabilidades para sus
+            estudiantes, precisando la duración completa desde el comienzo hasta
+            la finalización, incluyendo los días laborables y el horario
+            específico. Además, asume un compromiso con el estudiante y la
+            universidad.
+          </p>
+          <table class="table table-hover mt-0">
+            <thead>
+              <tr>
+                <th scope="col">Identificación</th>
+                <th scope="col">Nombre del estudiante</th>
+                <th scope="col">Área propuesta para la práctica</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1751592013</th>
+                <td>DELGADO LANDA BYRON DANIEL</td>
+                <td>SOFTWARE</td>
+                <td>
+                  <button
+                    class="btn btn-primary p-2"
+                    routerLink="/app/formularios/vso-004"
+                  >
+                    Completar
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">1751592013</th>
+                <td>MOLINA RIVERA JOSUE DAVID</td>
+                <td>BASE DE DATOS</td>
+                <td>
+                  <button
+                    class="btn btn-primary p-2"
+                    routerLink="/app/formularios/vso-004"
+                  >
+                    Completar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-
-  </div>
-  <div>
-
-
-  </div>
-
+  </div> -->
+</div>

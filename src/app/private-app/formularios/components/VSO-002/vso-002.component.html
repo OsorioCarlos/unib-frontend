@@ -2,200 +2,414 @@
   <div class="row">
     <div class="col">
       <h1 class="text-center text-primary">
-        COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+        COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR
+        PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
       </h1>
-      <div class="alert alert-warning" role="alert">En esta sección, delineas metas y responsabilidades para tus estudiantes, precisando la duración completa desde el comienzo hasta la finalización, incluyendo los días laborables y el horario específico. Además, asumes un compromiso tanto con el estudiante como con la universidad.</div>
     </div>
   </div>
-  <form class="card p-4">
-    <div class="row">
-      <div class="mb-3">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Objetivos de la práctica pre
-          profesional:</label
-        >
-        <textarea
-          class="form-control"
-          id="areaInput"
-          name=""
-          id=""
-          cols="30"
-          rows="3"
-        ></textarea>
+  <form
+    [formGroup]="formCompromisoRecepcion"
+    (ngSubmit)="onSubmit($event)"
+    novalidate
+  >
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">
+        <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
       </div>
-      <div class="row">
-      <div class="mb-3">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Tareas:</label
-        >
-        <textarea
-          class="form-control"
-          id="areaInput"
-          name=""
-          id=""
-          cols="30"
-          rows="4"
-        ></textarea>
-      </div>
-    </div>
-    </div>
-    <hr />
-    <div class="row">
-      <div class="mb-3 col">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Fecha de Inicio:</label
-        >
-        <input
-          type="date"
-          class="form-control"
-          id="areaInput"
-          placeholder=""
-          required
-        />
-      </div>
-      <div class="mb-3 col">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Fecha de Finalización:</label
-        >
-        <input
-          type="date"
-          class="form-control"
-          id="areaInput"
-          placeholder=""
-          required
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="mb-3 col">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Días Laborales de las prácticas pre
-          profesionales:
-        </label>
-        <br />
-        <div class="d-flex justify-content-around">
-          <div class="form-check-inline m-0">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-6">
+            <label for="razonSocialInput" class="form-label"
+              >Nombre / Razón Social:</label
+            >
             <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-lun-outlined"
-              autocomplete="off"
-              checked
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="razonSocialInput"
+              [value]="infoCompromisoRecepcion.razon_social"
+              readonly
             />
-            <label class="btn btn-outline-primary" for="btn-check-lun-outlined"
-              >Lun</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-mar-outlined"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-primary" for="btn-check-mar-outlined"
-              >Mar</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-mie-outlined"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-primary" for="btn-check-mie-outlined"
-              >Mie</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-jue-outlined"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-primary" for="btn-check-jue-outlined"
-              >Jue</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-vie-outlined"
-              autocomplete="off"
-              checked
-            />
-            <label class="btn btn-outline-primary" for="btn-check-vie-outlined"
-              >Vie</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-sab-outlined"
-              autocomplete="off"
-            />
-            <label class="btn btn-outline-primary" for="btn-check-sab-outlined"
-              >Sab</label
-            ><br />
-          </div>
-          <div class="form-check-inline m-0">
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btn-check-dom-outlined"
-              autocomplete="off"
-            />
-            <label class="btn btn-outline-primary" for="btn-check-dom-outlined"
-              >Dom</label
-            ><br />
           </div>
         </div>
-
-      </div>
-      <div class="mb-3 col">
-        <label for="areaInput" class="form-label"
-          ><span style="color: red">*</span> Horario:</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="areaInput"
-          placeholder=""
-          required
-        />
+        <div class="row mb-3">
+          <div class="col">
+            <label for="representanteInput" class="form-label"
+              >Representante legal:</label
+            >
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="representanteInput"
+              [value]="infoCompromisoRecepcion.representante_legal"
+              readonly
+            />
+          </div>
+          <div class="col">
+            <label for="areaInput" class="form-label">Area dedicación:</label>
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="areaInput"
+              [value]="infoCompromisoRecepcion.area_dedicacion"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="telefonoInput" class="form-label"
+              >Télefono de la organización, entidad o persona jurídica:</label
+            >
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="telefonoInput"
+              [value]="infoCompromisoRecepcion.telefono"
+              readonly
+            />
+          </div>
+          <div class="col">
+            <label for="direccionInput" class="form-label">Dirección:</label>
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="direccionInput"
+              [value]="infoCompromisoRecepcion.direccion"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="diasHabilesInput" class="form-label"
+              >Días hábiles:</label
+            >
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="diasHabilesInput"
+              [value]="infoCompromisoRecepcion.dias_habiles"
+              readonly
+            />
+          </div>
+          <div class="col">
+            <label for="horarioInput" class="form-label">Horario:</label>
+            <input
+              type="text"
+              class="form-control input-readonly inputCompletado"
+              id="horarioInput"
+              [value]="infoCompromisoRecepcion.horario"
+              readonly
+            />
+          </div>
+        </div>
       </div>
     </div>
-
-    <hr />
-    <h5 class="mb-3">
-      COMPROMISO DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:
-    </h5>
-    <p>
-      Me comprometo en realizar el seguimiento y las evaluaciones respectivas, y
-      recibir a la autoridad de la Universidad para la supervisión al
-      estudiante.
-    </p>
-    <div class="form-check mb-3">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        value=""
-        id="flexCheckChecked"
-        required
-      />
-      <label class="" for="flexCheckChecked" class="">
-        <b><span style="color: red">*</span> Aceptar Compromiso</b>
-      </label>
+    <div class="card shadow-sm mb-3">
+      <div class="card-header">
+        <b>DATOS DEL REPRESENTANTE DE LA PRÁCTICA:</b>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="nombreInput" class="form-label">Nombre:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nombreInput"
+                [value]="infoCompromisoRecepcion.nombre_representante"
+                readonly
+              />
+            </div>
+            <div class="col">
+              <label for="funcionInput" class="form-label">Función:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="funcionInput"
+                [value]="infoCompromisoRecepcion.funcion"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="telefonoInput" class="form-label">Télefono:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="telefonoInput"
+                [value]="infoCompromisoRecepcion.telefono_representante"
+                readonly
+              />
+            </div>
+            <div class="col">
+              <label for="emailInput" class="form-label">Email:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="emailInput"
+                [value]="infoCompromisoRecepcion.email_representante"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <hr />
-    <br />
-    <button class="btn btn-primary col-4 m-auto">Guardar</button>
+    <div formGroupName="compromisoRecepcion">
+      <div class="card shadow-sm mb-3">
+        <div class="card-header">
+          <b
+            >COMPROMISO EN RELACIÓN CON EL ESTUDIANTE DE PRÁCTICAS PRE
+            PROFESIONALES:</b
+          >
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="nombreEstudianteInput" class="form-label"
+                >Nombre del estudiante:</label
+              >
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nombreEstudianteInput"
+                [value]="infoCompromisoRecepcion.nombre_estudiante"
+                readonly
+              />
+            </div>
+            <div class="col">
+              <label for="areaPracticaInput" class="form-label"
+                >Área de la práctica pre profesional:</label
+              >
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="areaPracticaInput"
+                [value]="infoCompromisoRecepcion.area_estudiante"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3">
+              <label for="areaInput" class="form-label"
+                ><span style="color: red">*</span> Objetivos de la práctica pre
+                profesional:</label
+              >
+              <textarea
+                class="form-control"
+                id="areaInput"
+                name=""
+                id=""
+                formControlName="objetivos"
+                cols="30"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="row">
+              <div class="mb-3">
+                <label for="areaInput" class="form-label"
+                  ><span style="color: red">*</span> Tareas:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="areaInput"
+                  name=""
+                  id=""
+                  formControlName="tareas"
+                  cols="30"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <label for="areaInput" class="form-label"
+                ><span style="color: red">*</span> Fecha de Inicio:</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="areaInput"
+                formControlName="fechaInicio"
+                placeholder=""
+                required
+              />
+            </div>
+            <div class="mb-3 col">
+              <label for="areaInput" class="form-label"
+                ><span style="color: red">*</span> Fecha de Finalización:</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="areaInput"
+                formControlName="fechaFin"
+                placeholder=""
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <label for="areaInput" class="form-label"
+                ><span style="color: red">*</span> Días Laborales de las
+                prácticas pre profesionales:
+              </label>
+              <br />
+              <div class="d-flex justify-content-around">
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-lun-outlined"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-lun-outlined"
+                    >Lun</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-mar-outlined"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-mar-outlined"
+                    >Mar</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-mie-outlined"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-mie-outlined"
+                    >Mie</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-jue-outlined"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-jue-outlined"
+                    >Jue</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-vie-outlined"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-vie-outlined"
+                    >Vie</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-sab-outlined"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-sab-outlined"
+                    >Sab</label
+                  ><br />
+                </div>
+                <div class="form-check-inline m-0">
+                  <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-dom-outlined"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-primary"
+                    for="btn-check-dom-outlined"
+                    >Dom</label
+                  ><br />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3 col">
+              <label for="areaInput" class="form-label"
+                ><span style="color: red">*</span> Horario:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="areaInput"
+                formControlName="horario"
+                placeholder=""
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm mb-3">
+        <div class="card-header">
+          <b>COMPROMISO DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
+        </div>
+        <div class="card-body">
+          <p>
+            Me comprometo en realizar el seguimiento y las evaluaciones
+            respectivas, y recibir a la autoridad de la Universidad para la
+            supervisión al estudiante.
+          </p>
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckChecked"
+              formControlName="aceptarCompromiso"
+              required
+            />
+            <label class="" for="flexCheckChecked" class="">
+              <b><span style="color: red">*</span> Aceptar Compromiso</b>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      [disabled]="
+        formCompromisoRecepcion.invalid ||
+        formCompromisoRecepcion.get('aceptarCompromiso')?.value == false
+      "
+      class="btn btn-primary w-100 mb-3"
+    >
+      Recibir Estudiante
+    </button>
   </form>
 </div>

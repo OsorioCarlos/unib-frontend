@@ -1,14 +1,33 @@
-.card-body{
+.card-body {
   text-align: justify;
   width: 100%;
 }
-
 .menu {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.img-menu{
+.img-menu {
   width: 100%;
+}
+
+.fa-file-pdf {
+  font-size: 2rem;
+  color: #cf1b0e;
+}
+.td-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-file-pen {
+  font-size: 2rem;
+  color: rgb(61, 197, 37);
+}
+
+.fa-circle-check {
+  font-size: 2rem;
+  color: rgb(61, 197, 37);
 }

@@ -1,125 +1,145 @@
 <div class="container mb-3">
   <h1 class="text-center text-primary">CARTA DE COMPROMISO</h1>
-  <div class="alert alert-warning" role="alert">En esta carta manifiestas tu compromiso de adherirte al protocolo de bioseguridad durante tus prácticas preprofesionales, exonerando a la institución y a la universidad de cualquier responsabilidad en caso de incumplimiento y posibles complicaciones o contagios.</div>
   <form
-  [formGroup]="formGroupInformacionEstudiante"
-  (ngSubmit)="onSubmit($event)"
-  *ngIf="mostrarFormularioEstudiante === true"
-  novalidate
+    [formGroup]="formGroupInformacionEstudiante"
+    (ngSubmit)="onSubmit($event)"
+    *ngIf="mostrarFormularioEstudiante === true"
+    novalidate
   >
-  <div class="card shadow-sm mb-3">
-    <div class="card-header">Datos del estudiante</div>
-    <div class="card-body">
-      <div class="row mb-3" formGroupName="estudiante">
-        <div class="col">
-          <label class="form-label"
-            ><span style="color: red">*</span> Carrera:</label
-          >
-          <select
-            class="form-select"
-            aria-label="Selecciona carrera"
-            formControlName="carrera"
-          >
-            <option disabled>Selecciona una carrera</option>
-            <option
-              *ngFor="let opcion of carreraOpciones"
-              value="{{ opcion.id }}"
+    <div class="card shadow-sm mb-3">
+      <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
+      <div class="card-body">
+        <div class="row mb-3" formGroupName="estudiante">
+          <div class="col">
+            <label class="form-label"
+              ><span style="color: red">*</span> Carrera:</label
             >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-        <div class="col">
-          <label class="form-label"
-            ><span style="color: red">*</span> Semestre:</label
-          >
-          <select
-            class="form-select"
-            aria-label="Selecciona nivel"
-            formControlName="semestre"
-          >
-            <option disabled>Selecciona un semestre</option>
-            <option
-              *ngFor="let opcion of nivelOpciones"
-              value="{{ opcion.id }}"
+            <select
+              class="form-select"
+              aria-label="Selecciona carrera"
+              formControlName="carrera"
             >
-              {{ opcion.nombre }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card shadow-sm mb-3" formGroupName="organizacion">
-    <div class="card-header">
-      Organización, entidad o persona jurídica para la práctica
-    </div>
-    <div class="card-body">
-      <div class="row mb-3">
-        <div class="col">
-          <label for="nombreOrganizacionInput" class="form-label"
-            ><span style="color: red">*</span> Nombre / Razón Social:</label
-          >
-          <select
-            class="form-select"
-            aria-label="Selecciona la organización"
-            formControlName="nombreRazonSocial"
-          >
-            <option disabled>Selecciona una organización</option>
-            <option
-              *ngFor="let opcion of organizaciones"
-              value="{{ opcion.id }}"
+              <option disabled>Selecciona una carrera</option>
+              <option
+                *ngFor="let opcion of carreraOpciones"
+                value="{{ opcion.id }}"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col">
+            <label class="form-label"
+              ><span style="color: red">*</span> Semestre:</label
             >
-              {{ opcion.razon_social }}
-            </option>
-          </select>
+            <select
+              class="form-select"
+              aria-label="Selecciona nivel"
+              formControlName="semestre"
+            >
+              <option disabled>Selecciona un semestre</option>
+              <option
+                *ngFor="let opcion of nivelOpciones"
+                value="{{ opcion.id }}"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="card shadow-sm mb-3" formGroupName="organizacion">
+      <div class="card-header">
+        <b
+          >DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JÚRIDICA PARA LA PRÁCTICA
+          PRE PROFESIONAL:</b
+        >
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col">
+            <label for="nombreOrganizacionInput" class="form-label"
+              ><span style="color: red">*</span> Nombre / Razón Social:</label
+            >
+            <select
+              class="form-select"
+              aria-label="Selecciona la organización"
+              formControlName="nombreRazonSocial"
+            >
+              <option disabled>Selecciona una organización</option>
+              <option
+                *ngFor="let opcion of organizaciones"
+                value="{{ opcion.id }}"
+              >
+                {{ opcion.razon_social }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
     <button
-      class="btn btn-primary btn-lg w-100" [disabled]="formGroupInformacionEstudiante.invalid"
+      class="btn btn-primary btn-lg w-100"
+      [disabled]="formGroupInformacionEstudiante.invalid"
     >
-      Generar carta de compromiso
+      Continuar
     </button>
-</form>
-
+  </form>
 
   <div *ngIf="mostrarFormularioEstudiante == false">
     <p>
-      Señor/a<br>
-    <b>DIRECTOR DE LA CARRERA DE {{formularioCartaCompromiso.get('carrera')?.value}}</b>
-    <br>
-    <b>UNIB.E</b><br>
-    Presente.-
-  </p>
-  <p class="text-justify">
-    Yo, {{formularioCartaCompromiso.get('nombre_estudiante')?.value}}, estudiante, portador de la cédula de ciudadanía /
-    identidad No. {{formularioCartaCompromiso.get('cedula_estudiante')?.value}}, de la Carrera de {{formularioCartaCompromiso.get('carrera')?.value}},
-    en la que actualmente me estoy matriculando en el semestre Nº {{formularioCartaCompromiso.get('semestre')?.value}}, por medio del
-    presente, dejo constancia escrita de mi compromiso a cumplir de manera irrestricta con las
-    disposiciones contenidas en el protocolo de bioseguridad de la institución
-    {{formularioCartaCompromiso.get('empresa')?.value}}, durante el desarrollo de mis prácticas pre profesionales /
-    actividades de vinculación con la sociedad.
-  </p>
-  <p class="text-justify">
-    En caso de incumplir con una o varias disposiciones contenidas en el referido protocolo, deslindo a
-    la institución {{formularioCartaCompromiso.get('empresa')?.value}} y a la Universidad Iberoamericana del Ecuador de
-    cualquier responsabilidad en caso de registrarse cualquier complicación o contagio producto de
-    ese imcumplimiento.
-  </p>
-  <p class="text-end">
-    Quito, D.M, {{formularioCartaCompromiso.get('fecha_texto')?.value}}
-  </p>
-  <br><br><br>
-  <p>
-    Srta./Sr {{formularioCartaCompromiso.get('nombre_estudiante')?.value}}<br>
-    ESTUDIANTE DE LA CARRERA DE: {{formularioCartaCompromiso.get('carrera')?.value}}<br>
-    CC: {{formularioCartaCompromiso.get('cedula_estudiante')?.value}}
-  </p>
-  <div class="d-grid gap-2 mb-3">
-    <button class="btn btn-primary btn-lg" type="button" (click)="generarCartaCompromiso()" [disabled]="formularioCartaCompromiso.invalid">Imprimir</button>
+      Señor/a<br />
+      <b
+        >DIRECTOR DE LA CARRERA DE
+        {{ formularioCartaCompromiso.get("carrera")?.value }}</b
+      >
+      <br />
+      <b>UNIB.E</b><br />
+      Presente.-
+    </p>
+    <p class="text-justify">
+      Yo, {{ formularioCartaCompromiso.get("nombre_estudiante")?.value }},
+      estudiante, portador de la cédula de ciudadanía / identidad No.
+      {{ formularioCartaCompromiso.get("cedula_estudiante")?.value }}, de la
+      Carrera de {{ formularioCartaCompromiso.get("carrera")?.value }}, en la
+      que actualmente me estoy matriculando en el semestre Nº
+      {{ formularioCartaCompromiso.get("semestre")?.value }}, por medio del
+      presente, dejo constancia escrita de mi compromiso a cumplir de manera
+      irrestricta con las disposiciones contenidas en el protocolo de
+      bioseguridad de la institución
+      {{ formularioCartaCompromiso.get("empresa")?.value }}, durante el
+      desarrollo de mis prácticas pre profesionales / actividades de vinculación
+      con la sociedad.
+    </p>
+    <p class="text-justify">
+      En caso de incumplir con una o varias disposiciones contenidas en el
+      referido protocolo, deslindo a la institución
+      {{ formularioCartaCompromiso.get("empresa")?.value }} y a la Universidad
+      Iberoamericana del Ecuador de cualquier responsabilidad en caso de
+      registrarse cualquier complicación o contagio producto de ese
+      imcumplimiento.
+    </p>
+    <p class="text-end">
+      Quito, D.M, {{ formularioCartaCompromiso.get("fecha_texto")?.value }}
+    </p>
+    <br /><br /><br />
+    <p>
+      Srta./Sr {{ formularioCartaCompromiso.get("nombre_estudiante")?.value
+      }}<br />
+      ESTUDIANTE DE LA CARRERA DE:
+      {{ formularioCartaCompromiso.get("carrera")?.value }}<br />
+      CC: {{ formularioCartaCompromiso.get("cedula_estudiante")?.value }}
+    </p>
+    <div class="d-grid gap-2 mb-3">
+      <button
+        class="btn btn-primary btn-lg"
+        type="button"
+        (click)="generarCartaCompromiso()"
+        [disabled]="formularioCartaCompromiso.invalid"
+      >
+        Aceptar
+      </button>
+    </div>
   </div>
 </div>
-
-

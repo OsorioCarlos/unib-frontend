@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InfoEstudiante } from 'src/app/private-app/interfaces/info-estudiante';
+import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
 import { CompromisoBioseguridad } from 'src/app/private-app/interfaces/compromiso-bioseguridad';
+import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
 import { environment } from 'src/environment/environment';
-import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
-import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
 
 @Component({
   selector: 'app-carta-compromiso',
@@ -26,14 +25,19 @@ export class CartaCompromisoComponent {
   formGroupInformacionEstudiante!: FormGroup;
   mostrarFormularioEstudiante: boolean = true;
 
-  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private privateAppService: PrivateAppService,
+    private appService: AppService,
+    private router: Router
+  ) {
     this.formularioCartaCompromiso = this.fb.group({
       cedula_estudiante: ['', Validators.required],
       nombre_estudiante: ['', Validators.required],
       carrera: ['', Validators.required],
       semestre: ['', Validators.required],
       empresa: ['', Validators.required],
-      fecha_texto: ['', Validators.required]
+      fecha_texto: ['', Validators.required],
     });
     this.nivelOpciones = [];
     this.carreraOpciones = [];
@@ -49,7 +53,7 @@ export class CartaCompromisoComponent {
       'septiembre',
       'octubre',
       'noviembre',
-      'diciembre'
+      'diciembre',
     ];
 
     this.niveles = {
@@ -62,23 +66,22 @@ export class CartaCompromisoComponent {
       'SEPTIMO NIVEL': '7',
       'OCTAVO NIVEL': '8',
       'NOVENO NIVEL': '9',
-      'DÉCIMO NIVEL': '10'
+      'DÉCIMO NIVEL': '10',
     };
 
     this.compromisoBioseguridad = {
-      carrera:'',
-      nombreCompleto:'',
-      identificacion:'',
-      semestre:'',
-      razonSocial:''
-    }
+      carrera: '',
+      nombreCompleto: '',
+      identificacion: '',
+      semestre: '',
+      razonSocial: '',
+    };
 
     this.obtenerCarreras();
     this.obtenerNiveles();
     this.obtenerOrganizaciones();
     this.buildformGroupInformacionEstudiante();
   }
-
 
   onSubmit(event: Event) {
     console.log(this.formGroupInformacionEstudiante);
@@ -101,56 +104,78 @@ export class CartaCompromisoComponent {
 
   public generarCartaCompromiso(): void {
     if (this.formularioCartaCompromiso.valid) {
-      this.privateAppService.obtener('estudiantes/aceptarCompromisoBioseguridad').subscribe(res => {
-        const datos = {
-          'identificacionEstudiante': "1751592013"
-        };
-        this.privateAppService.crear('formularios/generar_carta_compromiso', datos).subscribe(res => {
-          window.open(`${this.apiUrl}/${res.data}`, '_blank');
-        }, error => {
-          this.appService.alertaError('ERROR', 'Error al generar la carta de compromiso');
-          console.error(error);
-        });
-      }, error => {
-        this.appService.alertaError('ERROR', error.error.mensaje);
-      });
-      }
-      this.router.navigateByUrl('/app/student');
-      this.appService.alertaExito('OK', 'Haz completado la carta de compromiso correctamente');
+      this.privateAppService
+        .obtener('estudiantes/aceptarCompromisoBioseguridad')
+        .subscribe(
+          (res) => {
+            const datos = {
+              identificacionEstudiante: '1751592013',
+            };
+            this.privateAppService
+              .crear('formularios/generar_carta_compromiso', datos)
+              .subscribe(
+                (res) => {
+                  window.open(`${this.apiUrl}/${res.data}`, '_blank');
+                },
+                (error) => {
+                  this.appService.alertaError(
+                    'ERROR',
+                    'Error al generar la carta de compromiso'
+                  );
+                  console.error(error);
+                }
+              );
+          },
+          (error) => {
+            this.appService.alertaError('ERROR', error.error.mensaje);
+          }
+        );
+    }
+    this.router.navigateByUrl('/app/student');
+    this.appService.alertaExito('OK', 'Carta de compromiso aceptada');
   }
 
   private completarCartaComprmiso(): void {
-    this.privateAppService.obtener('estudiantes/obtenerInfoCompromiso').subscribe(res => {
-      this.compromisoBioseguridad = res.data;
-        this.formularioCartaCompromiso.setValue({
-          cedula_estudiante: this.compromisoBioseguridad.identificacion,
-          nombre_estudiante: this.compromisoBioseguridad.nombreCompleto,
-          carrera: this.compromisoBioseguridad.carrera,
-          semestre: this.compromisoBioseguridad.semestre,
-          empresa: this.compromisoBioseguridad.razonSocial,
-          fecha_texto: this.devolverFechaTexto()
-        });
-        this.mostrarFormularioEstudiante = false;
-    }, error => {
-      this.mostrarFormularioEstudiante = true;
-    });
+    this.privateAppService
+      .obtener('estudiantes/obtenerInfoCompromiso')
+      .subscribe(
+        (res) => {
+          this.compromisoBioseguridad = res.data;
+          this.formularioCartaCompromiso.setValue({
+            cedula_estudiante: this.compromisoBioseguridad.identificacion,
+            nombre_estudiante: this.compromisoBioseguridad.nombreCompleto,
+            carrera: this.compromisoBioseguridad.carrera,
+            semestre: this.compromisoBioseguridad.semestre,
+            empresa: this.compromisoBioseguridad.razonSocial,
+            fecha_texto: this.devolverFechaTexto(),
+          });
+          this.mostrarFormularioEstudiante = false;
+        },
+        (error) => {
+          this.mostrarFormularioEstudiante = true;
+        }
+      );
   }
 
   private devolverFechaTexto(): string {
     const fechaActual = new Date();
-    return `${fechaActual.getDate()} de ${this.meses[fechaActual.getMonth()]} del ${fechaActual.getFullYear()}`;
+    return `${fechaActual.getDate()} de ${
+      this.meses[fechaActual.getMonth()]
+    } del ${fechaActual.getFullYear()}`;
   }
 
   obtenerOrganizaciones() {
-    this.privateAppService.obtener('estudiantes/obtenerOrganizaciones').subscribe(
-      (res) => {
-        this.organizaciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', error.error.mensaje);
-        console.error(error);
-      }
-    );
+    this.privateAppService
+      .obtener('estudiantes/obtenerOrganizaciones')
+      .subscribe(
+        (res) => {
+          this.organizaciones = res.data;
+        },
+        (error) => {
+          this.appService.alertaError('ERROR', error.error.mensaje);
+          console.error(error);
+        }
+      );
   }
 
   private buildformGroupInformacionEstudiante(): void {
@@ -161,7 +186,7 @@ export class CartaCompromisoComponent {
       }),
       organizacion: this.fb.group({
         nombreRazonSocial: ['', Validators.required],
-      })
+      }),
     });
   }
   private obtenerCarreras(): void {

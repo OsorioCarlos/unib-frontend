@@ -1,8 +1,8 @@
-$primary: #00498C;
-$warning: #F7BA00;
-$theme-colors:(
-    "primary": $primary,
-    "warning": $warning
+$primary: #00498c;
+$warning: #f7ba00;
+$theme-colors: (
+  "primary": $primary,
+  "warning": $warning,
 );
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";

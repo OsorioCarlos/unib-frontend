@@ -9,21 +9,21 @@ import { VSO004Component } from './components/VSO-004/vso-004.component';
 import { VSO005Component } from './components/VSO-005/vso-005.component';
 
 const routes: Routes = [
-    { 
-        path: '',
-        children: [
-            { path: 'carta-compromiso', component: CartaCompromisoComponent },
-            { path: 'vso-001', component: VSO001Component },
-            { path: 'vso-002', component: VSO002Component },
-            { path: 'vso-003', component: VSO003Component },
-            { path: 'vso-004', component: VSO004Component },
-            { path: 'vso-005', component: VSO005Component }
-        ]
-    }
+  {
+    path: '',
+    children: [
+      { path: 'carta-compromiso', component: CartaCompromisoComponent },
+      { path: 'vso-001', component: VSO001Component },
+      { path: 'vso-002/:id', component: VSO002Component },
+      { path: 'vso-003', component: VSO003Component },
+      { path: 'vso-004', component: VSO004Component },
+      { path: 'vso-005', component: VSO005Component },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FormulariosRoutingModule { }
+export class FormulariosRoutingModule {}
