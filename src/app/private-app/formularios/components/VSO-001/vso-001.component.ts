@@ -1,23 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 
-import {
-  PracticaPreprofesional,
-  SolicitarPracticaIn,
-} from 'src/app/private-app/models/SolicitarPracticaIn';
+import { Router } from '@angular/router';
+import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
+import { EstudianteInfo } from 'src/app/private-app/interfaces/estudiante-info';
+import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
-import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
-import { Usuario } from 'src/app/private-app/interfaces/usuario';
-import { InfoEstudiante } from 'src/app/private-app/interfaces/info-estudiante';
-import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
-import { Router } from '@angular/router';
-import { RepresentantePracticas } from 'src/app/private-app/interfaces/representante-practicas';
-import { User } from 'src/app/private-app/interfaces/user';
 import { environment } from 'src/environment/environment';
-import { Estudiante } from 'src/app/private-app/interfaces/estudiante';
-import { EstudianteInfo } from 'src/app/private-app/interfaces/estudiante-info';
 
 @Component({
   selector: 'app-vso-001',
@@ -53,7 +43,7 @@ export class VSO001Component {
       nombre: '',
     };
     this.organizacion = {
-      id:0,
+      id: 0,
       razon_social: '',
       representante_legal: '',
       direccion: '',
@@ -62,9 +52,9 @@ export class VSO001Component {
       area_dedicacion: '',
       horario: '',
       dias_laborables: '',
-      created_at: new Date,
-      updated_at: new Date,
-      internship_representatives: []
+      created_at: new Date(),
+      updated_at: new Date(),
+      internship_representatives: [],
     };
     this.obtenerCarreras();
     this.obtenerNiveles();
@@ -77,7 +67,7 @@ export class VSO001Component {
         horasSolicitadas: ['', Validators.required],
       }),
       organizacion: this.fb.group({
-        representante: ['', Validators.required]
+        representante: ['', Validators.required],
       }),
       compromisoEstudiante: this.fb.group({
         acepta: ['', [Validators.required]],
@@ -150,17 +140,19 @@ export class VSO001Component {
       });
   }
 
-  public generarVso001(identificacionEstudiante:string): void {
+  public generarVso001(identificacionEstudiante: string): void {
     const datos = {
-      'identificacionEstudiante': identificacionEstudiante
+      identificacionEstudiante: identificacionEstudiante,
     };
-        this.privateAppService.crear('formularios/generarVso001', datos).subscribe(res => {
-          window.open(`${this.apiUrl}/${res.data}`, '_blank');
-        }, error => {
-          this.appService.alertaError('ERROR', 'Error al generar la solicitud');
-          console.error(error);
-        });
-      this.router.navigateByUrl('/app/student');
+    this.privateAppService.crear('formularios/generarVso001', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al generar la solicitud');
+        console.error(error);
+      }
+    );
+    this.router.navigateByUrl('/app/student');
   }
-
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { environment } from 'src/environment/environment';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environment/environment';
 import { ApiResponse } from '../interfaces/api-response';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { ApiResponse } from '../interfaces/api-response';
 export class PrivateAppService {
   private apiUrl: string = environment.apiUrl + '/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public obtener(route: string): Observable<ApiResponse> {
     const url = `${this.apiUrl}/${route}`;
@@ -23,7 +23,11 @@ export class PrivateAppService {
     return this.http.post<any>(url, data);
   }
 
-  public actualizar(route: string, id: number, data: any): Observable<ApiResponse> {
+  public actualizar(
+    route: string,
+    id: number,
+    data: any
+  ): Observable<ApiResponse> {
     const url = `${this.apiUrl}/${route}/${id}`;
     return this.http.put<any>(url, data);
   }

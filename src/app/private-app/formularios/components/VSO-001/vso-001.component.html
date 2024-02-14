@@ -11,81 +11,80 @@
     (ngSubmit)="onSubmit($event)"
     novalidate
   >
-  <div class="card shadow-sm mb-3">
-    <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
-    <div class="card-body">
-      <div>
-      <div class="row mb-3" >
-        <div class="col-6">
-          <label for="nombreInput" class="form-label">Nombre:</label
-          >
-          <input
-            type="text"
-            class="form-control input-readonly inputCompletado"
-            id="nombreInput"
-            readonly
-            [value]="estudiante.nombre"
-          />
+    <div class="card shadow-sm mb-3">
+      <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
+      <div class="card-body">
+        <div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <label for="nombreInput" class="form-label">Nombre:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nombreInput"
+                readonly
+                [value]="estudiante.nombre"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="escuelaInput" class="form-label">Escuela:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="escuelaInput"
+                readonly
+                [value]="estudiante.escuela"
+              />
+            </div>
+            <div class="col">
+              <label for="nivelInput" class="form-label">Nivel/Ciclo:</label>
+              <input
+                type="text"
+                class="form-control input-readonly inputCompletado"
+                id="nivelInput"
+                readonly
+                [value]="estudiante.nivel"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row mb-3" >
-        <div class="col">
-          <label for="escuelaInput" class="form-label">Escuela:</label
-          >
-          <input
-            type="text"
-            class="form-control input-readonly inputCompletado"
-            id="escuelaInput"
-            readonly
-            [value]="estudiante.escuela"
-          />
-        </div>
-        <div class="col">
-          <label for="nivelInput" class="form-label">Nivel/Ciclo:</label
-          >
-          <input
-            type="text"
-            class="form-control input-readonly inputCompletado"
-            id="nivelInput"
-            readonly
-            [value]="estudiante.nivel"
-          />
-        </div>
-      </div>
-    </div>
 
-      <div class="row mb-3" formGroupName="practicaPreprofesional">
-        <div class="col">
-          <label for="areaEstudianteInput" class="form-label"
-            ><span style="color: red">*</span> Área propuesta para la
-            práctica:</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="areaEstudianteInput"
-            formControlName="areaPropuesta"
-          />
-        </div>
-        <div class="col">
-          <label for="numeroHorasEstudianteInput" class="form-label"
-            ><span style="color: red">*</span> Número de horas solicitadas:</label
-          >
-          <input
-            type="number"
-            min="0"
-            max="400"
-            class="form-control"
-            id="numeroHorasEstudianteInput"
-            formControlName="horasSolicitadas"
-          />
+        <div class="row mb-3" formGroupName="practicaPreprofesional">
+          <div class="col">
+            <label for="areaEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Área propuesta para la
+              práctica:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="areaEstudianteInput"
+              formControlName="areaPropuesta"
+            />
+          </div>
+          <div class="col">
+            <label for="numeroHorasEstudianteInput" class="form-label"
+              ><span style="color: red">*</span> Número de horas
+              solicitadas:</label
+            >
+            <input
+              type="number"
+              min="0"
+              max="400"
+              class="form-control"
+              id="numeroHorasEstudianteInput"
+              formControlName="horasSolicitadas"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div class="card shadow-sm mb-3" formGroupName="organizacion">
-      <div class="card-header"><b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
+      <div class="card-header">
+        <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
       </div>
       <div class="card-body">
         <div class="row mb-3">
@@ -170,29 +169,28 @@
         <div class="row">
           <div class="col">
             <label for="areaEstudianteInput" class="form-label"
-              ><span style="color: red">*</span> Representante para la práctica del estudiante:</label
+              ><span style="color: red">*</span> Representante para la práctica
+              del estudiante:</label
             >
             <select
-            class="form-select"
-            aria-label="Selecciona representante"
-            formControlName="representante"
-          >
-            <option disabled>Selecciona un representante</option>
-            <option
-              *ngFor="let opcion of organizacion.internship_representatives"
-              value="{{ opcion.id }}"
+              class="form-select"
+              aria-label="Selecciona representante"
+              formControlName="representante"
             >
-              {{ opcion.user.nombre_completo}}
-            </option>
-          </select>
+              <option disabled>Selecciona un representante</option>
+              <option
+                *ngFor="let opcion of organizacion.internship_representatives"
+                value="{{ opcion.id }}"
+              >
+                {{ opcion.user.nombre_completo }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
     </div>
     <div class="card shadow-sm mb-3">
-      <div class="card-header">
-        COMPROMISO DEL ESTUDIANTE
-      </div>
+      <div class="card-header"><b>COMPROMISO DEL ESTUDIANTE</b></div>
       <div class="card-body">
         <div class="row mb-3" formGroupName="compromisoEstudiante">
           <div class="col">
@@ -222,11 +220,13 @@
     <div class="d-grid gap-2 mb-3">
       <button
         class="btn btn-primary btn-lg"
-        [disabled]="formGroupSolicitudPracticas.invalid || formGroupSolicitudPracticas.get('aceptar_compromiso')?.value == false"
+        [disabled]="
+          formGroupSolicitudPracticas.invalid ||
+          formGroupSolicitudPracticas.get('aceptar_compromiso')?.value == false
+        "
       >
         Solicitar Prácticas Pre-Profesionales
       </button>
-
     </div>
   </form>
 </div>

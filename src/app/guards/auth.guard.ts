@@ -1,15 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { Router, CanActivateFn, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 class PermissionsService {
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   checkUserToken(route: ActivatedRouteSnapshot): Observable<boolean> {
     const token = this.authService.checkToken();
@@ -26,7 +23,7 @@ class PermissionsService {
     }
 
     return this.authService.getRol().pipe(
-      switchMap(rol => {
+      switchMap((rol) => {
         if (!rolesPermitidos.includes(rol)) {
           this.router.navigateByUrl('/auth');
           return of(false);
@@ -37,7 +34,8 @@ class PermissionsService {
   }
 }
 
-
-export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot): Observable<boolean> => {
+export const AuthGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot
+): Observable<boolean> => {
   return inject(PermissionsService).checkUserToken(route);
 };

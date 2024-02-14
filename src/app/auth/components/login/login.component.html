@@ -1,20 +1,55 @@
 <div class="fondo">
-    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand fs-4" href="#"><img src="../../../../assets/img/logo-unibejpeg.jpeg" class="logo-unibe"><span class="logo-unibe"> Prácticas Preprofesionales - UNIB.E</span></a>
-        </div>
-    </nav>
-    <div class="flex-inicio-sesion">
-        <img class="logo" src="../../../assets/img/logoUnibe.png" alt="" srcset="">
-        <form class="form-sesion" autocomplete="off" [formGroup]="formularioLogin" (ngSubmit)="login()">
-            <h4 class="text-center text-warning">Bienvenido!</h4>
-            <input class="mb-3 form-control" type="text" placeholder="Usuario" formControlName="email">
-            <input class="mb-3 form-control" type="password" placeholder="Contraseña" formControlName="password">
-            <button class="mb-3 btn btn-primary" type="submit" [disabled]="formularioLogin.invalid">Continuar</button>
-            <a class="text-center fs-8 " href="">Olvidaste tu usuario o contraseña?</a>
-        </form>
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-4" href="#"
+        ><img
+          src="../../../../assets/img/logo-unibejpeg.jpeg"
+          class="logo-unibe"
+        /><span class="logo-unibe">
+          Prácticas Preprofesionales - UNIB.E</span
+        ></a
+      >
     </div>
-    <footer class="footer bg-primary text-center p-3">
-        <span class="text-white">http://www.unibe.edu.ec<br>info@unibe.edu.ec</span>
-    </footer>
+  </nav>
+  <div class="flex-inicio-sesion">
+    <img
+      class="logo"
+      src="../../../assets/img/logoUnibe.png"
+      alt=""
+      srcset=""
+    />
+    <form
+      class="form-sesion"
+      autocomplete="off"
+      [formGroup]="formularioLogin"
+      (ngSubmit)="login()"
+    >
+      <h4 class="text-center text-warning">Bienvenido!</h4>
+      <input
+        class="mb-3 form-control"
+        type="text"
+        placeholder="Usuario"
+        formControlName="email"
+      />
+      <input
+        class="mb-3 form-control"
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+      <button
+        class="mb-3 btn btn-primary"
+        type="submit"
+        [disabled]="formularioLogin.invalid"
+      >
+        Continuar
+      </button>
+      <a class="text-center fs-8" href="">Olvidaste tu usuario o contraseña?</a>
+    </form>
+  </div>
+  <footer class="footer bg-primary text-center p-3">
+    <span class="text-white"
+      >http://www.unibe.edu.ec<br />info@unibe.edu.ec</span
+    >
+  </footer>
 </div>

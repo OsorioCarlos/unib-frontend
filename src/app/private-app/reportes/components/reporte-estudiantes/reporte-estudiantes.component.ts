@@ -11,25 +11,28 @@ import { environment } from 'src/environment/environment';
 @Component({
   selector: 'app-reporte-estudiantes',
   templateUrl: './reporte-estudiantes.component.html',
-  styleUrls: ['./reporte-estudiantes.component.css']
+  styleUrls: ['./reporte-estudiantes.component.css'],
 })
 export class ReporteEstudiantesComponent {
-
   formularioFiltros: FormGroup;
   apiUrl: string = environment.apiUrl;
   nivelOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
   estadoOpciones: Catalogo[];
 
-  constructor(private fb: FormBuilder, private privateAppService: PrivateAppService, private appService: AppService) {
+  constructor(
+    private fb: FormBuilder,
+    private privateAppService: PrivateAppService,
+    private appService: AppService
+  ) {
     this.formularioFiltros = this.fb.group({
       carrera: [''],
       nivel: [''],
-      estado: ['']
+      estado: [''],
     });
 
     this.nivelOpciones = [];
-    this.carreraOpciones = []
+    this.carreraOpciones = [];
     this.estadoOpciones = [];
 
     this.obtenerCarreras();
@@ -53,46 +56,59 @@ export class ReporteEstudiantesComponent {
 
     filter = filter.replace('&', '?');
 
-    this.privateAppService.obtener(`reportes${filter}`).subscribe(res => {
-      if (res.mensaje === 'OK') {
-        window.open(`${this.apiUrl}/${res.data}`, '_blank');
-      } else {
-        this.appService.alertaAviso('AVISO', res.data);
+    this.privateAppService.obtener(`reportes${filter}`).subscribe(
+      (res) => {
+        if (res.mensaje === 'OK') {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        } else {
+          this.appService.alertaAviso('AVISO', res.data);
+        }
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al generar el reporte');
+        console.error(error);
       }
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al generar el reporte');
-      console.error(error);
-    });
+    );
   }
 
   private obtenerCarreras(): void {
     this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(res => {
-      this.carreraOpciones = res.data;
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al obtener carreras');
-      console.error(error);
-    });
+    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
+      (res) => {
+        this.carreraOpciones = res.data;
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al obtener carreras');
+        console.error(error);
+      }
+    );
   }
 
   private obtenerNiveles(): void {
     this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(res => {
-      this.nivelOpciones = res.data;
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al obtener niveles');
-      console.error(error);
-    });
+    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
+      (res) => {
+        this.nivelOpciones = res.data;
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al obtener niveles');
+        console.error(error);
+      }
+    );
   }
 
   private obtenerEstados(): void {
     this.estadoOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=ESTADOS PRACTICA PREPROFESIONAL').subscribe(res => {
-      this.estadoOpciones = res.data;
-    }, error => {
-      this.appService.alertaError('ERROR', 'Error al obtener estados');
-      console.error(error);
-    });
+    this.privateAppService
+      .obtener('catalogos?nombre=ESTADOS PRACTICA PREPROFESIONAL')
+      .subscribe(
+        (res) => {
+          this.estadoOpciones = res.data;
+        },
+        (error) => {
+          this.appService.alertaError('ERROR', 'Error al obtener estados');
+          console.error(error);
+        }
+      );
   }
-
 }

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
-import { PrivateAppService } from '../../services/private-app.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AuthUser } from '../../interfaces/auth-user';
 import { User } from '../../interfaces/user';
+import { PrivateAppService } from '../../services/private-app.service';
 
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
-  styleUrls: ['./organization.component.css']
+  styleUrls: ['./organization.component.css'],
 })
 export class OrganizationComponent {
   representanteCompletoInformacionBasica: boolean = false;
@@ -20,8 +20,7 @@ export class OrganizationComponent {
     private privateAppService: PrivateAppService,
     private appService: AppService,
     private fb: FormBuilder,
-    private router: Router,
-
+    private router: Router
   ) {
     this.representanteCompletoInformacionBasica = false;
 
@@ -48,7 +47,7 @@ export class OrganizationComponent {
       representante: this.fb.group({
         funcionRepresentante: ['', Validators.required],
         telefono: ['', Validators.required],
-      })
+      }),
     });
   }
 
@@ -74,25 +73,32 @@ export class OrganizationComponent {
   }
 
   consultarInformaciónRepresentante(): void {
-    this.privateAppService.obtener('representante/obtenerInformacionRepresentantePracticas').subscribe(
-      (res) => {
-        this.representanteCompletoInformacionBasica = res.data;
-      },
-      (err) => {
-        console.log(err);
-        this.appService.alertaInformacion('Bienvenido!', 'Completa tu información para acceder al sistema.');
-      }
-    );
+    this.privateAppService
+      .obtener('representante/obtenerInformacionRepresentantePracticas')
+      .subscribe(
+        (res) => {
+          this.representanteCompletoInformacionBasica = res.data;
+        },
+        (err) => {
+          console.log(err);
+          this.appService.alertaInformacion(
+            'Bienvenido!',
+            'Completa tu información para acceder al sistema.'
+          );
+        }
+      );
   }
 
   consultarSolicitudesPracticas(): void {
-    this.privateAppService.obtener('representante/obtenerEstudiantes').subscribe(
-      (res) => {
-        this.estudiantes = res.data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.privateAppService
+      .obtener('representante/obtenerEstudiantes')
+      .subscribe(
+        (res) => {
+          this.estudiantes = res.data;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }

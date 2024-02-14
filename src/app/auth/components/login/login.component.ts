@@ -4,19 +4,18 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
-import { Credencial } from '../../interfaces/credencial';
 import { AppService } from 'src/app/services/app.service';
+import { Credencial } from '../../interfaces/credencial';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   formularioLogin: FormGroup;
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private appService: AppService,

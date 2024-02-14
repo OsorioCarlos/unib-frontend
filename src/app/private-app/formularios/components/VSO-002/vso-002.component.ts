@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompromisoRecepcion } from 'src/app/private-app/interfaces/compromiso-recepcion';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
@@ -8,13 +8,19 @@ import { AppService } from 'src/app/services/app.service';
 @Component({
   selector: 'app-vso-002',
   templateUrl: './vso-002.component.html',
-  styleUrls: ['./vso-002.component.css']
+  styleUrls: ['./vso-002.component.css'],
 })
 export class VSO002Component {
   identificacionEstudiante: string = '';
   infoCompromisoRecepcion: CompromisoRecepcion;
   formCompromisoRecepcion!: FormGroup;
-  constructor(private route: ActivatedRoute, private privateService: PrivateAppService, private appService: AppService, private fb: FormBuilder, private router: Router    ) {
+  constructor(
+    private route: ActivatedRoute,
+    private privateService: PrivateAppService,
+    private appService: AppService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.infoCompromisoRecepcion = {
       razon_social: '',
       representante_legal: '',
@@ -28,7 +34,7 @@ export class VSO002Component {
       telefono_representante: '',
       email_representante: '',
       nombre_estudiante: '',
-      area_estudiante: ''
+      area_estudiante: '',
     };
     this.buildFormCompromisoRecepcion();
   }
@@ -43,32 +49,43 @@ export class VSO002Component {
         fechaFin: ['', Validators.required],
         horario: ['', Validators.required],
         diasLaborables: [''],
-        aceptarCompromiso : [false, Validators.requiredTrue]
-      })
+        aceptarCompromiso: [false, Validators.requiredTrue],
+      }),
     });
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.identificacionEstudiante = params.get('id') ?? '';
       this.consultarEstudiante();
     });
   }
 
-  consultarEstudiante(){
-    this.privateService.obtener(`representante/obtenerCompromisoRecepcion/${this.identificacionEstudiante}`).subscribe((response) => {
-      this.infoCompromisoRecepcion = response.data;
-      console.log(this.infoCompromisoRecepcion);
-    }, (error) => {
-      this.appService.alertaError('Error','No se pudo consultar el estudiante');
-    });
+  consultarEstudiante() {
+    this.privateService
+      .obtener(
+        `representante/obtenerCompromisoRecepcion/${this.identificacionEstudiante}`
+      )
+      .subscribe(
+        (response) => {
+          this.infoCompromisoRecepcion = response.data;
+          console.log(this.infoCompromisoRecepcion);
+        },
+        (error) => {
+          this.appService.alertaError(
+            'Error',
+            'No se pudo consultar el estudiante'
+          );
+        }
+      );
   }
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.formCompromisoRecepcion.valid) {
       const datos = this.formCompromisoRecepcion.value;
-      datos.compromisoRecepcion.identificacionEstudiante = this.identificacionEstudiante;
-      datos.compromisoRecepcion.diasLaborables= 'CAMBIAR PRUEBA';
+      datos.compromisoRecepcion.identificacionEstudiante =
+        this.identificacionEstudiante;
+      datos.compromisoRecepcion.diasLaborables = 'CAMBIAR PRUEBA';
 
       this.privateService
         .crear('representante/recibirEstudiante', datos)

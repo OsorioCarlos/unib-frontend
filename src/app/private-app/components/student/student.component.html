@@ -1,105 +1,203 @@
 <div class="container mt-2">
-  <h1 class="text-primary">PRÁCTICAS PREPROFESIONALES <br><span class="titulo-bienvenida">ESTUDIANTE: {{estudiante.nombre}}</span> </h1>
-    <br>
-    <h6 class="text-center">Documentos Obligatorios</h6>
-    <br>
-    <div class="row mb-3">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-primary">CARTA DE COMPROMISO</h5>
-            <p class="card-text">En esta carta manifiestas tu compromiso de adherirte al protocolo de bioseguridad durante tus prácticas preprofesionales, exonerando a la institución y a la universidad de cualquier responsabilidad en caso de incumplimiento y posibles complicaciones o contagios.</p>
-            <a href="#" *ngIf="estadosProcesos.cartaCompromiso=='Pendiente'" class="btn btn-outline-primary" routerLink="/app/formularios/carta-compromiso">Completar <i class="fa-regular fa-pen-to-square ps-1"></i></a>
-            <div *ngIf="estadosProcesos.cartaCompromiso!='Pendiente'" >
-              <p><b>Estado: </b>Completado</p>
-              <button class="btn btn-primary" (click)="descargarCartaCompromiso()">Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br /><span class="titulo-bienvenida"
+      >ESTUDIANTE: {{ estudiante.nombre }}</span
+    >
+  </h1>
+  <br />
+  <h6 class="text-center">Documentos Obligatorios</h6>
+  <br />
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">CARTA DE COMPROMISO</h5>
+          <p class="card-text">
+            Afirmas tu compromiso de seguir las medidas de seguridad sanitaria
+            durante tus prácticas, liberando a la institución y la universidad
+            de responsabilidad en caso de que no cumplas y haya complicaciones o
+            contagios.
+          </p>
+          <a
+            href="#"
+            *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
+            class="btn btn-outline-primary"
+            routerLink="/app/formularios/carta-compromiso"
+            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
+          ></a>
+          <div *ngIf="estadosProcesos.cartaCompromiso != 'Pendiente'">
+            <p><b>Estado: </b>Completado</p>
+            <button
+              class="btn btn-primary"
+              (click)="descargarCartaCompromiso()"
+            >
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row mb-3" *ngIf="estadosProcesos.cartaCompromiso=='Completado'">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-primary">SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES</h5>
-            <p class="card-text">Para iniciar tus prácticas preprofesionales, es crucial que proporciones el área y las horas de tu práctica pre-profesional y los detalles relacionados con la organización. Asimismo, asumes el compromiso de cumplir con los objetivos y responsabilidades establecidos por la entidad.</p>
-            <a href="#" *ngIf="estadosProcesos.solicitud=='Pendiente'" class="btn btn-outline-primary" routerLink="/app/formularios/vso-001">Completar <i class="fa-regular fa-pen-to-square ps-1"></i></a>
-            <div *ngIf="estadosProcesos.solicitud!='Pendiente'" >
-              <p><b>Estado: </b>Completado</p>
-              <button class="btn btn-primary" (click)="descargarSolicitudEstudiante()">Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
+  <div class="row mb-3" *ngIf="estadosProcesos.cartaCompromiso == 'Completado'">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
+          </h5>
+          <p class="card-text">
+            Antes de comenzar tus prácticas, es necesario que indiques el área,
+            las horas y detalles de la organización. También, te comprometes a
+            cumplir con los objetivos y responsabilidades que la entidad
+            establezca.
+          </p>
+          <a
+            href="#"
+            *ngIf="estadosProcesos.solicitud == 'Pendiente'"
+            class="btn btn-outline-primary"
+            routerLink="/app/formularios/vso-001"
+            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
+          ></a>
+          <div *ngIf="estadosProcesos.solicitud != 'Pendiente'">
+            <p><b>Estado: </b>Completado</p>
+            <button
+              class="btn btn-primary"
+              (click)="descargarSolicitudEstudiante()"
+            >
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row mb-3" *ngIf="estadosProcesos.solicitud=='Completado'">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-primary">COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</h5>
-            <p class="card-text">El representante delinea metas y responsabilidades para sus estudiantes, precisando la duración completa desde el comienzo hasta la finalización, incluyendo los días laborables y el horario específico. Además, asume un compromiso con el estudiante y la universidad.</p>
-            <div *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'">
-              <p><b>Estado: </b>Pendiente por el representante de prácticas preprofesionales</p>
-              <button class="btn btn-primary" disabled>Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
-            <div *ngIf="estadosProcesos.compromisoRecepcion != 'Pendiente'">
-              <p><b>Estado: </b>Completado por el representante de prácticas preprofesionales</p>
-              <button class="btn btn-primary" (click)="descargarCompromisoRecepcion()">Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
+  <div class="row mb-3" *ngIf="estadosProcesos.solicitud == 'Completado'">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES
+            POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+          </h5>
+          <p class="card-text">
+            El representante establece metas y responsabilidades para los
+            estudiantes, especificando la duración completa con días y horarios.
+            También, adquiere un compromiso con el estudiante y la universidad.
+          </p>
+          <div *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'">
+            <p>
+              <b>Estado: </b>Pendiente por el representante de prácticas
+              preprofesionales
+            </p>
+            <button class="btn btn-primary" disabled>
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
+          </div>
+          <div *ngIf="estadosProcesos.compromisoRecepcion != 'Pendiente'">
+            <p>
+              <b>Estado: </b>Completado por el representante de prácticas
+              preprofesionales
+            </p>
+            <button
+              class="btn btn-primary"
+              (click)="descargarCompromisoRecepcion()"
+            >
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row mb-3" *ngIf="estadosProcesos.compromisoRecepcion=='Completado'">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-primary">SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE LA DIRECCIÓN DE CARRERA</h5>
-            <p class="card-text">La evaluación comprende diversos aspectos del rendimiento estudiantil en prácticas preprofesionales, incluyendo el cumplimiento de objetivos, competencias, responsabilidad, creatividad, adaptación, cooperación, honestidad y puntualidad, con un promedio general. También se evalúa la asistencia en porcentaje y se incluye espacio para observaciones detalladas. Las recomendaciones finales buscan guiar el desarrollo continuo del estudiante en áreas específicas. Este enfoque integral brinda una visión completa del desempeño estudiantil durante las prácticas.</p>
-            <div >
-              <p><b>Estado: </b>Pendiente por el director de carrera</p>
-              <button class="btn btn-primary" disabled>Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
+  <div
+    class="row mb-3"
+    *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
+            LA DIRECCIÓN DE CARRERA
+          </h5>
+          <p class="card-text">
+            El director de carrera evalua el desempeño estudiantil considerando
+            aspectos como objetivos, competencias, responsabilidad y asistencia.
+            Se dan recomendaciones finales para orientar el desarrollo del
+            estudiante.
+          </p>
+          <div>
+            <p><b>Estado: </b>Pendiente por el director de carrera</p>
+            <button class="btn btn-primary" disabled>
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="row mb-3" *ngIf="estadosProcesos.compromisoRecepcion=='Completado'">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-primary">INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL ESTUDIANTE</h5>
-            <p class="card-text">Para finalizar tus prácticas preprofesoinales, debes enviar el informe final donde debes explicar cómo lograste tus objetivos, qué aprendiste para tu carrera, cómo afectó a tu crecimiento personal, y también compartir tus comentarios y recomendaciones.</p>
-            <a href="#" *ngIf="estadosProcesos.informeFinal == 'Pendiente'" class="btn btn-outline-primary" routerLink="/app/formularios/vso-005">Completar <i class="fa-regular fa-pen-to-square ps-1"></i></a>
-            <div *ngIf="estadosProcesos.informeFinal != 'Pendiente'">
-              <p><b>Estado: </b>Completado</p>
-              <button class="btn btn-primary" (click)="descargarInformeFinal()">Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i></button>
-            </div>
+  </div>
+  <div
+    class="row mb-3"
+    *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE
+            LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+          </h5>
+          <p class="card-text">
+            La organización evalua el desempeño estudiantil considerando
+            aspectos como objetivos, competencias, responsabilidad y asistencia.
+            Se dan recomendaciones finales para orientar el desarrollo del
+            estudiante.
+          </p>
+          <div>
+            <p><b>Estado: </b>Pendiente por el representante</p>
+            <button class="btn btn-primary" disabled>
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
-  <!-- <table class="table table-hover mt-4">
-      <tr>
-        <th scope="row">VSO-003</th>
-        <td></td>
-        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente' && estadosProcesos.solicitud!='Pendiente'">  </span></td>
-      </tr>
-      <tr>
-        <th scope="row">VSO-004</th>
-        <td>SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</td>
-        <td><span *ngIf="estadosProcesos.cartaCompromiso!='Pendiente' && estadosProcesos.solicitud!='Pendiente'"></span></td>
-      </tr>
-      <tr>
-        <th scope="row">VSO-005</th>
-        <td>INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL ESTUDIANTE</td>
-        <td><span *ngIf="estadosProcesos.informeFinal!='Pendiente'">{{estadosProcesos.informeFinal}}<br></span><button class="btn btn-primary p-2" routerLink="/app/formularios/vso-005" *ngIf="estadosProcesos.cartaCompromiso=='Completado' && estadosProcesos.solicitud=='Completado' && estadosProcesos.informeFinal=='Pendiente'">Completar</button></td>
-      </tr>
-    </tbody>
-  </table> -->
+  </div>
+  <div
+    class="row mb-3"
+    *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL
+            ESTUDIANTE
+          </h5>
+          <p class="card-text">
+            Al concluir tus prácticas, envía un informe explicando cómo
+            alcanzaste tus objetivos, lo que aprendiste para tu carrera, cómo te
+            benefició a nivel personal, y comparte tus comentarios y
+            recomendaciones.
+          </p>
+          <a
+            href="#"
+            *ngIf="estadosProcesos.informeFinal == 'Pendiente'"
+            class="btn btn-outline-primary"
+            routerLink="/app/formularios/vso-005"
+            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
+          ></a>
+          <div *ngIf="estadosProcesos.informeFinal != 'Pendiente'">
+            <p><b>Estado: </b>Completado</p>
+            <button class="btn btn-primary" (click)="descargarInformeFinal()">
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-

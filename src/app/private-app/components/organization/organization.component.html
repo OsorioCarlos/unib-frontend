@@ -56,13 +56,12 @@
             COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES
           </h5>
           <p class="card-text">
-            El representante delinea metas y responsabilidades para sus
-            estudiantes, precisando la duración completa desde el comienzo hasta
-            la finalización, incluyendo los días laborables y el horario
-            específico. Además, asume un compromiso con el estudiante y la
-            universidad.
+            El representante establece metas y responsabilidades para los
+            estudiantes, especificando la duración completa con días y horarios.
+            También, adquiere un compromiso con el estudiante y la universidad.
           </p>
-          <table class="table table-hover mt-5">
+          <h6>No tienes estudiantes pendientes</h6>
+          <table class="table table-hover mt-5" *ngIf="estudiantes.length > 0">
             <thead>
               <tr>
                 <th scope="col">Identificación</th>
@@ -72,15 +71,18 @@
             </thead>
             <tbody>
               <tr *ngFor="let estudiante of estudiantes">
-                <th scope="row">{{estudiante.identificacion}}</th>
-                <td>{{estudiante.nombre_completo}}</td>
+                <th scope="row">{{ estudiante.identificacion }}</th>
+                <td>{{ estudiante.nombre_completo }}</td>
                 <td>
                   <a
                     class="btn btn-primary p-2"
-                    [routerLink]="['/app/formularios/vso-002',estudiante.identificacion]"
+                    [routerLink]="[
+                      '/app/formularios/vso-002',
+                      estudiante.identificacion
+                    ]"
                   >
                     Completar
-                </a>
+                  </a>
                 </td>
               </tr>
             </tbody>
@@ -90,7 +92,7 @@
     </div>
   </div>
 
-  <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
+  <!-- <div class="row mb-3" *ngIf="representanteCompletoInformacionBasica === true">
     <div class="col">
       <div class="card">
         <div class="card-body">
@@ -145,5 +147,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

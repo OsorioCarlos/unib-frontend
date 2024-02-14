@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
-*{
-    font-family: 'Roboto', sans-serif;
+* {
+  font-family: "Roboto", sans-serif;
 }
 
-body{
-    color: black;
+body {
+  color: black;
 }
 
 /* You can add global styles to this file, and also import other style files */
 @import "../src/assets/styles/styles.css";
 @import "../src/assets/styles/normalize.css";
 
-.inputCompletado{
+.inputCompletado {
   font-weight: 500;
   color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.033);
@@ -20,11 +20,11 @@ body{
   border: none;
 }
 
-.inputCompletado:focus{
+.inputCompletado:focus {
   border: none;
   box-shadow: none;
 }
 
-.titulo-bienvenida{
+.titulo-bienvenida {
   font-weight: 300;
 }
