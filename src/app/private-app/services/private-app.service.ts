@@ -32,6 +32,11 @@ export class PrivateAppService {
     return this.http.put<any>(url, data);
   }
 
+  public eliminar(route: string, id: number): Observable<ApiResponse> {
+    const url = `${this.apiUrl}/${route}/${id}`;
+    return this.http.delete<any>(url);
+  }
+
   get(url: string, params = new HttpParams()) {
     url = this.apiUrl + url;
     return this.http.get(url, { params });
