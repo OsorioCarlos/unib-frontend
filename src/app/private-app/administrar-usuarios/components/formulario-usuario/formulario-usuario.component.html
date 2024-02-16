@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center text-warning">Formulario de Usuario</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <form [formGroup]="formularioUsuario">
+                <div class="card shadow-sm">
+                    <div class="card-header">INFORMACION DEL USUARIO</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="identificacionInput" class="form-label">Cédula:</label>
+                                <input type="text" class="form-control" id="identificacionInput" formControlName="identificacion">
+                            </div>
+                            <div class="col">
+                                <label for="nombreCompletoInput" class="form-label">Nombre Completo:</label>
+                                <input type="text" class="form-control" id="nombreCompletoInput" formControlName="nombre_completo">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="emailInput" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="emailInput" formControlName="email">
+                            </div>
+                            <div class="col">
+                                <label for="passwordInput" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="passwordInput" formControlName="password">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label">Tipo Usuario:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="tipo_id" (change)="validarTipoUsuario($event)">
+                                    <option disabled>Selecciona una opción</option>
+                                    <option *ngFor="let opcion of tipoUsuarioOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Estado:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="estado_id">
+                                    <option disabled>Selecciona una opción</option>
+                                    <option *ngFor="let opcion of estadoUsuarioOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col" *ngIf="tipoUsuarioTemp==='ESTUDIANTE' || tipoUsuarioTemp==='DIRECTOR DE CARRERA'">
+                                <label class="form-label">Carrera:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="carrera_id">
+                                    <option disabled>Selecciona una opción</option>
+                                    <option *ngFor="let opcion of carreraOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col" *ngIf="tipoUsuarioTemp==='ESTUDIANTE'">
+                                <label class="form-label">Nivel:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="nivel_id">
+                                    <option disabled>Selecciona una opción</option>
+                                    <option *ngFor="let opcion of nivelOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col" *ngIf="tipoUsuarioTemp==='REPRESENTANTE PRÁCTICAS'">
+                                <label class="form-label">Organización:</label>
+                                <select class="form-select" aria-label="Default select example" formControlName="organizacion_id">
+                                    <option disabled>Selecciona una opción</option>
+                                    <option *ngFor="let opcion of organizacionOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-3">
+        <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioUsuario.invalid">Guardar</button>
+    </div>
+</div>

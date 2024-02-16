@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center text-warning">Información del Usuario</h1>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+          <p class="card-text">
+            <b>Identificacion:</b> {{usuario?.identificacion}}<br>
+            <b>Nombre:</b> {{usuario?.nombre_completo}}<br>
+            <b>Correo Electrónico:</b> {{usuario?.email}}<br>
+            <b>Tipo:</b> {{usuario?.tipo_catalogo?.nombre}}<br>
+            <b>Estado:</b> {{usuario?.estado_catalogo?.nombre}}
+          </p>
+          <p class="card-text" *ngIf="usuario?.student">
+            <b>Carrera:</b> {{usuario?.student?.carrera_catalogo?.nombre}}<br>
+            <b>Nivel:</b> {{usuario?.student?.nivel_catalogo?.nombre}}
+          </p>
+          <p class="card-text" *ngIf="usuario?.career_director">
+            <b>Carrera:</b> {{usuario?.career_director?.carrera_catalogo?.nombre}}<br>
+          </p>
+          <p class="card-text" *ngIf="usuario?.internship_representative">
+            <b>Carrera:</b> {{usuario?.internship_representative?.organization?.ruc}}<br>
+          </p>
+        </div>
+    </div>
+</div>
