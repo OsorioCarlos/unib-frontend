@@ -1,4 +1,6 @@
+import { Pagination } from "./pagination";
+
 export interface ApiResponse {
-  data: any | any[];
-  mensaje: string;
+    data: any | any[] | Pagination;
+    mensaje: string;
 }

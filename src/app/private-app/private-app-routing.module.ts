@@ -42,10 +42,14 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     data: { expectedRoles: 'REPRESENTANTE PRÁCTICAS' },
   },
-  {
-    path: '**',
-    redirectTo: 'home',
+  { 
+      path: 'administrar-usuarios',
+      loadChildren: () => import('./administrar-usuarios/administrar-usuarios.module').then(m => m.AdministrarUsuariosModule)
   },
+  {
+      path: '**',
+      redirectTo: 'home'
+  }
 ];
 
 @NgModule({

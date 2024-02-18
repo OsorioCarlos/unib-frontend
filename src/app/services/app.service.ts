@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -8,43 +8,55 @@ import Swal from 'sweetalert2';
 export class AppService {
   constructor() {}
 
-  public alertaExito(titulo: string, texto: string): void {
-    Swal.fire({
+  public alertaExito(titulo: string, texto: string): Promise<SweetAlertResult<any>> {
+    return Swal.fire({
       title: titulo,
       text: texto,
-      icon: 'success',
+      icon: 'success'
     });
   }
 
-  public alertaError(titulo: string, texto: string): void {
-    Swal.fire({
+  public alertaError(titulo: string, texto: string):  Promise<SweetAlertResult<any>> {
+    return Swal.fire({
       title: titulo,
       text: texto,
-      icon: 'error',
+      icon: 'error'
     });
   }
 
-  public alertaAviso(titulo: string, texto: string): void {
-    Swal.fire({
+  public alertaAviso(titulo: string, texto: string):  Promise<SweetAlertResult<any>> {
+    return Swal.fire({
       title: titulo,
       text: texto,
-      icon: 'warning',
+      icon: 'warning'
     });
   }
 
-  public alertaInformacion(titulo: string, texto: string): void {
-    Swal.fire({
+  public alertaInformacion(titulo: string, texto: string):  Promise<SweetAlertResult<any>> {
+    return Swal.fire({
       title: titulo,
       text: texto,
-      icon: 'info',
+      icon: 'info'
     });
   }
 
-  public alertaPregunta(titulo: string, texto: string): void {
-    Swal.fire({
+  public alertaPregunta(titulo: string, texto: string):  Promise<SweetAlertResult<any>> {
+    return Swal.fire({
       title: titulo,
       text: texto,
-      icon: 'question',
+      icon: 'question'
+    });
+  }
+
+  public alertaConfirmacion(titulo: string, texto: string, icono: SweetAlertIcon = 'question'):  Promise<SweetAlertResult<any>> {
+    return Swal.fire({
+      title: titulo,
+      text: texto,
+      icon: icono,
+      showCancelButton: true,
+      cancelButtonText: 'NO',
+      showConfirmButton: true,
+      confirmButtonText: 'SI'
     });
   }
 }

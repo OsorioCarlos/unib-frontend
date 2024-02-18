@@ -111,7 +111,7 @@ export class VSO003Component {
             id: practicaPreProfesional.id,
             informacion_estudiante: {
               cedula: practicaPreProfesional.student?.user?.identificacion,
-              nombre: `${practicaPreProfesional.student?.user?.primer_nombre} ${practicaPreProfesional.student?.user?.segundo_nombre} ${practicaPreProfesional.student?.user?.primer_apellido} ${practicaPreProfesional.student?.user?.segundo_apellido}`,
+              nombre: `${practicaPreProfesional.student?.user?.nombre_completo}`,
               carrera: practicaPreProfesional.student?.carrera_id,
               nivel: practicaPreProfesional.student?.nivel_id,
               area_practica: practicaPreProfesional.area_practicas,
