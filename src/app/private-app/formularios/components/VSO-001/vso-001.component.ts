@@ -44,6 +44,7 @@ export class VSO001Component {
     };
     this.organizacion = {
       id: 0,
+      ruc: '',
       razon_social: '',
       representante_legal: '',
       direccion: '',

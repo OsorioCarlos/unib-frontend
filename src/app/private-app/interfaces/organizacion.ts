@@ -2,6 +2,7 @@ import { RepresentantePracticas } from './representante-practicas';
 
 export interface Organizacion {
   id: number;
+  ruc: string;
   razon_social: string;
   representante_legal: string;
   direccion: string;
