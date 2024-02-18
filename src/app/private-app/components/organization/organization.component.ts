@@ -12,7 +12,7 @@ import { PrivateAppService } from '../../services/private-app.service';
   styleUrls: ['./organization.component.css'],
 })
 export class OrganizationComponent {
-  representanteCompletoInformacionBasica: boolean = false;
+  representanteCompletoInformacionBasica: boolean = true;
   formGroupInformacionRepresentante!: FormGroup;
   representante: AuthUser;
   estudiantes: User[] = [];
@@ -23,7 +23,7 @@ export class OrganizationComponent {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.representanteCompletoInformacionBasica = false;
+    this.representanteCompletoInformacionBasica = true;
 
     this.representante = {
       cedula: '',
@@ -62,12 +62,12 @@ export class OrganizationComponent {
         .crear('representante/completarInformacionBasica', datos)
         .subscribe(
           (res) => {
-            this.appService.alertaExito('OK', res.mensaje);
             this.representanteCompletoInformacionBasica = true;
             this.router.navigateByUrl('/app/organization');
           },
           (err) => {
             console.log(err);
+            this.representanteCompletoInformacionBasica = false;
             this.appService.alertaError('ERROR', err.error.mensaje);
           }
         );
@@ -83,6 +83,7 @@ export class OrganizationComponent {
         },
         (err) => {
           console.log(err);
+          this.representanteCompletoInformacionBasica = false;
           this.appService.alertaInformacion(
             'Bienvenido!',
             'Completa tu información para acceder al sistema.'

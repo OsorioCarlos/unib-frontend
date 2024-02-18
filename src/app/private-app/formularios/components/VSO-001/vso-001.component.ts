@@ -38,6 +38,7 @@ export class VSO001Component {
 
   ngOnInit(): void {
     this.estudiante = {
+      identificacion: '',
       escuela: '',
       nivel: '',
       nombre: '',
@@ -112,7 +113,7 @@ export class VSO001Component {
         .subscribe(
           (res) => {
             this.appService.alertaExito('OK', res.mensaje);
-            this.generarVso001('1751592013');
+            this.generarVso001(this.estudiante.identificacion);
           },
           (err) => {
             console.log(err);

@@ -147,4 +147,22 @@ export class StudentComponent {
       }
     );
   }
+
+  descargarEvaluacionOrganizacion(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso004', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion organizacion'
+        );
+        console.error(error);
+      }
+    );
+  }
 }
