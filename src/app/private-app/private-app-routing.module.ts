@@ -5,6 +5,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { StudentComponent } from './components/student/student.component';
+import { DirectorComponent } from './components/director/director.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,9 @@ const routes: Routes = [
         (m) => m.FormulariosModule
       ),
     canLoad: [AuthGuard],
-    data: { expectedRoles: 'ESTUDIANTE,REPRESENTANTE PRÁCTICAS' },
+    data: {
+      expectedRoles: 'ESTUDIANTE,REPRESENTANTE PRÁCTICAS,DIRECTOR DE CARRERA',
+    },
   },
   {
     path: 'reportes',
@@ -42,14 +45,24 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     data: { expectedRoles: 'REPRESENTANTE PRÁCTICAS' },
   },
-  { 
-      path: 'administrar-usuarios',
-      loadChildren: () => import('./administrar-usuarios/administrar-usuarios.module').then(m => m.AdministrarUsuariosModule)
+  {
+    path: 'director',
+    component: DirectorComponent,
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    data: { expectedRoles: 'DIRECTOR DE CARRERA' },
   },
   {
-      path: '**',
-      redirectTo: 'home'
-  }
+    path: 'administrar-usuarios',
+    loadChildren: () =>
+      import('./administrar-usuarios/administrar-usuarios.module').then(
+        (m) => m.AdministrarUsuariosModule
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
 ];
 
 @NgModule({

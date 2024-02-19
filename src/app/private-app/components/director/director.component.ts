@@ -7,12 +7,11 @@ import { User } from '../../interfaces/user';
 import { PrivateAppService } from '../../services/private-app.service';
 
 @Component({
-  selector: 'app-organization',
-  templateUrl: './organization.component.html',
-  styleUrls: ['./organization.component.css'],
+  selector: 'app-director',
+  templateUrl: './director.component.html',
+  styleUrls: ['./director.component.css'],
 })
-export class OrganizationComponent {
-  representanteCompletoInformacionBasica: boolean = true;
+export class DirectorComponent {
   formGroupInformacionRepresentante!: FormGroup;
   representante: AuthUser;
   estudiantes: User[] = [];
@@ -23,17 +22,14 @@ export class OrganizationComponent {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.representanteCompletoInformacionBasica = true;
-
     this.representante = {
       cedula: '',
       nombre: '',
       tipo_usuario: '',
     };
     this.buildformGroupSolicitudPracticas();
-    this.consultarInformaciónRepresentante();
     this.mostrarBienvenida();
-    this.consultarSolicitudesPracticas();
+    this.consultarEvaluacionesPendientes();
     this.consultarEvaluacionesPendientes();
   }
   mostrarBienvenida() {
@@ -62,55 +58,22 @@ export class OrganizationComponent {
         .crear('representante/completarInformacionBasica', datos)
         .subscribe(
           (res) => {
-            this.representanteCompletoInformacionBasica = true;
             this.router.navigateByUrl('/app/organization');
           },
           (err) => {
             console.log(err);
-            this.representanteCompletoInformacionBasica = false;
             this.appService.alertaError('ERROR', err.error.mensaje);
           }
         );
     }
   }
 
-  consultarInformaciónRepresentante(): void {
+  consultarEvaluacionesPendientes(): void {
     this.privateAppService
-      .obtener('representante/obtenerInformacionRepresentantePracticas')
-      .subscribe(
-        (res) => {
-          this.representanteCompletoInformacionBasica = res.data;
-        },
-        (err) => {
-          console.log(err);
-          this.representanteCompletoInformacionBasica = false;
-          this.appService.alertaInformacion(
-            'Bienvenido!',
-            'Completa tu información para acceder al sistema.'
-          );
-        }
-      );
-  }
-
-  consultarSolicitudesPracticas(): void {
-    this.privateAppService
-      .obtener('representante/obtenerEstudiantes')
+      .obtener('director/obtenerEvaluacionesPendientes')
       .subscribe(
         (res) => {
           this.estudiantes = res.data;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  }
-
-  consultarEvaluacionesPendientes(): void {
-    this.privateAppService
-      .obtener('representante/obtenerEvaluacionesPendientes')
-      .subscribe(
-        (res) => {
-          this.evaluacionesPendientes = res.data;
         },
         (err) => {
           console.log(err);

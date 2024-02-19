@@ -182,7 +182,7 @@
             </div>
             <div class="col">
               <label for="areaPracticaInput" class="form-label"
-                >Área de la práctica pre profesional:</label
+                >Área propuesta para la práctica pre profesional:</label
               >
               <input
                 type="text"
@@ -193,17 +193,17 @@
               />
             </div>
           </div>
+          <div class="row mb-3"></div>
           <div class="row">
             <div class="mb-3">
-              <label for="areaInput" class="form-label"
+              <label for="objetivosInput" class="form-label"
                 ><span style="color: red">*</span> Objetivos de la práctica pre
                 profesional:</label
               >
               <textarea
                 class="form-control"
-                id="areaInput"
+                id="objetivosInput"
                 name=""
-                id=""
                 formControlName="objetivos"
                 cols="30"
                 rows="3"
@@ -211,14 +211,13 @@
             </div>
             <div class="row">
               <div class="mb-3">
-                <label for="areaInput" class="form-label"
+                <label for="tareaInput" class="form-label"
                   ><span style="color: red">*</span> Tareas:</label
                 >
                 <textarea
                   class="form-control"
-                  id="areaInput"
+                  id="tareaInput"
                   name=""
-                  id=""
                   formControlName="tareas"
                   cols="30"
                   rows="4"
@@ -228,26 +227,26 @@
           </div>
           <div class="row">
             <div class="mb-3 col">
-              <label for="areaInput" class="form-label"
+              <label for="fechaInicioInput" class="form-label"
                 ><span style="color: red">*</span> Fecha de Inicio:</label
               >
               <input
                 type="date"
                 class="form-control"
-                id="areaInput"
+                id="fechaInicioInput"
                 formControlName="fechaInicio"
                 placeholder=""
                 required
               />
             </div>
             <div class="mb-3 col">
-              <label for="areaInput" class="form-label"
+              <label for="fechaFinInput" class="form-label"
                 ><span style="color: red">*</span> Fecha de Finalización:</label
               >
               <input
                 type="date"
                 class="form-control"
-                id="areaInput"
+                id="fechaFinInput"
                 formControlName="fechaFin"
                 placeholder=""
                 required
@@ -256,7 +255,7 @@
           </div>
           <div class="row">
             <div class="mb-3 col">
-              <label for="areaInput" class="form-label"
+              <label for="diasInput" class="form-label"
                 ><span style="color: red">*</span> Días Laborales de las
                 prácticas pre profesionales:
               </label>
@@ -266,9 +265,11 @@
                   <input
                     type="checkbox"
                     class="btn-check"
-                    id="btn-check-lun-outlined"
+                    id="lunesCheckBox"
                     autocomplete="off"
-                    checked
+                    [checked]="diasLaborables.lunes"
+                    #lunesCheckBox
+                    (change)="seleccionarDia('lunes', lunesCheckBox.checked)"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -282,7 +283,9 @@
                     class="btn-check"
                     id="btn-check-mar-outlined"
                     autocomplete="off"
-                    checked
+                    [checked]="diasLaborables.martes"
+                    #martesCheckBox
+                    (change)="seleccionarDia('martes', martesCheckBox.checked)"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -296,7 +299,11 @@
                     class="btn-check"
                     id="btn-check-mie-outlined"
                     autocomplete="off"
-                    checked
+                    [checked]="diasLaborables.miercoles"
+                    #miercolesCheckBox
+                    (change)="
+                      seleccionarDia('miercoles', miercolesCheckBox.checked)
+                    "
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -310,7 +317,9 @@
                     class="btn-check"
                     id="btn-check-jue-outlined"
                     autocomplete="off"
-                    checked
+                    [checked]="diasLaborables.jueves"
+                    #juevesCheckBox
+                    (change)="seleccionarDia('jueves', juevesCheckBox.checked)"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -324,7 +333,11 @@
                     class="btn-check"
                     id="btn-check-vie-outlined"
                     autocomplete="off"
-                    checked
+                    [checked]="diasLaborables.viernes"
+                    #viernesCheckBox
+                    (change)="
+                      seleccionarDia('viernes', viernesCheckBox.checked)
+                    "
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -338,6 +351,9 @@
                     class="btn-check"
                     id="btn-check-sab-outlined"
                     autocomplete="off"
+                    [checked]="diasLaborables.sabado"
+                    #sabadoCheckBox
+                    (change)="seleccionarDia('sabado', sabadoCheckBox.checked)"
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -351,6 +367,11 @@
                     class="btn-check"
                     id="btn-check-dom-outlined"
                     autocomplete="off"
+                    [checked]="diasLaborables.domingo"
+                    #domingoCheckBox
+                    (change)="
+                      seleccionarDia('domingo', domingoCheckBox.checked)
+                    "
                   />
                   <label
                     class="btn btn-outline-primary"
@@ -364,14 +385,29 @@
               <label for="areaInput" class="form-label"
                 ><span style="color: red">*</span> Horario:</label
               >
-              <input
-                type="text"
-                class="form-control"
-                id="areaInput"
-                formControlName="horario"
-                placeholder=""
-                required
-              />
+              <div class="row form-group">
+                <div class="col">
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="desde"
+                    formControlName="horarioDesde"
+                    required
+                  />
+                </div>
+                <label for="hasta" class="col-1 col-form-label text-center"
+                  >a</label
+                >
+                <div class="col">
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="hasta"
+                    formControlName="horarioHasta"
+                    required
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

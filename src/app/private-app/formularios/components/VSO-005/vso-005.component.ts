@@ -40,6 +40,7 @@ export class VSO005Component {
     this.carreraOpciones = [];
     this.nivelOpciones = [];
     this.informeEstudiante = {
+      identificacion: '',
       nombre_estudiante: '',
       carrera: '',
       nivel: '',
@@ -62,7 +63,7 @@ export class VSO005Component {
             'OK',
             'Se ha guardado la información correctamente'
           );
-          this.generarVso005('1751592013');
+          this.generarVso005(this.informeEstudiante.identificacion);
         },
         (err) => {
           this.appService.alertaError('ERROR', err.error.message);

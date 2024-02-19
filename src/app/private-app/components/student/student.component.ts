@@ -28,6 +28,7 @@ export class StudentComponent {
       informeFinal: 'Pendiente',
       compromisoRecepcion: 'Pendiente',
       evaluacionRepresentante: 'Pendiente',
+      evaluacionDirector: 'Pendiente',
     };
     this.estudiante = {
       cedula: '',
@@ -143,6 +144,42 @@ export class StudentComponent {
       },
       (error) => {
         this.appService.alertaError('ERROR', 'Error al generar informe final');
+        console.error(error);
+      }
+    );
+  }
+
+  descargarEvaluacionOrganizacion(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso004', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion organizacion'
+        );
+        console.error(error);
+      }
+    );
+  }
+
+  descargarEvaluacionDirector(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso003', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion director'
+        );
         console.error(error);
       }
     );

@@ -111,35 +111,10 @@
       </div>
     </div>
   </div>
-
   <div
     class="row mb-3"
     *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
   >
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
-            LA DIRECCIÓN DE CARRERA
-          </h5>
-          <p class="card-text">
-            El director de carrera evalua el desempeño estudiantil considerando
-            aspectos como objetivos, competencias, responsabilidad y asistencia.
-            Se dan recomendaciones finales para orientar el desarrollo del
-            estudiante.
-          </p>
-          <div>
-            <p><b>Estado: </b>Pendiente por el director de carrera</p>
-            <button class="btn btn-primary" disabled>
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-3">
     <div class="col">
       <div class="card">
         <div class="card-body">
@@ -161,7 +136,10 @@
           </div>
           <div *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'">
             <p><b>Estado: </b>Completado por el representante</p>
-            <button class="btn btn-primary">
+            <button
+              class="btn btn-primary"
+              (click)="descargarEvaluacionOrganizacion()"
+            >
               Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
             </button>
           </div>
@@ -171,7 +149,46 @@
   </div>
   <div
     class="row mb-3"
-    *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
+    *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
+            LA DIRECCIÓN DE CARRERA
+          </h5>
+          <p class="card-text">
+            El director de carrera evalua el desempeño estudiantil considerando
+            aspectos como objetivos, competencias, responsabilidad y asistencia.
+            Se dan recomendaciones finales para orientar el desarrollo del
+            estudiante.
+          </p>
+          <div *ngIf="estadosProcesos.evaluacionDirector == 'Pendiente'">
+            <p><b>Estado: </b>Pendiente por el director</p>
+            <button class="btn btn-primary" disabled>
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
+          </div>
+          <div *ngIf="estadosProcesos.evaluacionDirector == 'Completado'">
+            <p><b>Estado: </b>Completado por el director</p>
+            <button
+              class="btn btn-primary"
+              (click)="descargarEvaluacionDirector()"
+            >
+              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="row mb-3"
+    *ngIf="
+      estadosProcesos.evaluacionRepresentante == 'Completado' &&
+      estadosProcesos.evaluacionDirector == 'Completado'
+    "
   >
     <div class="col">
       <div class="card">
@@ -193,6 +210,7 @@
             routerLink="/app/formularios/vso-005"
             >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
           ></a>
+
           <div *ngIf="estadosProcesos.informeFinal != 'Pendiente'">
             <p><b>Estado: </b>Completado</p>
             <button class="btn btn-primary" (click)="descargarInformeFinal()">

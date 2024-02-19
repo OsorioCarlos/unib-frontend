@@ -109,7 +109,8 @@ export class CartaCompromisoComponent {
         .subscribe(
           (res) => {
             const datos = {
-              identificacionEstudiante: '1751592013',
+              identificacionEstudiante:
+                this.compromisoBioseguridad.identificacion,
             };
             this.privateAppService
               .crear('formularios/generar_carta_compromiso', datos)

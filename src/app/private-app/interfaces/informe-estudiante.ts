@@ -1,4 +1,5 @@
 export interface InformeEstudiante {
+  identificacion: string;
   nombre_estudiante: string;
   carrera: string;
   nivel: string;
