@@ -8,6 +8,7 @@ import { OrganizationComponent } from './components/organization/organization.co
 import { StudentComponent } from './components/student/student.component';
 import { PrivateAppRoutingModule } from './private-app-routing.module';
 import { PrivateAppComponent } from './private-app.component';
+import { DirectorComponent } from './components/director/director.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PrivateAppComponent } from './private-app.component';
     NavbarComponent,
     AdminComponent,
     OrganizationComponent,
+    DirectorComponent,
   ],
   imports: [CommonModule, PrivateAppRoutingModule, ReactiveFormsModule],
 })

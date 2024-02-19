@@ -6,7 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
+import { InfoEvaluacion } from 'src/app/private-app/interfaces/info-evaluacion';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
@@ -18,38 +20,35 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class VSO003Component {
   formularioVSO003: FormGroup;
-  carreraOpciones: Catalogo[];
-  nivelOpciones: Catalogo[];
+  identificacionEstudiante: string = '';
+  infoEvaluacionDirector: InfoEvaluacion;
 
   constructor(
     private fb: FormBuilder,
     private privateAppService: PrivateAppService,
-    private appService: AppService
+    private appService: AppService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    this.infoEvaluacionDirector = {
+      razon_social: '',
+      representante_legal: '',
+      area_dedicacion: '',
+      representante: '',
+      nombre_estudiante: '',
+      escuela: '',
+      nivel: '',
+      area_practicas: '',
+      horas_practicas: 0,
+      fecha_inicio: '',
+      fecha_fin: '',
+      nota_organizacion: '',
+    };
     this.formularioVSO003 = this.fb.group({
-      id: ['', Validators.required],
+      id: [''],
       formulario: ['VSO-003', Validators.required],
-      informacion_estudiante: this.fb.group({
-        cedula: ['', Validators.required],
-        nombre: ['', Validators.required],
-        carrera: ['', Validators.required],
-        nivel: ['', Validators.required],
-        area_practica: ['', Validators.required],
-        horas_practica: ['', Validators.required],
-        fecha_inicio: ['', Validators.required],
-        fecha_fin: ['', Validators.required],
-      }),
-      informacion_organizacion: this.fb.group({
-        razon_social: ['', Validators.required],
-        representante_legal: ['', Validators.required],
-        area_dedicacion: ['', Validators.required],
-        representante_estudiante: ['', Validators.required],
-        area_practica: ['', Validators.required],
-      }),
       calificacion: this.fb.group({
         criterios: this.fb.array([]),
-        total: [0, Validators.required],
-        nota_organizacion: ['', Validators.required],
         nota_promedio: [0, Validators.required],
         nota_final: [0, Validators.required],
         porcentaje_asistencia: [
@@ -60,26 +59,30 @@ export class VSO003Component {
         observaciones: [''],
       }),
     });
-
-    this.carreraOpciones = [];
-    this.nivelOpciones = [];
-
-    this.obtenerCarreras();
-    this.obtenerNiveles();
     this.obtenerCriteriosCalificacion();
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.identificacionEstudiante = params.get('id') ?? '';
+    });
+    this.obtenerInformacionEvaluacion();
+    this.calcularNotaPromedio();
   }
 
   public guardarInformacion(): void {
     const datos = this.formularioVSO003.value;
+    datos.id = this.identificacionEstudiante;
     this.privateAppService.crear('calificaciones', datos).subscribe(
       (res) => {
         this.appService.alertaExito(
           'OK',
           'Se ha guardado la información correctamente'
         );
+        this.router.navigateByUrl('/app/director');
       },
       (err) => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
+        this.appService.alertaError('ERROR', err.error.mensaje);
         console.error(err);
       }
     );
@@ -109,25 +112,6 @@ export class VSO003Component {
           }
           this.formularioVSO003.patchValue({
             id: practicaPreProfesional.id,
-            informacion_estudiante: {
-              cedula: practicaPreProfesional.student?.user?.identificacion,
-              nombre: `${practicaPreProfesional.student?.user?.nombre_completo}`,
-              carrera: practicaPreProfesional.student?.carrera_id,
-              nivel: practicaPreProfesional.student?.nivel_id,
-              area_practica: practicaPreProfesional.area_practicas,
-              horas_practica: practicaPreProfesional.numero_horas_practicas,
-              fecha_inicio: practicaPreProfesional.fecha_inicio,
-              fecha_fin: practicaPreProfesional.fecha_fin,
-            },
-            informacion_organizacion: {
-              razon_social: practicaPreProfesional.organization?.razon_social,
-              representante_legal:
-                practicaPreProfesional.organization?.representante_legal,
-              area_dedicacion:
-                practicaPreProfesional.organization?.area_dedicacion,
-              // representante_estudiante: `${practicaPreProfesional.internship_representative?.user?.primer_nombre} ${practicaPreProfesional.internship_representative?.user?.segundo_nombre} ${practicaPreProfesional.internship_representative?.user?.primer_apellido} ${practicaPreProfesional.internship_representative?.user?.segundo_apellido}`,
-              area_practica: practicaPreProfesional.area_practicas,
-            },
             calificacion: {
               nota_organizacion: notaOrganizacion,
               numero_horas_practicas:
@@ -151,21 +135,20 @@ export class VSO003Component {
       nombre: string;
       calificacion: number;
     }[] = this.formularioVSO003.get('calificacion.criterios')?.value;
+    let sumatoria = 0;
     let total = 0;
     let promedio = 0;
 
     calificaciones.forEach((c) => {
-      total += c.calificacion;
+      sumatoria += c.calificacion;
     });
-    this.formularioVSO003.get('calificacion.total')?.setValue(total);
+    this.formularioVSO003.get('calificacion.nota_promedio')?.setValue(total);
 
-    promedio = total / calificaciones.length;
-    this.formularioVSO003.get('calificacion.nota_promedio')?.setValue(promedio);
+    total = sumatoria / calificaciones.length;
+    this.formularioVSO003.get('calificacion.nota_promedio')?.setValue(total);
 
     promedio =
-      (promedio +
-        this.formularioVSO003.get('calificacion.nota_organizacion')?.value) /
-      2;
+      (total + parseInt(this.infoEvaluacionDirector.nota_organizacion)) / 2;
     this.formularioVSO003.get('calificacion.nota_final')?.setValue(promedio);
   }
 
@@ -175,34 +158,7 @@ export class VSO003Component {
     return abstractControl as FormArray;
   }
 
-  private obtenerCarreras(): void {
-    this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
-      (res) => {
-        this.carreraOpciones = res.data;
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', 'Error al obtener carreras');
-        console.error(err);
-      }
-    );
-  }
-
-  private obtenerNiveles(): void {
-    this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
-      (res) => {
-        this.nivelOpciones = res.data;
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', 'Error al obtener niveles');
-        console.error(err);
-      }
-    );
-  }
-
   private obtenerCriteriosCalificacion(): void {
-    this.nivelOpciones = [];
     this.privateAppService
       .obtener('catalogos?nombre=CRITERIOS CALIFFICACIÓN')
       .subscribe(
@@ -229,6 +185,21 @@ export class VSO003Component {
             'ERROR',
             'Error al obtener criterios calificación'
           );
+          console.error(err);
+        }
+      );
+  }
+
+  obtenerInformacionEvaluacion() {
+    this.privateAppService
+      .obtener(
+        `director/obtenerInformacionEvaluacion/${this.identificacionEstudiante}`
+      )
+      .subscribe(
+        (res) => {
+          this.infoEvaluacionDirector = res.data;
+        },
+        (err) => {
           console.error(err);
         }
       );

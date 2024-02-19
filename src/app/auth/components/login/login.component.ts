@@ -42,6 +42,9 @@ export class LoginComponent {
           case 'REPRESENTANTE PRÁCTICAS':
             this.router.navigateByUrl('/app/organization');
             break;
+          case 'DIRECTOR DE CARRERA':
+            this.router.navigateByUrl('/app/director');
+            break;
           default:
             this.router.navigateByUrl('/auth/login');
             this.appService.alertaError(

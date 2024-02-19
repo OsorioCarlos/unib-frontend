@@ -1,4 +1,4 @@
-export interface InfoEvaluacionRepresentante {
+export interface InfoEvaluacion {
   razon_social: string;
   representante_legal: string;
   area_dedicacion: string;
@@ -10,4 +10,5 @@ export interface InfoEvaluacionRepresentante {
   horas_practicas: number;
   fecha_inicio: string;
   fecha_fin: string;
+  nota_organizacion: string;
 }

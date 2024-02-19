@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
-import { InfoEvaluacionRepresentante } from 'src/app/private-app/interfaces/info-evaluacion-representante';
+import { InfoEvaluacion } from 'src/app/private-app/interfaces/info-evaluacion';
 import { PracticaPreProfesional } from 'src/app/private-app/interfaces/practica-preprofesional';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
@@ -20,10 +20,8 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class VSO004Component {
   formularioVSO004: FormGroup;
-  carreraOpciones: Catalogo[];
-  nivelOpciones: Catalogo[];
   identificacionEstudiante: string = '';
-  infoEvaluacionRepresentante: InfoEvaluacionRepresentante;
+  infoEvaluacionRepresentante: InfoEvaluacion;
   constructor(
     private fb: FormBuilder,
     private privateAppService: PrivateAppService,
@@ -43,6 +41,7 @@ export class VSO004Component {
       horas_practicas: 0,
       fecha_inicio: '',
       fecha_fin: '',
+      nota_organizacion: '',
     };
 
     this.formularioVSO004 = this.fb.group({
@@ -60,11 +59,6 @@ export class VSO004Component {
       }),
     });
 
-    this.carreraOpciones = [];
-    this.nivelOpciones = [];
-
-    this.obtenerCarreras();
-    this.obtenerNiveles();
     this.obtenerCriteriosCalificacion();
   }
 
@@ -121,34 +115,7 @@ export class VSO004Component {
     return abstractControl as FormArray;
   }
 
-  private obtenerCarreras(): void {
-    this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
-      (res) => {
-        this.carreraOpciones = res.data;
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', 'Error al obtener carreras');
-        console.error(err);
-      }
-    );
-  }
-
-  private obtenerNiveles(): void {
-    this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
-      (res) => {
-        this.nivelOpciones = res.data;
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', 'Error al obtener niveles');
-        console.error(err);
-      }
-    );
-  }
-
   private obtenerCriteriosCalificacion(): void {
-    this.nivelOpciones = [];
     this.privateAppService
       .obtener('catalogos?nombre=CRITERIOS CALIFFICACIÓN')
       .subscribe(

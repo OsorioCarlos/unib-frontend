@@ -8,68 +8,45 @@
     </div>
   </div>
   <form [formGroup]="formularioVSO003">
-    <div class="row mb-3" formGroupName="informacion_estudiante">
+    <div class="row mb-3">
       <div class="col">
         <div class="card shadow-sm">
-          <div class="card-header">DATOS DEL ESTUDIANTE</div>
+          <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col">
-                <label for="cedulaEstudianteInput" class="form-label"
-                  >Cédula:</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="cedulaEstudianteInput"
-                  formControlName="cedula"
-                  (blur)="buscarEstudiante()"
-                />
-              </div>
-              <div class="col">
+              <div class="col-6">
                 <label for="nombreEstudianteInput" class="form-label"
                   >Nombre:</label
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="nombreEstudianteInput"
-                  formControlName="nombre"
+                  [value]="infoEvaluacionDirector.nombre_estudiante"
+                  readonly
                 />
               </div>
             </div>
             <div class="row mb-3">
               <div class="col">
                 <label class="form-label">Carrera:</label>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  formControlName="carrera"
-                >
-                  <option disabled>Selecciona una carrera</option>
-                  <option
-                    *ngFor="let opcion of carreraOpciones"
-                    value="{{ opcion.id }}"
-                  >
-                    {{ opcion.nombre }}
-                  </option>
-                </select>
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="escuelaInput"
+                  [value]="infoEvaluacionDirector.escuela"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label class="form-label">Nivel/Ciclo:</label>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  formControlName="nivel"
-                >
-                  <option disabled>Selecciona un nivel/ciclo</option>
-                  <option
-                    *ngFor="let opcion of nivelOpciones"
-                    value="{{ opcion.id }}"
-                  >
-                    {{ opcion.nombre }}
-                  </option>
-                </select>
+                <input
+                  type="text"
+                  class="form-control inputCompletado"
+                  id="nivelInput"
+                  [value]="infoEvaluacionDirector.nivel"
+                  readonly
+                />
               </div>
             </div>
             <div class="row mb-3">
@@ -79,9 +56,10 @@
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="areaPracticasInput"
-                  formControlName="area_practica"
+                  [value]="infoEvaluacionDirector.area_practicas"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -90,9 +68,10 @@
                 >
                 <input
                   type="number"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="horasPracicasInput"
-                  formControlName="horas_practica"
+                  [value]="infoEvaluacionDirector.horas_practicas"
+                  readonly
                 />
               </div>
             </div>
@@ -103,9 +82,10 @@
                 >
                 <input
                   type="date"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="inicioPracticasInput"
-                  formControlName="fecha_inicio"
+                  [value]="infoEvaluacionDirector.fecha_inicio"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -114,9 +94,10 @@
                 >
                 <input
                   type="date"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="finPracicasInput"
-                  formControlName="fecha_fin"
+                  [value]="infoEvaluacionDirector.fecha_fin"
+                  readonly
                 />
               </div>
             </div>
@@ -124,47 +105,50 @@
         </div>
       </div>
     </div>
-    <div class="row mb-3" formGroupName="informacion_organizacion">
+    <div class="row mb-3">
       <div class="col">
         <div class="card shadow-sm">
           <div class="card-header">
-            DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
+            <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
           </div>
           <div class="card-body">
             <div class="row mb-3">
-              <div class="col">
+              <div class="col-6">
                 <label for="nombreEmpresaInput" class="form-label"
                   >Nombre / Razón social:</label
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="nombreEmpresaInput"
-                  formControlName="razon_social"
+                  [value]="infoEvaluacionDirector.razon_social"
+                  readonly
                 />
               </div>
+            </div>
+            <div class="row mb-3">
               <div class="col">
                 <label for="representanteEmpresaInput" class="form-label"
                   >Representante legal:</label
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="representanteEmpresaInput"
-                  formControlName="representante_legal"
+                  [value]="infoEvaluacionDirector.representante_legal"
+                  readonly
                 />
               </div>
-            </div>
-            <div class="row mb-3">
               <div class="col">
                 <label for="areaEmpresaInput" class="form-label"
                   >Área de dedicación:</label
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="areaEmpresaInput"
-                  formControlName="area_dedicacion"
+                  [value]="infoEvaluacionDirector.area_dedicacion"
+                  readonly
                 />
               </div>
             </div>
@@ -177,9 +161,10 @@
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="representantePracticaEmpresaInput"
-                  formControlName="representante_estudiante"
+                  [value]="infoEvaluacionDirector.representante"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -188,9 +173,10 @@
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control inputCompletado"
                   id="areaPracticaEmpresaInput"
-                  formControlName="area_practica"
+                  [value]="infoEvaluacionDirector.area_practicas"
+                  readonly
                 />
               </div>
             </div>
@@ -201,7 +187,7 @@
     <div class="row mb-3" formGroupName="calificacion">
       <div class="col">
         <div class="card shadow-sm">
-          <div class="card-header">VALORACIÓN</div>
+          <div class="card-header"><b>VALORACIÓN:</b></div>
           <div class="card-body">
             <table class="table table-striped">
               <thead>
@@ -235,6 +221,8 @@
                       id="{{ 'criterioCalificacion' + i }}"
                       formControlName="calificacion"
                       (blur)="calcularNotaPromedio()"
+                      max="30"
+                      min="0"
                     />
                   </td>
                 </tr>
@@ -245,8 +233,8 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control"
-                      formControlName="total"
+                      class="form-control inputCompletado"
+                      formControlName="nota_promedio"
                       readonly
                     />
                   </td>
@@ -258,9 +246,9 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control"
-                      formControlName="nota_organizacion"
-                      (blur)="calcularNotaPromedio()"
+                      class="form-control inputCompletado"
+                      [value]="infoEvaluacionDirector.nota_organizacion"
+                      readonly
                     />
                   </td>
                 </tr>
@@ -269,7 +257,7 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control"
+                      class="form-control inputCompletado"
                       formControlName="nota_final"
                       readonly
                     />
@@ -281,18 +269,21 @@
             <div class="row mb-3">
               <div class="col">
                 <label for="asistenciaInput" class="form-label"
-                  >Asistencia (%):</label
+                  ><span style="color: red">*</span> Asistencia (%):</label
                 >
                 <input
                   type="number"
                   class="form-control"
                   id="asistenciaInput"
                   formControlName="porcentaje_asistencia"
+                  min="0"
+                  max="100"
                 />
               </div>
               <div class="col">
                 <label for="numeroHorasPracticasInput" class="form-label"
-                  >Horas aprobadas de prácticas pre profesionales:</label
+                  ><span style="color: red">*</span> Horas aprobadas de
+                  prácticas pre profesionales:</label
                 >
                 <input
                   type="number"

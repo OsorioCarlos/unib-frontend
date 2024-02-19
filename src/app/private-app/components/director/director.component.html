@@ -1,0 +1,56 @@
+<div class="container mt-2">
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br /><span class="titulo-bienvenida"
+      >DIRECTOR DE CÁRRERA: {{ representante.nombre }}</span
+    >
+  </h1>
+  <br />
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
+            LA DIRECCIÓN DE CARRERA
+          </h5>
+          <p class="card-text">
+            El director de carrera evalua el desempeño estudiantil considerando
+            aspectos como objetivos, competencias, responsabilidad y asistencia.
+            Se dan recomendaciones finales para orientar el desarrollo del
+            estudiante.
+          </p>
+          <h6 *ngIf="estudiantes.length == 0">
+            No tienes estudiantes pendientes
+          </h6>
+          <table class="table table-hover mt-5" *ngIf="estudiantes.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">Identificación</th>
+                <th scope="col">Nombre del estudiante</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let estudiante of estudiantes">
+                <th scope="row">{{ estudiante.identificacion }}</th>
+                <td>{{ estudiante.nombre_completo }}</td>
+                <td>
+                  <a
+                    class="btn btn-primary p-2"
+                    [routerLink]="[
+                      '/app/formularios/vso-003',
+                      estudiante.identificacion
+                    ]"
+                  >
+                    Completar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

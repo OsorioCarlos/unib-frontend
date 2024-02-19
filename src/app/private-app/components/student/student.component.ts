@@ -166,4 +166,22 @@ export class StudentComponent {
       }
     );
   }
+
+  descargarEvaluacionDirector(): void {
+    const datos = {
+      identificacionEstudiante: this.estudiante.cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso003', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion director'
+        );
+        console.error(error);
+      }
+    );
+  }
 }
