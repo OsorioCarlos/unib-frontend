@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompromisoRecepcion } from 'src/app/private-app/interfaces/compromiso-recepcion';
+import { DiasLaborables } from 'src/app/private-app/interfaces/dias-laborables';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
 
@@ -14,6 +15,8 @@ export class VSO002Component {
   identificacionEstudiante: string = '';
   infoCompromisoRecepcion: CompromisoRecepcion;
   formCompromisoRecepcion!: FormGroup;
+  diasLaborables: DiasLaborables;
+
   constructor(
     private route: ActivatedRoute,
     private privateService: PrivateAppService,
@@ -21,6 +24,15 @@ export class VSO002Component {
     private fb: FormBuilder,
     private router: Router
   ) {
+    this.diasLaborables = {
+      lunes: true,
+      martes: true,
+      miercoles: true,
+      jueves: true,
+      viernes: true,
+      sabado: false,
+      domingo: false,
+    };
     this.infoCompromisoRecepcion = {
       razon_social: '',
       representante_legal: '',
@@ -47,7 +59,8 @@ export class VSO002Component {
         tareas: ['', Validators.required],
         fechaInicio: ['', Validators.required],
         fechaFin: ['', Validators.required],
-        horario: ['', Validators.required],
+        horarioDesde: ['', Validators.required],
+        horarioHasta: ['', Validators.required],
         diasLaborables: [''],
         aceptarCompromiso: [false, Validators.requiredTrue],
       }),
@@ -85,7 +98,7 @@ export class VSO002Component {
       const datos = this.formCompromisoRecepcion.value;
       datos.compromisoRecepcion.identificacionEstudiante =
         this.identificacionEstudiante;
-      datos.compromisoRecepcion.diasLaborables = 'CAMBIAR PRUEBA';
+      datos.compromisoRecepcion.diasLaborables = this.obtenerDiasLaborables();
 
       this.privateService
         .crear('representante/recibirEstudiante', datos)
@@ -98,6 +111,57 @@ export class VSO002Component {
             this.appService.alertaError('ERROR', err.error.mensaje);
           }
         );
+    }
+  }
+  obtenerDiasLaborables(): string {
+    let diasLaborablesTexto = '';
+    if (this.diasLaborables.lunes) {
+      diasLaborablesTexto += 'Lunes ';
+    }
+    if (this.diasLaborables.martes) {
+      diasLaborablesTexto += 'Martes ';
+    }
+    if (this.diasLaborables.miercoles) {
+      diasLaborablesTexto += 'Miercoles ';
+    }
+    if (this.diasLaborables.jueves) {
+      diasLaborablesTexto += 'Jueves ';
+    }
+    if (this.diasLaborables.viernes) {
+      diasLaborablesTexto += 'Viernes ';
+    }
+    if (this.diasLaborables.sabado) {
+      diasLaborablesTexto += 'Sabado ';
+    }
+    if (this.diasLaborables.domingo) {
+      diasLaborablesTexto += 'Domingo';
+    }
+    return diasLaborablesTexto;
+  }
+
+  seleccionarDia(dia: string, status: boolean) {
+    switch (dia) {
+      case 'lunes':
+        this.diasLaborables.lunes = status;
+        break;
+      case 'martes':
+        this.diasLaborables.martes = status;
+        break;
+      case 'miercoles':
+        this.diasLaborables.miercoles = status;
+        break;
+      case 'jueves':
+        this.diasLaborables.jueves = status;
+        break;
+      case 'viernes':
+        this.diasLaborables.viernes = status;
+        break;
+      case 'sabado':
+        this.diasLaborables.sabado = status;
+        break;
+      case 'domingo':
+        this.diasLaborables.domingo = status;
+        break;
     }
   }
 }

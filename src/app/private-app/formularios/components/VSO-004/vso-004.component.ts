@@ -55,9 +55,8 @@ export class VSO004Component {
           '',
           [Validators.required, Validators.min(0), Validators.max(100)],
         ],
-        numero_horas_practicas: ['', Validators.required],
-        observaciones: [''],
-        recomendaciones: [''],
+        observaciones: ['', Validators.required],
+        recomendaciones: ['', Validators.required],
       }),
     });
 

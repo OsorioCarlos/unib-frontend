@@ -25,6 +25,7 @@
                   class="form-control inputCompletado"
                   id="nombreEmpresaInput"
                   [value]="infoEvaluacionRepresentante.razon_social"
+                  readonly
                 />
               </div>
             </div>
@@ -38,6 +39,7 @@
                   class="form-control inputCompletado"
                   id="representanteEmpresaInput"
                   [value]="infoEvaluacionRepresentante.representante_legal"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -49,6 +51,7 @@
                   class="form-control inputCompletado"
                   id="areaEmpresaInput"
                   [value]="infoEvaluacionRepresentante.area_dedicacion"
+                  readonly
                 />
               </div>
             </div>
@@ -64,6 +67,7 @@
                   class="form-control inputCompletado"
                   id="representantePracticaEmpresaInput"
                   [value]="infoEvaluacionRepresentante.representante"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -75,6 +79,7 @@
                   class="form-control inputCompletado"
                   id="areaPracticaEmpresaInput"
                   [value]="infoEvaluacionRepresentante.area_practicas"
+                  readonly
                 />
               </div>
             </div>
@@ -97,6 +102,7 @@
                   class="form-control inputCompletado"
                   id="nombreEstudianteInput"
                   [value]="infoEvaluacionRepresentante.nombre_estudiante"
+                  readonly
                 />
               </div>
             </div>
@@ -108,6 +114,7 @@
                   class="form-control inputCompletado"
                   id="escuelaInput"
                   [value]="infoEvaluacionRepresentante.escuela"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -117,6 +124,7 @@
                   class="form-control inputCompletado"
                   id="nivelInput"
                   [value]="infoEvaluacionRepresentante.nivel"
+                  readonly
                 />
               </div>
             </div>
@@ -130,6 +138,7 @@
                   class="form-control inputCompletado"
                   id="areaPracticasInput"
                   [value]="infoEvaluacionRepresentante.area_practicas"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -141,6 +150,7 @@
                   class="form-control inputCompletado"
                   id="horasPracicasInput"
                   [value]="infoEvaluacionRepresentante.horas_practicas"
+                  readonly
                 />
               </div>
             </div>
@@ -154,6 +164,7 @@
                   class="form-control inputCompletado"
                   id="inicioPracticasInput"
                   [value]="infoEvaluacionRepresentante.fecha_inicio"
+                  readonly
                 />
               </div>
               <div class="col">
@@ -165,6 +176,7 @@
                   class="form-control inputCompletado"
                   id="finPracicasInput"
                   [value]="infoEvaluacionRepresentante.fecha_fin"
+                  readonly
                 />
               </div>
             </div>
@@ -219,7 +231,7 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control"
+                      class="form-control inputCompletado"
                       formControlName="nota_promedio"
                       readonly
                     />
@@ -229,33 +241,24 @@
             </table>
             <br />
             <div class="row mb-3">
-              <div class="col">
+              <div class="col-6">
                 <label for="asistenciaInput" class="form-label"
-                  >Asistencia (%):</label
+                  ><span style="color: red">*</span> Asistencia (%):</label
                 >
                 <input
                   type="number"
                   class="form-control"
                   id="asistenciaInput"
                   formControlName="porcentaje_asistencia"
-                />
-              </div>
-              <div class="col">
-                <label for="numeroHorasPracticasInput" class="form-label"
-                  >Horas aprobadas de prácticas pre profesionales:</label
-                >
-                <input
-                  type="number"
-                  class="form-control"
-                  id="numeroHorasPracticasInput"
-                  formControlName="numero_horas_practicas"
+                  min="0"
+                  max="100"
                 />
               </div>
             </div>
             <div class="row mb-3">
               <div class="col">
                 <label for="observacionesInput" class="form-label"
-                  >Observaciones:</label
+                  ><span style="color: red">*</span> Observaciones:</label
                 >
                 <textarea
                   class="form-control"
@@ -267,12 +270,12 @@
             </div>
             <div class="row mb-3">
               <div class="col">
-                <label for="observacionesInput" class="form-label"
-                  >Recomendaciones:</label
+                <label for="recomendacionesInput" class="form-label"
+                  ><span style="color: red">*</span> Recomendaciones:</label
                 >
                 <textarea
                   class="form-control"
-                  id="observacionesInput"
+                  id="recomendacionesInput"
                   rows="3"
                   formControlName="recomendaciones"
                 ></textarea>

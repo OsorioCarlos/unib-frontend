@@ -28,6 +28,7 @@ export class StudentComponent {
       informeFinal: 'Pendiente',
       compromisoRecepcion: 'Pendiente',
       evaluacionRepresentante: 'Pendiente',
+      evaluacionDirector: 'Pendiente',
     };
     this.estudiante = {
       cedula: '',
