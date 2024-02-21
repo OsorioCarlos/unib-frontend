@@ -9,12 +9,12 @@
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
         <button class="accordion-button collapsed card-title text-primary completed-check" [ngClass]="{'collapsed':!collapse1}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-          CARTA DE COMPROMISO
+          <i class="fa-solid fa-user-graduate"></i>CARTA DE COMPROMISO
         </button>
       </h2>
       <div id="flush-collapseOne" class="accordion-collapse collapse" [ngClass]="{'show':collapse1}" aria-labelledby="flush-headingOne">
         <div class="accordion-body">
-          <p>Afirmas tu compromiso de seguir las medidas de seguridad sanitaria durante tus prácticas, liberando a la institución y la universidad de responsabilidad en caso de que no cumplas y haya complicaciones o contagios.</p>          
+          El <b>estudiante</b> manifiesta su compromiso de adherirse rigurosamente a las medidas de seguridad sanitaria durante sus prácticas, eximiendo a la institución y la universidad de cualquier responsabilidad en caso de incumplimiento que resulte en complicaciones o contagios.
           <a
             href="#"
             *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
@@ -35,16 +35,13 @@
     <div class="accordion-item" *ngIf="estadosProcesos.cartaCompromiso == 'Completado'">
       <h2 class="accordion-header" id="flush-headingTwo">
         <button class="accordion-button card-title text-primary completed-check" [ngClass]="{'collapsed':!collapse2}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-          SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
+          <i class="fa-solid fa-user-graduate"></i>SOLICITUD
         </button>
       </h2>
       <div id="flush-collapseTwo" class="accordion-collapse collapse" [ngClass]="{'show':collapse2}" aria-labelledby="flush-headingTwo">
         <div class="accordion-body">
           <p>
-            Antes de comenzar tus prácticas, es necesario que indiques el área,
-            las horas y detalles de la organización. También, te comprometes a
-            cumplir con los objetivos y responsabilidades que la entidad
-            establezca.
+            El <b>estudiante</b> solicita formalmente la realización de sus prácticas y asume la responsabilidad de cumplir con los objetivos y deberes establecidos por la entidad correspondiente.
           </p>
           <a
             href="#"
@@ -66,15 +63,12 @@
     <div class="accordion-item" *ngIf="estadosProcesos.solicitud == 'Completado'">
       <h2 class="accordion-header" id="flush-headingThree">
         <button class="accordion-button collapsed card-title text-primary completed-check" [ngClass]="{'collapsed':!collapse3}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-          COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES
-          POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</button>
+          <i class="fa-solid fa-building-user"></i>COMPROMISO DE RECEPCIÓN</button>
       </h2>
       <div id="flush-collapseThree" class="accordion-collapse collapse" [ngClass]="{'show':collapse3}" aria-labelledby="flush-headingThree">
         <div class="accordion-body">
           <p>
-            El representante establece metas y responsabilidades para los
-            estudiantes, especificando la duración completa con días y horarios.
-            También, adquiere un compromiso con el estudiante y la universidad.
+            El <b>representante</b> define objetivos y responsabilidades específicas para el estudiante, detallando la duración completa de las prácticas, incluyendo días y horarios. Además, adquiere un compromiso formal con el estudiante y la universidad.
           </p>
           <button
             href="#"
@@ -96,16 +90,12 @@
     <div class="accordion-item" *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'">
       <h2 class="accordion-header" id="flush-headingThree">
         <button class="accordion-button collapsed card-title text-primary completed-check"  [ngClass]="{'collapsed':!collapse4}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-          SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE
-            LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA</button>
+          <i class="fa-solid fa-building-user"></i>SEGUIMIENTO Y EVALUACIÓN</button>
       </h2>
       <div id="flush-collapseFour" class="accordion-collapse collapse" [ngClass]="{'show':collapse4}"aria-labelledby="flush-headingThree">
         <div class="accordion-body">
           <p>
-            La organización evalua el desempeño estudiantil considerando
-            aspectos como objetivos, competencias, responsabilidad y asistencia.
-            Se dan recomendaciones finales para orientar el desarrollo del
-            estudiante.
+            El <b>representante</b> evalúa el rendimiento del estudiante, considerando aspectos como los objetivos establecidos, competencias demostradas, responsabilidad y asistencia. Al finalizar, se proporcionan recomendaciones finales para guiar el desarrollo continuo del estudiante.
           </p>
           <button
             href="#"
@@ -127,16 +117,12 @@
     <div class="accordion-item" *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'">
       <h2 class="accordion-header" id="flush-headingThree">
         <button class="accordion-button collapsed card-title text-primary completed-check" [ngClass]="{'collapsed':!collapse5}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-          SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
-            LA DIRECCIÓN DE CARRERA</button>
+          <i class="fa-solid fa-user-tie"></i>SEGUIMIENTO Y EVALUACIÓN</button>
       </h2>
       <div id="flush-collapseFive" class="accordion-collapse collapse" [ngClass]="{'show':collapse5}" aria-labelledby="flush-headingThree">
         <div class="accordion-body">
           <p>
-            El director de carrera evalua el desempeño estudiantil considerando
-            aspectos como objetivos, competencias, responsabilidad y asistencia.
-            Se dan recomendaciones finales para orientar el desarrollo del
-            estudiante.
+            El <b>director de carrera</b> realiza una evaluación del desempeño estudiantil, tomando en cuenta elementos como objetivos alcanzados, competencias demostradas, responsabilidad y asistencia. Posteriormente, emite recomendaciones finales para orientar el crecimiento y desarrollo del estudiante.
           </p>
           <button
             href="#"
@@ -158,16 +144,12 @@
     <div class="accordion-item" *ngIf="estadosProcesos.evaluacionDirector == 'Completado'">
       <h2 class="accordion-header" id="flush-headingThree">
         <button class="accordion-button collapsed card-title text-primary completed-check" [ngClass]="{'collapsed':!collapse6}"  type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-          INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL
-            ESTUDIANTE</button>
+          <i class="fa-solid fa-user-graduate"></i>INFORME FINAL</button>
       </h2>
       <div id="flush-collapseSix" class="accordion-collapse collapse" [ngClass]="{'show':collapse6}" aria-labelledby="flush-headingThree">
         <div class="accordion-body">
           <p>
-            Al concluir tus prácticas, envía un informe explicando cómo
-            alcanzaste tus objetivos, lo que aprendiste para tu carrera, cómo te
-            benefició a nivel personal, y comparte tus comentarios y
-            recomendaciones.
+            El <b>estudiante</b> presenta un informe detallado explicando cómo logró alcanzar los objetivos, los aprendizajes obtenidos, los beneficios obtenidos, así como comentarios y recomendaciones relevantes.
           </p>
           <a
           href="#"

@@ -40,3 +40,12 @@
 .completed-check::after {
   content: none;
 }
+.fa-graduation-cap {
+  font-size: 1.5rem;
+  padding-right: 10px;
+}	
+
+.fa-user-graduate, .fa-user-tie, .fa-building-user {
+  font-size: 1.5rem;
+  padding-right: 10px;
+}	
