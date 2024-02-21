@@ -104,7 +104,7 @@ export class VSO002Component {
         .crear('representante/recibirEstudiante', datos)
         .subscribe(
           (res) => {
-            this.appService.alertaExito('OK', 'Estudiante recibido');
+            this.appService.alertaExito('OK', 'Estudiante aceptado con éxito');
             this.router.navigateByUrl('/app/organization');
           },
           (err) => {
