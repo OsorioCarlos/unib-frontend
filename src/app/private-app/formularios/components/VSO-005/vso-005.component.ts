@@ -59,10 +59,6 @@ export class VSO005Component {
       .crear('estudiantes/enviarInformeFinal', datos)
       .subscribe(
         (res) => {
-          this.appService.alertaExito(
-            'OK',
-            'Se ha guardado la información correctamente'
-          );
           this.generarVso005(this.informeEstudiante.identificacion);
         },
         (err) => {

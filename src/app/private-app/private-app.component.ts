@@ -6,6 +6,7 @@ import { PrivateAppService } from './services/private-app.service';
 @Component({
   selector: 'private-app-root',
   templateUrl: './private-app.component.html',
+  styleUrls: ['./private-app.component.css']
 })
 export class PrivateAppComponent {
   authUser : AuthUser;

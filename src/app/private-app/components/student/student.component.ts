@@ -17,6 +17,12 @@ export class StudentComponent {
   apiUrl: string = environment.apiUrl;
   estadosProcesos: EstadosProcesos;
   estudiante: AuthUser;
+  collapse1: boolean = false;
+  collapse2: boolean = false;
+  collapse3: boolean = false;
+  collapse4: boolean = false;
+  collapse5: boolean = false;
+  collapse6: boolean = false;
   constructor(
     private privateAppService: PrivateAppService,
     private appService: AppService,
@@ -53,11 +59,49 @@ export class StudentComponent {
       .subscribe(
         (res) => {
           this.estadosProcesos = res.data;
+          if(this.estadosProcesos.cartaCompromiso == 'Pendiente' ){         
+            this.collapse1 = true;
+            this.appService.alertaExito('Bienvenido', 'Ya puedes completar tu carta de compromiso');
+          }
+          if(this.estadosProcesos.cartaCompromiso == 'Completado' && this.estadosProcesos.solicitud == 'Pendiente'){
+            this.collapse2 = true;
+            this.appService.alertaExito('Felicidades', 'Ya puedes solicitar tus prácticas preprofesionales');
+          }
+          
+          if(this.estadosProcesos.solicitud == 'Completado' && this.estadosProcesos.compromisoRecepcion == 'Pendiente'){
+            this.collapse3 = true;
+            this.appService.alertaAviso('Pendiente del Representante!', 'Se te enviará una notificación por correo cuando tu representante envié el compromiso de recepción.');
+          }
+
+          if(this.estadosProcesos.compromisoRecepcion == 'Completado' && this.estadosProcesos.evaluacionRepresentante == 'Pendiente'){
+            this.collapse4 = true;
+            this.appService.alertaAviso('Pendiente del Representante!', 'Se te enviará una notificación por correo cuando tu representante envíe la evaluación');
+          }
+
+          if(this.estadosProcesos.evaluacionRepresentante == 'Completado' && this.estadosProcesos.evaluacionDirector == 'Pendiente'){
+            this.collapse5 = true;
+            this.appService.alertaAviso('Pendiente del Director de Carrera!', 'Se te enviará una notificación por correo cuando tu director envíe la evaluación');
+          }
+
+          if(this.estadosProcesos.evaluacionDirector == 'Completado' && this.estadosProcesos.informeFinal == 'Pendiente'){
+            this.collapse6 = true;
+            this.appService.alertaExito('Felicidades!', 'Ya puedes completar tu informe final');
+          }
           if (
             this.estadosProcesos.cartaCompromiso == 'Completado' &&
-            this.estadosProcesos.informeFinal == 'Completado' &&
-            this.estadosProcesos.solicitud == 'Completado'
+            this.estadosProcesos.solicitud == 'Completado' &&
+            this.estadosProcesos.compromisoRecepcion == 'Completado' &&
+            this.estadosProcesos.evaluacionRepresentante == 'Completado' &&
+            this.estadosProcesos.evaluacionDirector == 'Completado' &&
+            this.estadosProcesos.informeFinal == 'Completado'
           ) {
+            this.collapse1 = true;
+            this.collapse2 = true;
+            this.collapse3 = true;
+            this.collapse4 = true;
+            this.collapse5 = true;
+            this.collapse6 = true;
+
             this.appService.alertaExito(
               'Felicidades!',
               'Haz completado tus prácticas preprofesionales'
@@ -65,7 +109,8 @@ export class StudentComponent {
           }
         },
         (err) => {
-          this.appService.alertaInformacion('Recuerda!', err.error.mensaje);
+          this.appService.alertaExito('Bienvenido', 'Ya puedes completar tu carta de compromiso');
+          this.collapse1 = true;
         }
       );
   }

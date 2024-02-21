@@ -3,3 +3,12 @@
   height: 50px;
   margin: auto;
 }
+
+nav{
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  padding: 0;
+  height: max-content;
+}

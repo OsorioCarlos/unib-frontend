@@ -113,7 +113,6 @@ export class VSO001Component {
         .crear('estudiantes/solicitarPracticas', datos)
         .subscribe(
           (res) => {
-            this.appService.alertaExito('OK', res.mensaje);
             this.generarVso001(this.estudiante.identificacion);
           },
           (err) => {

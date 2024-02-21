@@ -1,6 +1,7 @@
-<div class="container mb-3">
-  <h1 class="text-center text-primary">CARTA DE COMPROMISO</h1>
+<div class="container ">
+  <h1 class="text-center text-primary titulo-principal">CARTA DE COMPROMISO</h1>
   <form
+    class="needs-validation"
     [formGroup]="formGroupInformacionEstudiante"
     (ngSubmit)="onSubmit($event)"
     *ngIf="mostrarFormularioEstudiante === true"
@@ -9,63 +10,71 @@
     <div class="card shadow-sm mb-3">
       <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
       <div class="card-body">
-        <div class="row mb-3" formGroupName="estudiante">
-          <div class="col">
-            <label class="form-label"
-              ><span style="color: red">*</span> Carrera:</label
-            >
-            <select
-              class="form-select"
-              aria-label="Selecciona carrera"
-              formControlName="carrera"
-            >
-              <option disabled>Selecciona una carrera</option>
-              <option
-                *ngFor="let opcion of carreraOpciones"
-                value="{{ opcion.id }}"
-              >
-                {{ opcion.nombre }}
-              </option>
-            </select>
+        <div class="row " formGroupName="estudiante">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre completo:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre completo"
+              disabled
+              readonly
+            />
           </div>
-          <div class="col">
-            <label class="form-label"
-              ><span style="color: red">*</span> Semestre:</label
-            >
-            <select
-              class="form-select"
-              aria-label="Selecciona nivel"
-              formControlName="semestre"
-            >
-              <option disabled>Selecciona un semestre</option>
-              <option
-                *ngFor="let opcion of nivelOpciones"
-                value="{{ opcion.id }}"
-              >
-                {{ opcion.nombre }}
-              </option>
-            </select>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Identificación:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Identificación"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row " formGroupName="estudiante">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Carrera:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Carrera"
+              disabled
+              readonly
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Semestre:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Semestre"
+              disabled
+              readonly
+            />
           </div>
         </div>
       </div>
     </div>
-    <div class="card shadow-sm mb-3" formGroupName="organizacion">
+    <div class="card shadow-sm mb-3">
       <div class="card-header">
         <b
           >DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JÚRIDICA PARA LA PRÁCTICA
           PRE PROFESIONAL:</b
         >
       </div>
-      <div class="card-body">
-        <div class="row mb-3">
-          <div class="col">
+      <div class="card-body" formGroupName="organizacion">
+        <div class="row ">
+          <div class="col-md-6 mb-3">
             <label for="nombreOrganizacionInput" class="form-label"
               ><span style="color: red">*</span> Nombre / Razón Social:</label
             >
             <select
+              id="nombreOrganizacionInput"
               class="form-select"
               aria-label="Selecciona la organización"
               formControlName="nombreRazonSocial"
+              required
             >
               <option disabled>Selecciona una organización</option>
               <option
@@ -75,16 +84,16 @@
                 {{ opcion.razon_social }}
               </option>
             </select>
+            <div class="invalid-feedback">Campo obligatorio</div>
           </div>
         </div>
       </div>
     </div>
-    <button
-      class="btn btn-primary btn-lg w-100"
-      [disabled]="formGroupInformacionEstudiante.invalid"
-    >
-      Continuar
-    </button>
+    <div class="d-flex justify-content-end  mb-3">
+      <button class="btn btn-primary" type="submit">
+        CONTINUAR <i class="fa-solid fa-circle-check"></i>
+      </button>
+    </div>
   </form>
 
   <div *ngIf="mostrarFormularioEstudiante == false">
@@ -131,14 +140,14 @@
       {{ formularioCartaCompromiso.get("carrera")?.value }}<br />
       CC: {{ formularioCartaCompromiso.get("cedula_estudiante")?.value }}
     </p>
-    <div class="d-grid gap-2 mb-3">
+    <div class="d-flex justify-content-end  mb-3">
       <button
-        class="btn btn-primary btn-lg"
+        class="btn btn-primary"
         type="button"
         (click)="generarCartaCompromiso()"
         [disabled]="formularioCartaCompromiso.invalid"
       >
-        Aceptar
+        CONTINUAR <i class="fa-solid fa-circle-check"></i>
       </button>
     </div>
   </div>

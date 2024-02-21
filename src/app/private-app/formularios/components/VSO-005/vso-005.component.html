@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h1 class="text-center text-primary">
+    <div class="col-md mb-3">
+      <h1 class="text-center text-primary titulo-principal">
         INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL ESTUDIANTE
       </h1>
     </div>
@@ -10,55 +10,57 @@
         <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
         <div class="card-body">
           <div>
-            <div class="row mb-3">
-              <div class="col-6">
+            <div class="row ">
+              <div class="col-md-6 mb-3">
                 <label for="nombreInput" class="form-label">Nombre:</label>
                 <input
                   type="text"
-                  class="form-control input-readonly inputCompletado"
+                  class="form-control input-readonly "
                   id="nombreInput"
-                  readonly
+                  readonly disabled
                   [value]="informeEstudiante.nombre_estudiante"
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="escuelaInput" class="form-label">Escuela:</label>
                 <input
                   type="text"
-                  class="form-control input-readonly inputCompletado"
+                  class="form-control input-readonly "
                   id="escuelaInput"
-                  readonly
+                  readonly disabled
                   [value]="informeEstudiante.carrera"
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="nivelInput" class="form-label">Nivel/Ciclo:</label>
                 <input
                   type="text"
-                  class="form-control input-readonly inputCompletado"
+                  class="form-control input-readonly "
                   id="nivelInput"
-                  readonly
+                  readonly disabled
                   [value]="informeEstudiante.nivel"
                 />
               </div>
             </div>
           </div>
 
-          <div class="row mb-3">
-            <div class="col">
+          <div class="row ">
+            <div class="col-md mb-3">
               <label for="areaEstudianteInput" class="form-label"
                 >Organización, entidad o persona jurídica de la práctica:</label
               >
               <input
                 type="text"
-                class="form-control inputCompletado"
+                class="form-control "
                 id="areaEstudianteInput"
                 [value]="informeEstudiante.organizacion"
+                readonly
+                disabled
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="numeroHorasEstudianteInput" class="form-label"
                 >Número de horas de prácticas realizadas:</label
               >
@@ -66,46 +68,48 @@
                 type="number"
                 min="0"
                 max="400"
-                class="form-control inputCompletado"
+                class="form-control "
                 id="numeroHorasEstudianteInput"
                 [value]="informeEstudiante.numero_horas_realizada"
+                readonly
+                disabled
               />
             </div>
           </div>
 
-          <div class="row mb-3" formGroupName="practicaPreprofesional">
-            <div class="col">
+          <div class="row " formGroupName="practicaPreprofesional">
+            <div class="col-md mb-3">
               <label for="fechaInicioInput" class="form-label"
                 >Fecha de inicio:</label
               >
               <input
                 type="date"
-                class="form-control inputCompletado"
+                class="form-control "
                 id="fechaInicioInput"
                 [value]="informeEstudiante.fecha_inicio"
+                readonly disabled
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="fechaFinalizacionInput" class="form-label"
                 >Fecha de finalización:</label
               >
               <input
                 type="date"
-                class="form-control inputCompletado"
+                class="form-control "
                 id="fechaFinalizacionInput"
                 [value]="informeEstudiante.fecha_fin"
+                readonly disabled
               />
             </div>
           </div>
         </div>
       </div>
-      <div class="row mb-3" formGroupName="informe">
-        <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm mb-3" formGroupName="informe">
             <div class="card-header"><b>INFORME:</b></div>
             <div class="card-body">
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="cumplimientoObjetivosTextarea" class="form-label"
                     ><span style="color: red">*</span> Cumplimiento de los
                     objetivos de las prácticas:</label
@@ -118,8 +122,8 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="beneficiosFormacionTextarea" class="form-label"
                     ><span style="color: red">*</span> Beneficios para su
                     formación profesional:</label
@@ -132,8 +136,8 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="nuevosAprendizajesTextarea" class="form-label"
                     ><span style="color: red">*</span> Nuevos
                     aprendizajes:</label
@@ -146,8 +150,8 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="desarrolloPersonalTextarea" class="form-label"
                     ><span style="color: red">*</span> Incidencia en su
                     desarrollo personal:</label
@@ -160,8 +164,8 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="comentariosTextarea" class="form-label"
                     ><span style="color: red">*</span> Comentarios:</label
                   >
@@ -173,8 +177,8 @@
                   ></textarea>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col">
+              <div class="row ">
+                <div class="col-md mb-3">
                   <label for="recomendacionesTextarea" class="form-label"
                     ><span style="color: red">*</span> Recomendaciones:</label
                   >
@@ -188,16 +192,14 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="d-grid gap-2 mb-3">
+      <div class="d-grid gap-2  d-flex justify-content-end mb-3">
         <button
           [disabled]="formularioVSO005.invalid"
           class="btn btn-primary btn-lg"
           type="button"
           (click)="guardarInformacion()"
         >
-          Guardar
+        CONTINUAR <i class="fa-solid fa-circle-check"></i>
         </button>
       </div>
     </form>

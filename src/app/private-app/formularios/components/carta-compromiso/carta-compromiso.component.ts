@@ -84,9 +84,13 @@ export class CartaCompromisoComponent {
   }
 
   onSubmit(event: Event) {
-    console.log(this.formGroupInformacionEstudiante);
-    event.preventDefault();
-    if (this.formGroupInformacionEstudiante.valid) {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso('Completa el formulario', 'Revisa los campos requeridos');
+    }else if (this.formGroupInformacionEstudiante.valid) {
       const datos = this.formGroupInformacionEstudiante.value;
       this.privateAppService
         .crear('estudiantes/generarCartaCompromiso', datos)
@@ -100,7 +104,9 @@ export class CartaCompromisoComponent {
           }
         );
     }
+    forms!.classList.add('was-validated');
   }
+
 
   public generarCartaCompromiso(): void {
     if (this.formularioCartaCompromiso.valid) {
@@ -133,7 +139,6 @@ export class CartaCompromisoComponent {
         );
     }
     this.router.navigateByUrl('/app/student');
-    this.appService.alertaExito('OK', 'Carta de compromiso aceptada');
   }
 
   private completarCartaComprmiso(): void {
@@ -181,10 +186,6 @@ export class CartaCompromisoComponent {
 
   private buildformGroupInformacionEstudiante(): void {
     this.formGroupInformacionEstudiante = this.fb.group({
-      estudiante: this.fb.group({
-        carrera: ['', Validators.required],
-        semestre: ['', Validators.required],
-      }),
       organizacion: this.fb.group({
         nombreRazonSocial: ['', Validators.required],
       }),
