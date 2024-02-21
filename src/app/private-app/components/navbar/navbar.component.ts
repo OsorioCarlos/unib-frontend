@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthUser } from '../../interfaces/auth-user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  @Input() authUser: AuthUser; 
+  constructor(private authService: AuthService, private router: Router) {
+    this.authUser = {
+      cedula: '',
+      nombre: '',
+      tipo_usuario: '',
+    };
+  }
 
   public logout(): void {
     this.authService.logout().subscribe((data) => {
