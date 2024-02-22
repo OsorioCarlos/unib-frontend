@@ -1,8 +1,11 @@
-$primary: #00498c;
-$warning: #f7ba00;
-$theme-colors: (
-  "primary": $primary,
-  "warning": $warning,
-);
+$primarys: #00498c;
+$warnings: #f7ba00;
 
-@import "../../../node_modules/bootstrap/scss/bootstrap";
+$theme-colors: (
+  "primary": $primarys,
+  "warning": $warnings,
+  );
+  
+  $primary:$primarys;
+  $warning:$warnings;
+  @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

@@ -7,6 +7,7 @@
     </div>
   </div>
   <form
+    class="needs-validation"
     [formGroup]="formGroupSolicitudPracticas"
     (ngSubmit)="onSubmit($event)"
     novalidate
@@ -62,6 +63,7 @@
               class="form-control"
               id="areaEstudianteInput"
               formControlName="areaPropuesta"
+              required
             />
           </div>
           <div class="col-md mb-3">
@@ -76,6 +78,7 @@
               class="form-control"
               id="numeroHorasEstudianteInput"
               formControlName="horasSolicitadas"
+              required
             />
           </div>
         </div>
@@ -176,6 +179,7 @@
               class="form-select"
               aria-label="Selecciona representante"
               formControlName="representante"
+              required
             >
               <option disabled>Selecciona un representante</option>
               <option
@@ -208,6 +212,7 @@
                 type="checkbox"
                 formControlName="acepta"
                 id="aceptarCompromisoCheckbox"
+                required
               />
               <label for="aceptarCompromisoCheckbox">
                 <p><span style="color: red">*</span> Aceptar Compromiso</p>
@@ -220,11 +225,6 @@
     <div class="d-grid gap-2  d-flex justify-content-end  mb-3">
       <button
         class="btn btn-primary btn-lg"
-        [disabled]="
-          formGroupSolicitudPracticas.invalid ||
-          formGroupSolicitudPracticas.get('compromisoEstudiante.acepta')
-            ?.value == false
-        "
       >CONTINUAR <i class="fa-solid fa-circle-check"></i></button>
     </div>
   </form>

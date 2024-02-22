@@ -70,22 +70,36 @@ export class VSO003Component {
     this.calcularNotaPromedio();
   }
 
-  public guardarInformacion(): void {
-    const datos = this.formularioVSO003.value;
-    datos.id = this.identificacionEstudiante;
-    this.privateAppService.crear('calificaciones', datos).subscribe(
-      (res) => {
-        this.appService.alertaExito(
-          'OK',
-          'Se ha guardado la información correctamente'
+  onSubmit(event: Event) {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
+      );
+    } else {
+      if (this.formularioVSO003.valid) {
+        const datos = this.formularioVSO003.value;
+        datos.id = this.identificacionEstudiante;
+        this.privateAppService.crear('calificaciones', datos).subscribe(
+          (res) => {
+            this.appService.alertaExito(
+              'OK',
+              'Se ha notificado el seguimiento y evaluación al estudiante'
+            );
+            this.router.navigateByUrl('/app/director');
+          },
+          (err) => {
+            this.appService.alertaError('ERROR', err.error.mensaje);
+            console.error(err);
+          }
         );
-        this.router.navigateByUrl('/app/director');
-      },
-      (err) => {
-        this.appService.alertaError('ERROR', err.error.mensaje);
-        console.error(err);
       }
-    );
+    }
+    forms!.classList.add('was-validated');
   }
 
   public buscarEstudiante(): void {

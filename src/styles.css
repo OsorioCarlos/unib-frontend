@@ -13,6 +13,7 @@ body {
 @import "../src/assets/styles/styles.css";
 @import "../src/assets/styles/normalize.css";
 
+
 .inputCompletado {
   font-weight: 500;
   color: rgb(0, 0, 0);

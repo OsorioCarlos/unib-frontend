@@ -59,10 +59,7 @@ export class StudentComponent {
       .subscribe(
         (res) => {
           this.estadosProcesos = res.data;
-          if(this.estadosProcesos.cartaCompromiso == 'Pendiente' ){         
-            this.collapse1 = true;
-            this.appService.alertaExito('BIENVENIDO', 'Ya puedes completar tu carta de compromiso');
-          }
+
           if(this.estadosProcesos.cartaCompromiso == 'Completado' && this.estadosProcesos.solicitud == 'Pendiente'){
             this.collapse2 = true;
             this.appService.alertaAviso('INICIO DEL PROCESO', 'Ya puedes solicitar tus prácticas preprofesionales');
@@ -70,7 +67,7 @@ export class StudentComponent {
           
           if(this.estadosProcesos.solicitud == 'Completado' && this.estadosProcesos.compromisoRecepcion == 'Pendiente'){
             this.collapse3 = true;
-            this.appService.alertaAviso('INICIO DEL PROCESO', 'Se te enviará una notificación por correo cuando tu representante envié el compromiso de recepción.');
+            this.appService.alertaAviso('INICIO DEL PROCESO', 'Se te enviará una notificación por correo cuando tu representante envíe el compromiso de recepción.');
           }
 
           if(this.estadosProcesos.compromisoRecepcion == 'Completado' && this.estadosProcesos.evaluacionRepresentante == 'Pendiente'){
@@ -95,13 +92,6 @@ export class StudentComponent {
             this.estadosProcesos.evaluacionDirector == 'Completado' &&
             this.estadosProcesos.informeFinal == 'Completado'
           ) {
-            this.collapse1 = true;
-            this.collapse2 = true;
-            this.collapse3 = true;
-            this.collapse4 = true;
-            this.collapse5 = true;
-            this.collapse6 = true;
-
             this.appService.alertaExito(
               'PRÁCTICAS FINALIZADAS!',
               'Haz completado tus prácticas preprofesionales'
@@ -109,7 +99,7 @@ export class StudentComponent {
           }
         },
         (err) => {
-          this.appService.alertaAviso('INICIO DEL PROCESO', 'Bienvenido! Por favor completa la carta de compromiso para continuar con el proceso.');
+          this.appService.alertaAviso('INICIO DEL PROCESO', 'Por favor completa la carta de compromiso para continuar con el proceso.');
           this.collapse1 = true;
         }
       );
@@ -155,7 +145,7 @@ export class StudentComponent {
       (error) => {
         this.appService.alertaError(
           'ERROR',
-          'Error al generar solicitud de prácticas preprofesionales'
+          error.error.data
         );
         console.error(error);
       }

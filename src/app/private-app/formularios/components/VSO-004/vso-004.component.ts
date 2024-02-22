@@ -69,28 +69,38 @@ export class VSO004Component {
     });
   }
 
-  public guardarInformacion(): void {
-    console.log(this.formularioVSO004);
-    if (this.formularioVSO004.valid) {
-      let datos = this.formularioVSO004.value;
-      datos.id = this.identificacionEstudiante;
-      this.privateAppService.crear('calificaciones', datos).subscribe(
-        (res) => {
-          this.appService.alertaExito(
-            'OK',
-            'Se ha guardado la información correctamente'
-          );
-          this.router.navigateByUrl('/app/organization');
-        },
-        (err) => {
-          this.appService.alertaError(
-            'ERROR',
-            'Error al guardar la información'
-          );
-          console.error(err);
-        }
+  public onSubmit(event:Event): void {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
       );
+    } else {
+      if (this.formularioVSO004.valid) {
+        let datos = this.formularioVSO004.value;
+        datos.id = this.identificacionEstudiante;
+        this.privateAppService.crear('calificaciones', datos).subscribe(
+          (res) => {
+            this.appService.alertaExito(
+              'OK',
+              'Se ha notificado el seguimiento y evaluación al director y al estudiante'
+            );
+            this.router.navigateByUrl('/app/organization');
+          },
+          (err) => {
+            this.appService.alertaError(
+              'ERROR',
+              'Error al guardar la información'
+            );
+            console.error(err);
+          }
+        );
+      }
     }
+    forms!.classList.add('was-validated');
   }
 
   public calcularNotaPromedio(): void {

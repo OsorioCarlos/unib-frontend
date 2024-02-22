@@ -93,25 +93,38 @@ export class VSO002Component {
       );
   }
   onSubmit(event: Event) {
-    event.preventDefault();
-    if (this.formCompromisoRecepcion.valid) {
-      const datos = this.formCompromisoRecepcion.value;
-      datos.compromisoRecepcion.identificacionEstudiante =
-        this.identificacionEstudiante;
-      datos.compromisoRecepcion.diasLaborables = this.obtenerDiasLaborables();
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
+      );
+    } else {
+      if (this.formCompromisoRecepcion.valid) {
+        const datos = this.formCompromisoRecepcion.value;
+        datos.compromisoRecepcion.identificacionEstudiante =
+          this.identificacionEstudiante;
+        datos.compromisoRecepcion.diasLaborables = this.obtenerDiasLaborables();
 
-      this.privateService
-        .crear('representante/recibirEstudiante', datos)
-        .subscribe(
-          (res) => {
-            this.appService.alertaExito('OK', 'Estudiante aceptado con éxito');
-            this.router.navigateByUrl('/app/organization');
-          },
-          (err) => {
-            this.appService.alertaError('ERROR', err.error.mensaje);
-          }
-        );
+        this.privateService
+          .crear('representante/recibirEstudiante', datos)
+          .subscribe(
+            (res) => {
+              this.appService.alertaExito(
+                'OK',
+                'Se ha notificado el comprobante de recepción al estudiantes'
+              );
+              this.router.navigateByUrl('/app/organization');
+            },
+            (err) => {
+              this.appService.alertaError('ERROR', err.error.mensaje);
+            }
+          );
+      }
     }
+    forms!.classList.add('was-validated');
   }
   obtenerDiasLaborables(): string {
     let diasLaborablesTexto = '';

@@ -8,6 +8,7 @@
     </div>
   </div>
   <form
+    class="needs-validation"
     [formGroup]="formCompromisoRecepcion"
     (ngSubmit)="onSubmit($event)"
     novalidate
@@ -206,6 +207,7 @@
                 formControlName="objetivos"
                 cols="30"
                 rows="3"
+                required
               ></textarea>
             </div>
             <div class="row">
@@ -220,6 +222,7 @@
                   formControlName="tareas"
                   cols="30"
                   rows="4"
+                  required
                 ></textarea>
               </div>
             </div>
@@ -264,7 +267,7 @@
                   <input
                     type="checkbox"
                     class="btn-check"
-                    id="lunesCheckBox"
+                    id="btn-check-lun-outlined"
                     autocomplete="off"
                     [checked]="diasLaborables.lunes"
                     #lunesCheckBox
@@ -439,10 +442,6 @@
     </div>
     <div class="d-grid gap-2  d-flex justify-content-end  mb-3">
     <button
-      [disabled]="
-        formCompromisoRecepcion.invalid ||
-        formCompromisoRecepcion.get('aceptarCompromiso')?.value == false
-      "
       class="btn btn-primary"
     >
     CONTINUAR <i class="fa-solid fa-circle-check"></i>

@@ -5,7 +5,7 @@
         INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL ESTUDIANTE
       </h1>
     </div>
-    <form [formGroup]="formularioVSO005">
+    <form [formGroup]="formularioVSO005" class="needs-validation" (ngSubmit)="onSubmit($event)" novalidate>
       <div class="card shadow-sm mb-3">
         <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
         <div class="card-body">
@@ -194,10 +194,8 @@
           </div>
       <div class="d-grid gap-2  d-flex justify-content-end mb-3">
         <button
-          [disabled]="formularioVSO005.invalid"
           class="btn btn-primary btn-lg"
-          type="button"
-          (click)="guardarInformacion()"
+          type="submit"
         >
         CONTINUAR <i class="fa-solid fa-circle-check"></i>
         </button>

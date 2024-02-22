@@ -17,7 +17,6 @@ export class CartaCompromisoComponent {
   formularioCartaCompromiso: FormGroup;
   apiUrl: string = environment.apiUrl;
   meses: string[];
-  niveles: any;
   compromisoBioseguridad: CompromisoBioseguridad;
   nivelOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
@@ -56,19 +55,6 @@ export class CartaCompromisoComponent {
       'diciembre',
     ];
 
-    this.niveles = {
-      'PRIMER NIVEL': '1',
-      'SEGUNDO NIVEL': '2',
-      'TERCER NIVEL': '3',
-      'CUARTO NIVEL': '4',
-      'QUINTO NIVEL': '5',
-      'SEXTO NIVEL': '6',
-      'SEPTIMO NIVEL': '7',
-      'OCTAVO NIVEL': '8',
-      'NOVENO NIVEL': '9',
-      'DÉCIMO NIVEL': '10',
-    };
-
     this.compromisoBioseguridad = {
       carrera: '',
       nombreCompleto: '',
@@ -77,8 +63,7 @@ export class CartaCompromisoComponent {
       razonSocial: '',
     };
 
-    this.obtenerCarreras();
-    this.obtenerNiveles();
+    this.obtenerInfoCartaCompromiso();
     this.obtenerOrganizaciones();
     this.buildformGroupInformacionEstudiante();
   }
@@ -191,29 +176,18 @@ export class CartaCompromisoComponent {
       }),
     });
   }
-  private obtenerCarreras(): void {
-    this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
-      (res) => {
-        this.carreraOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener carreras');
-        console.error(error);
-      }
-    );
-  }
 
-  private obtenerNiveles(): void {
-    this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
-      (res) => {
-        this.nivelOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener niveles');
-        console.error(error);
-      }
-    );
+  public obtenerInfoCartaCompromiso(): void {
+    this.privateAppService
+      .obtener('estudiantes/obtenerInfoCompromiso')
+      .subscribe(
+        (res) => {
+          this.compromisoBioseguridad = res.data;
+        },
+        (error) => {
+          this.appService.alertaError('ERROR', error.error.mensaje);
+          console.error(error);
+        }
+      );
   }
 }

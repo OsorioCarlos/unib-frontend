@@ -49,3 +49,9 @@
   font-size: 1.5rem;
   padding-right: 10px;
 }	
+.progress-bar{
+  font-weight: 500;
+}
+.fa-circle-check, .fa-circle-exclamation {
+  font-size: 1.2rem;
+}

@@ -53,7 +53,17 @@ export class VSO005Component {
     this.obtenerInformeEstudiante();
   }
 
-  public guardarInformacion(): void {
+  onSubmit(event:Event) {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
+      );
+    } else {
+      if(this.formularioVSO005.valid) {
     const datos = this.formularioVSO005.value;
     this.privateAppService
       .crear('estudiantes/enviarInformeFinal', datos)
@@ -66,6 +76,9 @@ export class VSO005Component {
           console.error(err);
         }
       );
+      }
+    }
+    forms!.classList.add('was-validated');
   }
 
   public buscarEstudiante(): void {

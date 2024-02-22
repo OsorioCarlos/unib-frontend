@@ -58,8 +58,6 @@ export class VSO001Component {
       updated_at: new Date(),
       internship_representatives: [],
     };
-    this.obtenerCarreras();
-    this.obtenerNiveles();
   }
 
   private buildformGroupSolicitudPracticas(): void {
@@ -77,50 +75,34 @@ export class VSO001Component {
     });
   }
 
-  private obtenerCarreras(): void {
-    this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
-      (res) => {
-        this.carreraOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener carreras');
-        console.error(error);
-      }
-    );
-  }
-
-  private obtenerNiveles(): void {
-    this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
-      (res) => {
-        this.nivelOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener niveles');
-        console.error(error);
-      }
-    );
-  }
-
   onSubmit(event: Event) {
-    event.preventDefault();
-    if (this.formGroupSolicitudPracticas.valid) {
-      const datos = this.formGroupSolicitudPracticas.value;
-      datos.organizacion.diasHabiles = 'lun / mar';
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
+      );
+    } else {
+      if (this.formGroupSolicitudPracticas.valid) {
+        const datos = this.formGroupSolicitudPracticas.value;
+        datos.organizacion.diasHabiles = 'lun / mar';
 
-      this.privateAppService
-        .crear('estudiantes/solicitarPracticas', datos)
-        .subscribe(
-          (res) => {
-            this.generarVso001(this.estudiante.identificacion);
-          },
-          (err) => {
-            console.log(err);
-            this.appService.alertaError('ERROR', err.error.mensaje);
-          }
-        );
+        this.privateAppService
+          .crear('estudiantes/solicitarPracticas', datos)
+          .subscribe(
+            (res) => {
+              this.generarVso001(this.estudiante.identificacion);
+            },
+            (err) => {
+              console.log(err);
+              this.appService.alertaError('ERROR', err.error.mensaje);
+            }
+          );
+      }
     }
+    forms!.classList.add('was-validated');
   }
 
   buscarEstudiante(): void {
