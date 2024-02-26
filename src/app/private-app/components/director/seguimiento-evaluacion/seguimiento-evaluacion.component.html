@@ -21,34 +21,53 @@
               estudiante.
             </p>
             <h6 *ngIf="estudiantes.length == 0">
-              No tienes estudiantes pendientes
+              No tienes evaluaciones pendientes
             </h6>
-            <table class="table table-hover mt-5" *ngIf="estudiantes.length > 0">
-              <thead>
-                <tr>
-                  <th scope="col">Identificación</th>
-                  <th scope="col">Nombre del estudiante</th>
-                  <th scope="col">Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let estudiante of estudiantes">
-                  <th scope="row">{{ estudiante.identificacion }}</th>
-                  <td>{{ estudiante.nombre_completo }}</td>
-                  <td>
-                    <a
-                      class="btn btn-primary p-2"
-                      [routerLink]="[
-                        '/app/director/seguimiento-evaluacion',
-                        estudiante.identificacion
-                      ]"
-                    >
-                      Completar
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <p-table *ngIf="estudiantes.length > 0" #dt [value]="estudiantes" [rows]="10" [paginator]="true" [globalFilterFields]="['identificacion','nombre']" styleClass="p-datatable-sm" responsiveLayout="scroll"
+            [rowHover]="true" dataKey="id"
+              >
+             <ng-template pTemplate="header">
+                 <tr>
+                     <th pSortableColumn="identificacion">Identificacion <p-sortIcon field="identificacion"></p-sortIcon></th>
+                     <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                     <th pSortableColumn="nivel">Nivel <p-sortIcon field="nivel"></p-sortIcon></th>
+                     <th rowspan="2">Acciones</th>
+                 </tr>
+                 <tr>
+                   <th>
+                     <input class="form-control" pInputText type="text" #identificacionfilter (input)="dt.filter(identificacionfilter.value, 'identificacion', 'startsWith')">
+                   </th>
+                   <th>
+                     <input class="form-control" pInputText type="text" #nombrefilter (input)="dt.filter(nombrefilter.value, 'nombre', 'startsWith')">
+                   </th>
+                   <th>
+                    <input class="form-control" pInputText type="text" #nivelfilter (input)="dt.filter(nivelfilter.value, 'nivel', 'startsWith')">
+                  </th>
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="body" let-estudiante>
+                 <tr>
+                     <td>{{estudiante.identificacion}}</td>
+                     <td>{{estudiante.nombre}}</td>
+                     <td>{{estudiante.nivel}}</td>
+                     <td><a
+                       class="btn btn-primary p-2"
+                       [routerLink]="[
+                         '/app/director/seguimiento-evaluacion',
+                         estudiante.identificacion
+                       ]"
+                     >
+                       Completar
+                     </a>
+                     </td>
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="summary">
+                 <div class="flex align-items-center justify-content-between">
+                     Total: {{estudiantes ? estudiantes.length : 0 }} estudiantes.
+                 </div>
+             </ng-template>
+         </p-table>
           </div>
         </div>
       </div>

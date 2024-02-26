@@ -90,7 +90,7 @@ export class VSO003Component {
               'OK',
               'Se ha notificado el seguimiento y evaluación al estudiante'
             );
-            this.router.navigateByUrl('/app/director');
+            this.router.navigateByUrl('/app/director/seguimiento-evaluacion');
           },
           (err) => {
             this.appService.alertaError('ERROR', err.error.mensaje);

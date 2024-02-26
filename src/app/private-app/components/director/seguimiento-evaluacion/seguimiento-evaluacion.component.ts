@@ -5,6 +5,7 @@ import { AppService } from 'src/app/services/app.service';
 import { AuthUser } from '../../../interfaces/auth-user';
 import { User } from '../../../interfaces/user';
 import { PrivateAppService } from '../../../services/private-app.service';
+import { EstudiantesDirector } from 'src/app/private-app/interfaces/estudiantes-director';
 
 @Component({
   selector: 'app-seguimiento-evaluacion',
@@ -15,7 +16,7 @@ export class SeguimientoEvaluacionComponent {
     formGroupInformacionRepresentante!: FormGroup;
     representante: AuthUser;
     estudiantes: User[] = [];
-    evaluacionesPendientes: User[] = [];
+    evaluacionesPendientes: EstudiantesDirector[] = [];
     constructor(
       private privateAppService: PrivateAppService,
       private appService: AppService,

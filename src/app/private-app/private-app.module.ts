@@ -11,6 +11,8 @@ import { PrivateAppComponent } from './private-app.component';
 import { DirectorComponent } from './components/director/director.component';
 import { SeguimientoEvaluacionComponent } from './components/director/seguimiento-evaluacion/seguimiento-evaluacion.component';
 import { ResumenPracticaComponent } from './components/student/resumen-practica/resumen-practica.component';
+import {TableModule} from 'primeng/table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,9 @@ import { ResumenPracticaComponent } from './components/student/resumen-practica/
     OrganizationComponent,
     DirectorComponent,
     SeguimientoEvaluacionComponent,
-    ResumenPracticaComponent
+    ResumenPracticaComponent,
+
   ],
-  imports: [CommonModule, PrivateAppRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, PrivateAppRoutingModule, ReactiveFormsModule,TableModule, FormsModule],
 })
 export class PrivateAppModule {}

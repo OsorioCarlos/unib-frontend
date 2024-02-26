@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthUser } from 'src/app/private-app/interfaces/auth-user';
 import { Calificacione, Director, Organizacion2, ResumenEstudiante } from 'src/app/private-app/interfaces/resumen-estudiante';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
@@ -11,15 +12,16 @@ import { PrivateAppService } from 'src/app/private-app/services/private-app.serv
 export class ResumenPracticaComponent {
   authUser : AuthUser;
   resumen : ResumenEstudiante;
-
+  identificacionEstudiante: string;
   calificacionesOrganizacion!:Calificacione[];
-  constructor(private privateAppService: PrivateAppService ) { 
+  constructor(private privateAppService: PrivateAppService, private route: ActivatedRoute,
+    private router: Router ) { 
     this.authUser = {
       cedula: '',
       nombre: '',
       tipo_usuario: '',
     };
-  
+    this.identificacionEstudiante = '';
     this.resumen = {
       estudiante: {
         nombre: '',
@@ -68,11 +70,16 @@ export class ResumenPracticaComponent {
     this.obtenerInfoUsuario();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    
   }
 
   obtenerInfoEstudiante(){
-    this.privateAppService.obtener(`estudiantes/obtenerInfoEstudiante/${this.authUser.cedula}`).subscribe(
+    this.route.paramMap.subscribe((params) => {
+      this.identificacionEstudiante = params.get('id') ?? this.authUser.cedula;
+    });
+    if(this.authUser.tipo_usuario == 'ESTUDIANTE'){
+    this.privateAppService.obtener(`estudiantes/obtenerInfo/${this.authUser.cedula}`).subscribe(
       res=>{
         this.resumen = res.data;
       },
@@ -80,6 +87,16 @@ export class ResumenPracticaComponent {
         console.error(err);
       }
     );
+    }else{
+      this.privateAppService.obtener(`estudiantes/obtenerInfoEstudiante/${this.identificacionEstudiante}`).subscribe(
+        res=>{
+          this.resumen = res.data;
+        },
+        err=>{
+          console.error(err);
+        }
+      );
+    }
   }
 
   obtenerInfoUsuario(){

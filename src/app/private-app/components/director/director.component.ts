@@ -5,7 +5,9 @@ import { AppService } from 'src/app/services/app.service';
 import { AuthUser } from '../../interfaces/auth-user';
 import { User } from '../../interfaces/user';
 import { PrivateAppService } from '../../services/private-app.service';
-import { Product } from '../../interfaces/product';
+import { EstudiantesDirector } from '../../interfaces/estudiantes-director';
+import { environment } from 'src/environment/environment';
+import { EstadosProcesos } from '../../interfaces/estados-procesos';
 
 @Component({
   selector: 'app-director',
@@ -13,20 +15,14 @@ import { Product } from '../../interfaces/product';
   styleUrls: ['./director.component.css'],
 })
 export class DirectorComponent {
+  apiUrl: string = environment.apiUrl;
   formGroupInformacionRepresentante!: FormGroup;
   representante: AuthUser;
   estudiantes: User[] = [];
+  estudiantesDirector: EstudiantesDirector[] = [];
   evaluacionesPendientes: User[] = [];
-
-  productDialog!: boolean;
-
-  products!: Product[];
-
-  product!: Product;
-
-  selectedProducts!: Product[];
-
-  submitted!: boolean;
+  loading: boolean = true;
+  estadosProcesos!: EstadosProcesos;
 
   constructor(
     private privateAppService: PrivateAppService,
@@ -43,6 +39,7 @@ export class DirectorComponent {
     this.mostrarBienvenida();
     this.consultarEvaluacionesPendientes();
     this.consultarEvaluacionesPendientes();
+    this.obtenerEstudiantes();
   }
   mostrarBienvenida() {
     this.privateAppService.obtener('auth/authUser').subscribe(
@@ -80,6 +77,63 @@ export class DirectorComponent {
     }
   }
 
+  consultarStatusProcesos(id: string): void {
+    this.privateAppService
+      .obtener('estudiantes/obtenerEstadosPracticasPreprofesionalesEstudiantes')
+      .subscribe(
+        (res) => {
+          this.estadosProcesos = res.data;
+
+          if (
+            this.estadosProcesos.cartaCompromiso == 'Completado' &&
+            this.estadosProcesos.solicitud == 'Pendiente'
+          ) {
+            this.descargarCartaCompromiso(id);
+          }
+
+          if (
+            this.estadosProcesos.solicitud == 'Completado' &&
+            this.estadosProcesos.compromisoRecepcion == 'Pendiente'
+          ) {
+            this.descargarSolicitudEstudiante(id);
+          }
+
+          if (
+            this.estadosProcesos.compromisoRecepcion == 'Completado' &&
+            this.estadosProcesos.evaluacionRepresentante == 'Pendiente'
+          ) {
+           this.descargarCompromisoRecepcion(id);
+          }
+
+          if (
+            this.estadosProcesos.evaluacionRepresentante == 'Completado' &&
+            this.estadosProcesos.evaluacionDirector == 'Pendiente'
+          ) {
+            this.descargarEvaluacionOrganizacion(id);
+          }
+
+          if (
+            this.estadosProcesos.evaluacionDirector == 'Completado' &&
+            this.estadosProcesos.informeFinal == 'Pendiente'
+          ) {
+            this.descargarEvaluacionDirector(id);
+          }
+          if (
+            this.estadosProcesos.cartaCompromiso == 'Completado' &&
+            this.estadosProcesos.solicitud == 'Completado' &&
+            this.estadosProcesos.compromisoRecepcion == 'Completado' &&
+            this.estadosProcesos.evaluacionRepresentante == 'Completado' &&
+            this.estadosProcesos.evaluacionDirector == 'Completado' &&
+            this.estadosProcesos.informeFinal == 'Completado'
+          ) {
+            this.descargarInformeFinal(id);
+          }
+        },
+        (err) => {
+
+        }
+      );
+  }
   consultarEvaluacionesPendientes(): void {
     this.privateAppService
       .obtener('director/obtenerEvaluacionesPendientes')
@@ -92,69 +146,121 @@ export class DirectorComponent {
         }
       );
   }
+  obtenerEstudiantes(): void {
+    this.privateAppService.obtener('director/obtenerEstudiantes').subscribe(
+      (res) => {
+        this.estudiantesDirector = res.data;
+        this.loading=false;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  generarPdf(id: string): void {
+    
+  }
 
-
-  openNew() {
-    this.product = {};
-    this.submitted = false;
-    this.productDialog = true;
-}
-
-deleteSelectedProducts() {
-
-}
-
-editProduct(product: Product) {
-    this.product = {...product};
-    this.productDialog = true;
-}
-
-deleteProduct(product: Product) {
-
-}
-
-hideDialog() {
-    this.productDialog = false;
-    this.submitted = false;
-}
-
-saveProduct() {
-    this.submitted = true;
-
-    if (this.product?.name?.trim()) {
-        if (this.product.id) {
-            this.products[this.findIndexById(this.product.id)] = this.product;                
+  public descargarCartaCompromiso(cedula:string): void {
+    const datos = {
+      identificacionEstudiante: cedula,
+    };
+    this.privateAppService
+      .crear('formularios/generar_carta_compromiso', datos)
+      .subscribe(
+        (res) => {
+          window.open(`${this.apiUrl}/${res.data}`, '_blank');
+        },
+        (error) => {
+          this.appService.alertaError(
+            'ERROR',
+            'Error al generar la carta de compromiso'
+          );
+          console.error(error);
         }
-        else {
-            this.product.id = this.createId();
-            this.product.image = 'product-placeholder.svg';
-            this.products.push(this.product);
-        }
+      );
+  }
 
-        this.products = [...this.products];
-        this.productDialog = false;
-        this.product = {};
-    }
-}
+  public descargarSolicitudEstudiante(cedula:string): void {
+    const datos = {
+      identificacionEstudiante: cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso001', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', error.error.data);
+        console.error(error);
+      }
+    );
+  }
 
-findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-        if (this.products[i].id === id) {
-            index = i;
-            break;
-        }
-    }
+  descargarCompromisoRecepcion(cedula:string): void {
+    const datos = {
+      identificacionEstudiante: cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso002', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar compromiso de recepcion'
+        );
+        console.error(error);
+      }
+    );
+  }
+  descargarInformeFinal(cedula:string): void {
+    const datos = {
+      identificacionEstudiante: cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso005', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError('ERROR', 'Error al generar informe final');
+        console.error(error);
+      }
+    );
+  }
 
-    return index;
-}
+  descargarEvaluacionOrganizacion(cedula:string): void {
+    const datos = {
+      identificacionEstudiante:cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso004', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion organizacion'
+        );
+        console.error(error);
+      }
+    );
+  }
 
-createId(): string {
-    let id = '';
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for ( var i = 0; i < 5; i++ ) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
-}
+  descargarEvaluacionDirector(cedula:string): void {
+    const datos = {
+      identificacionEstudiante: cedula,
+    };
+    this.privateAppService.crear('formularios/generarVso003', datos).subscribe(
+      (res) => {
+        window.open(`${this.apiUrl}/${res.data}`, '_blank');
+      },
+      (error) => {
+        this.appService.alertaError(
+          'ERROR',
+          'Error al generar evaluacion director'
+        );
+        console.error(error);
+      }
+    );
+  }
 }

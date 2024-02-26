@@ -104,6 +104,11 @@ const routes: Routes = [
         title: 'Seguimiento y Evaluación',
       },
       {
+        path: 'informacion-practica/:id',
+        component: ResumenPracticaComponent,
+        title: 'Resumen Práctica',
+      },
+      {
         path: '**',
         component: DirectorComponent,
         title: 'Inicio'
