@@ -1,0 +1,76 @@
+<div class="container mt-2">
+    <h1 class="text-primary">
+      PRÁCTICAS PREPROFESIONALES <br /><span class="titulo-bienvenida"
+        >DIRECTOR DE CÁRRERA: {{ representante.nombre }}</span
+      >
+    </h1>
+    <br />
+  
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-primary">
+              SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
+              LA DIRECCIÓN DE CARRERA
+            </h5>
+            <p class="card-text">
+              El director de carrera evalua el desempeño estudiantil considerando
+              aspectos como objetivos, competencias, responsabilidad y asistencia.
+              Se dan recomendaciones finales para orientar el desarrollo del
+              estudiante.
+            </p>
+            <h6 *ngIf="estudiantes.length == 0">
+              No tienes evaluaciones pendientes
+            </h6>
+            <p-table *ngIf="estudiantes.length > 0" #dt [value]="estudiantes" [rows]="10" [paginator]="true" [globalFilterFields]="['identificacion','nombre']" styleClass="p-datatable-sm" responsiveLayout="scroll"
+            [rowHover]="true" dataKey="id"
+              >
+             <ng-template pTemplate="header">
+                 <tr>
+                     <th pSortableColumn="identificacion">Identificacion <p-sortIcon field="identificacion"></p-sortIcon></th>
+                     <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                     <th pSortableColumn="nivel">Nivel <p-sortIcon field="nivel"></p-sortIcon></th>
+                     <th rowspan="2">Acciones</th>
+                 </tr>
+                 <tr>
+                   <th>
+                     <input class="form-control" pInputText type="text" #identificacionfilter (input)="dt.filter(identificacionfilter.value, 'identificacion', 'startsWith')">
+                   </th>
+                   <th>
+                     <input class="form-control" pInputText type="text" #nombrefilter (input)="dt.filter(nombrefilter.value, 'nombre', 'startsWith')">
+                   </th>
+                   <th>
+                    <input class="form-control" pInputText type="text" #nivelfilter (input)="dt.filter(nivelfilter.value, 'nivel', 'startsWith')">
+                  </th>
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="body" let-estudiante>
+                 <tr>
+                     <td>{{estudiante.identificacion}}</td>
+                     <td>{{estudiante.nombre}}</td>
+                     <td>{{estudiante.nivel}}</td>
+                     <td><a
+                       class="btn btn-primary p-2"
+                       [routerLink]="[
+                         '/app/director/seguimiento-evaluacion',
+                         estudiante.identificacion
+                       ]"
+                     >
+                       Completar
+                     </a>
+                     </td>
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="summary">
+                 <div class="flex align-items-center justify-content-between">
+                     Total: {{estudiantes ? estudiantes.length : 0 }} estudiantes.
+                 </div>
+             </ng-template>
+         </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

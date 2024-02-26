@@ -4,221 +4,452 @@
       >ESTUDIANTE: {{ estudiante.nombre }}</span
     >
   </h1>
-  <br />
-  <h6 class="text-center">Documentos Obligatorios</h6>
-  <br />
-  <div class="row mb-3">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">CARTA DE COMPROMISO</h5>
-          <p class="card-text">
-            Afirmas tu compromiso de seguir las medidas de seguridad sanitaria
-            durante tus prácticas, liberando a la institución y la universidad
-            de responsabilidad en caso de que no cumplas y haya complicaciones o
-            contagios.
-          </p>
+  <br>
+  <div >
+    <h6 class="text-primary text-center">
+      ESTADO ACTUAL:
+      <span *ngIf="estadosProcesos.informeFinal == 'Completado'">COMPLETADO</span
+      ><span
+        *ngIf="
+          estadosProcesos.evaluacionRepresentante != 'Completado' ||
+          estadosProcesos.evaluacionDirector != 'Completado' ||
+          estadosProcesos.compromisoRecepcion != 'Completado' ||
+          estadosProcesos.cartaCompromiso != 'Completado' ||
+          estadosProcesos.solicitud != 'Completado' ||
+          estadosProcesos.informeFinal != 'Completado'
+        "
+        >EN PROCESO</span
+      >
+    </h6>
+    <div
+      class="progress mb-3"
+      role="progressbar"
+      aria-label="primary example"
+      aria-valuenow="25"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 3%"
+        *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
+      >
+        0%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 15%"
+        *ngIf="
+          estadosProcesos.cartaCompromiso == 'Completado' &&
+          estadosProcesos.solicitud != 'Completado'
+        "
+      >
+        15%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 30%"
+        *ngIf="
+          estadosProcesos.solicitud == 'Completado' &&
+          estadosProcesos.compromisoRecepcion != 'Completado'
+        "
+      >
+        30%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 50%"
+        *ngIf="
+          estadosProcesos.compromisoRecepcion == 'Completado' &&
+          estadosProcesos.evaluacionRepresentante != 'Completado'
+        "
+      >
+        50%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 70%"
+        *ngIf="
+          estadosProcesos.evaluacionRepresentante == 'Completado' &&
+          estadosProcesos.evaluacionDirector != 'Completado'
+        "
+      >
+        70%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 90%"
+        *ngIf="
+          estadosProcesos.evaluacionDirector == 'Completado' &&
+          estadosProcesos.informeFinal != 'Completado'
+        "
+      >
+        90%
+      </div>
+      <div
+        class="progress-bar progress-bar-striped bg-primary"
+        style="width: 100%"
+        *ngIf="estadosProcesos.informeFinal == 'Completado'"
+      >
+        100%
+      </div>
+    </div>
+
+  </div>
+  <div class="accordion" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button
+          class="accordion-button collapsed card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse1 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne"
+          aria-expanded="false"
+          aria-controls="flush-collapseOne"
+        >
+          <span
+            ><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.cartaCompromiso != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
+          ></i> CARTA DE COMPROMISO</span
+          >
+        </button>
+      </h2>
+      <div
+        id="flush-collapseOne"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse1 }"
+        aria-labelledby="flush-headingOne"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <P>
+            El <b>estudiante</b> manifiesta su compromiso de adherirse
+            rigurosamente a las medidas de seguridad sanitaria durante sus
+            prácticas, eximiendo a la institución y la universidad de cualquier
+            responsabilidad en caso de incumplimiento que resulte en
+            complicaciones o contagios.
+          </P>
           <a
             href="#"
             *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
-            class="btn btn-outline-primary"
-            routerLink="/app/formularios/carta-compromiso"
-            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
-          ></a>
+            class="btn btn-primary estado-estudiante"
+            [routerLink]="['/app/estudiante/carta-compromiso']"
+            >COMPLETAR <i class="fa-solid fa-file-import"></i>
+            </a>
           <div *ngIf="estadosProcesos.cartaCompromiso != 'Pendiente'">
-            <p><b>Estado: </b>Completado</p>
             <button
-              class="btn btn-primary"
+              class="btn btn-outline-primary estado-estudiante"
               (click)="descargarCartaCompromiso()"
             >
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
+              
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row mb-3" *ngIf="estadosProcesos.cartaCompromiso == 'Completado'">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
-          </h5>
-          <p class="card-text">
-            Antes de comenzar tus prácticas, es necesario que indiques el área,
-            las horas y detalles de la organización. También, te comprometes a
-            cumplir con los objetivos y responsabilidades que la entidad
-            establezca.
+    <div
+      class="accordion-item"
+      *ngIf="estadosProcesos.cartaCompromiso == 'Completado'"
+    >
+      <h2 class="accordion-header" id="flush-headingTwo">
+        <button
+          class="accordion-button card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse2 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo"
+          aria-expanded="false"
+          aria-controls="flush-collapseTwo"
+        >
+          <span><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.solicitud != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.solicitud == 'Pendiente'"
+          ></i> SOLICITUD</span>
+        </button>
+      </h2>
+      <div
+        id="flush-collapseTwo"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse2 }"
+        aria-labelledby="flush-headingTwo"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <p>
+            El <b>estudiante</b> solicita formalmente la realización de sus
+            prácticas y asume la responsabilidad de cumplir con los objetivos y
+            deberes establecidos por la entidad correspondiente.
           </p>
           <a
             href="#"
             *ngIf="estadosProcesos.solicitud == 'Pendiente'"
-            class="btn btn-outline-primary"
-            routerLink="/app/formularios/vso-001"
-            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
-          ></a>
+            class="btn btn-primary estado-estudiante"
+            [routerLink]="['/app/estudiante/solicitud']"
+            >COMPLETAR <i class="fa-solid fa-file-import"></i></a>
           <div *ngIf="estadosProcesos.solicitud != 'Pendiente'">
-            <p><b>Estado: </b>Completado</p>
             <button
-              class="btn btn-primary"
+              class="btn btn-outline-primary estado-estudiante estado-estudiante"
               (click)="descargarSolicitudEstudiante()"
             >
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="row mb-3" *ngIf="estadosProcesos.solicitud == 'Completado'">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES
-            POR PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
-          </h5>
-          <p class="card-text">
-            El representante establece metas y responsabilidades para los
-            estudiantes, especificando la duración completa con días y horarios.
-            También, adquiere un compromiso con el estudiante y la universidad.
+    <div
+      class="accordion-item"
+      *ngIf="estadosProcesos.solicitud == 'Completado'"
+    >
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse3 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseThree"
+          aria-expanded="false"
+          aria-controls="flush-collapseThree"
+        >
+          <span
+            ><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.compromisoRecepcion != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'"
+          ></i> COMPROMISO DE
+            RECEPCIÓN</span
+          >
+        </button>
+      </h2>
+      <div
+        id="flush-collapseThree"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse3 }"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <p>
+            El <b>representante</b> define objetivos y responsabilidades
+            específicas para el estudiante, detallando la duración completa de
+            las prácticas, incluyendo días y horarios. Además, adquiere un
+            compromiso formal con el estudiante y la universidad.
           </p>
-          <div *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'">
-            <p>
-              <b>Estado: </b>Pendiente por el representante de prácticas
-              preprofesionales
-            </p>
-            <button class="btn btn-primary" disabled>
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
-            </button>
-          </div>
+          <button
+            href="#"
+            *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'"
+            (click)="consultarStatusProcesos()"
+            class="btn btn-outline-primary estado-estudiante"
+          >
+            {{ estadosProcesos.compromisoRecepcion }} POR REPRESENTANTE
+          </button>
           <div *ngIf="estadosProcesos.compromisoRecepcion != 'Pendiente'">
-            <p>
-              <b>Estado: </b>Completado por el representante de prácticas
-              preprofesionales
-            </p>
             <button
-              class="btn btn-primary"
+              class="btn btn-outline-primary estado-estudiante estado-estudiante"
               (click)="descargarCompromisoRecepcion()"
             >
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
+              
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="row mb-3"
-    *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
-  >
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PRE PROFESIONALES POR PARTE DE
-            LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
-          </h5>
-          <p class="card-text">
-            La organización evalua el desempeño estudiantil considerando
-            aspectos como objetivos, competencias, responsabilidad y asistencia.
-            Se dan recomendaciones finales para orientar el desarrollo del
-            estudiante.
+    <div
+      class="accordion-item"
+      *ngIf="estadosProcesos.compromisoRecepcion == 'Completado'"
+    >
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse4 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseFour"
+          aria-expanded="false"
+          aria-controls="flush-collapseFour"
+        >
+          <span
+            ><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.evaluacionRepresentante != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.evaluacionRepresentante == 'Pendiente'"
+          ></i> SEGUIMIENTO Y
+            EVALUACIÓN</span
+          >
+        </button>
+      </h2>
+      <div
+        id="flush-collapseFour"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse4 }"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <p>
+            El <b>representante</b> evalúa el rendimiento del estudiante,
+            considerando aspectos como los objetivos establecidos, competencias
+            demostradas, responsabilidad y asistencia. Al finalizar, se
+            proporcionan recomendaciones finales para guiar el desarrollo
+            continuo del estudiante.
           </p>
-          <div *ngIf="estadosProcesos.evaluacionRepresentante == 'Pendiente'">
-            <p><b>Estado: </b>Pendiente por el representante</p>
-            <button class="btn btn-primary" disabled>
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
-            </button>
-          </div>
-          <div *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'">
-            <p><b>Estado: </b>Completado por el representante</p>
+          <button
+            href="#"
+            *ngIf="estadosProcesos.evaluacionRepresentante == 'Pendiente'"
+            (click)="consultarStatusProcesos()"
+            class="btn btn-outline-primary estado-estudiante"
+          >
+            {{ estadosProcesos.evaluacionRepresentante }} POR REPRESENTANTE
+          </button>
+          <div *ngIf="estadosProcesos.evaluacionRepresentante != 'Pendiente'">
             <button
-              class="btn btn-primary"
+              class="btn btn-outline-primary estado-estudiante estado-estudiante"
               (click)="descargarEvaluacionOrganizacion()"
             >
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
+              
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="row mb-3"
-    *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'"
-  >
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE
-            LA DIRECCIÓN DE CARRERA
-          </h5>
-          <p class="card-text">
-            El director de carrera evalua el desempeño estudiantil considerando
-            aspectos como objetivos, competencias, responsabilidad y asistencia.
-            Se dan recomendaciones finales para orientar el desarrollo del
-            estudiante.
+    <div
+      class="accordion-item"
+      *ngIf="estadosProcesos.evaluacionRepresentante == 'Completado'"
+    >
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse5 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseFive"
+          aria-expanded="false"
+          aria-controls="flush-collapseFive"
+        >
+          <span
+            ><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.evaluacionDirector != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.evaluacionDirector == 'Pendiente'"
+          ></i> SEGUIMIENTO Y EVALUACIÓN</span
+          >
+        </button>
+      </h2>
+      <div
+        id="flush-collapseFive"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse5 }"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <p>
+            El <b>director de carrera</b> realiza una evaluación del desempeño
+            estudiantil, tomando en cuenta elementos como objetivos alcanzados,
+            competencias demostradas, responsabilidad y asistencia.
+            Posteriormente, emite recomendaciones finales para orientar el
+            crecimiento y desarrollo del estudiante.
           </p>
-          <div *ngIf="estadosProcesos.evaluacionDirector == 'Pendiente'">
-            <p><b>Estado: </b>Pendiente por el director</p>
-            <button class="btn btn-primary" disabled>
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
-            </button>
-          </div>
-          <div *ngIf="estadosProcesos.evaluacionDirector == 'Completado'">
-            <p><b>Estado: </b>Completado por el director</p>
+          <button
+            href="#"
+            *ngIf="estadosProcesos.evaluacionDirector == 'Pendiente'"
+            (click)="consultarStatusProcesos()"
+            class="btn btn-outline-primary estado-estudiante"
+          >
+            {{ estadosProcesos.evaluacionDirector }} POR DIRECTOR
+          </button>
+          <div *ngIf="estadosProcesos.evaluacionDirector != 'Pendiente'">
             <button
-              class="btn btn-primary"
+              class="btn btn-outline-primary estado-estudiante estado-estudiante"
               (click)="descargarEvaluacionDirector()"
             >
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
+              
             </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    class="row mb-3"
-    *ngIf="
-      estadosProcesos.evaluacionRepresentante == 'Completado' &&
-      estadosProcesos.evaluacionDirector == 'Completado'
-    "
-  >
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-primary">
-            INFORME SOBRE LAS PRÁCTICAS PRE PROFESIONALES POR PARTE DEL
-            ESTUDIANTE
-          </h5>
-          <p class="card-text">
-            Al concluir tus prácticas, envía un informe explicando cómo
-            alcanzaste tus objetivos, lo que aprendiste para tu carrera, cómo te
-            benefició a nivel personal, y comparte tus comentarios y
-            recomendaciones.
+    <div
+      class="accordion-item"
+      *ngIf="estadosProcesos.evaluacionDirector == 'Completado'"
+    >
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button
+          class="accordion-button collapsed card-title text-primary completed-check d-flex justify-content-between"
+          [ngClass]="{ collapsed: !collapse6 }"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseSix"
+          aria-expanded="false"
+          aria-controls="flush-collapseSix"
+        >
+          <span><i
+            class="fa-regular fa-circle-check"
+            *ngIf="estadosProcesos.informeFinal != 'Pendiente'"
+          ></i>
+          <i
+            class="fa-regular fa-circle-user"
+            *ngIf="estadosProcesos.informeFinal == 'Pendiente'"
+          ></i> INFORME FINAL</span>
+        </button>
+      </h2>
+      <div
+        id="flush-collapseSix"
+        class="accordion-collapse collapse"
+        [ngClass]="{ show: collapse6 }"
+        aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <div class="accordion-body">
+          <p>
+            El <b>estudiante</b> presenta un informe detallado explicando cómo
+            logró alcanzar los objetivos, los aprendizajes obtenidos, los
+            beneficios obtenidos, así como comentarios y recomendaciones
+            relevantes.
           </p>
           <a
             href="#"
             *ngIf="estadosProcesos.informeFinal == 'Pendiente'"
-            class="btn btn-outline-primary"
-            routerLink="/app/formularios/vso-005"
-            >Completar <i class="fa-regular fa-pen-to-square ps-1"></i
-          ></a>
-
+            class="btn btn-primary estado-estudiante"
+            routerLink="/app/estudiante/informe-final"
+            >COMPLETAR <i class="fa-solid fa-file-import"></i>
+           </a>
           <div *ngIf="estadosProcesos.informeFinal != 'Pendiente'">
-            <p><b>Estado: </b>Completado</p>
-            <button class="btn btn-primary" (click)="descargarInformeFinal()">
-              Descargar <i class="fa-solid fa-file-arrow-down ps-1"></i>
+            <button
+              class="btn btn-outline-primary estado-estudiante estado-estudiante"
+              (click)="descargarInformeFinal()"
+            >
+            DESCARGAR PDF <i class="fa-solid fa-file-arrow-down"></i>
+              
             </button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <br>
+
 </div>

@@ -11,15 +11,19 @@
       >
     </div>
   </nav>
-  <div class="flex-inicio-sesion">
+  <br>
+  <br>
+  <br>
+  <div class="container m-auto flex-content row">
     <img
-      class="logo"
+      class="logo col-lg-6 p-4 p-lg-5 m-auto w-50 w-md-100"
       src="../../../assets/img/logoUnibe.png"
       alt=""
       srcset=""
     />
+    <div class="col-lg-6 p-lg-5">
     <form
-      class="form-sesion"
+      class="form-sesion m-auto"
       autocomplete="off"
       [formGroup]="formularioLogin"
       (ngSubmit)="login()"
@@ -47,7 +51,11 @@
       <a class="text-center fs-8" href="">Olvidaste tu usuario o contraseña?</a>
     </form>
   </div>
-  <footer class="footer bg-primary text-center p-3">
+  </div>
+  <br>
+  <br>
+  <br>
+  <footer class="footer bg-primary text-center p-2">
     <span class="text-white"
       >http://www.unibe.edu.ec<br />info@unibe.edu.ec</span
     >

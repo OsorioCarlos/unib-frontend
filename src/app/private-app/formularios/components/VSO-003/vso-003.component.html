@@ -1,159 +1,153 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h1 class="text-center text-primary">
+    <div class="col-md mb-3">
+      <h1 class="text-center text-primary titulo-principal">
         SEGUIMIENTO Y EVALUACIÓN DE PRÁCTICAS PREPROFESIONALES POR PARTE DE LA
         DIRECCIÓN DE CARRERA
       </h1>
     </div>
   </div>
-  <form [formGroup]="formularioVSO003">
-    <div class="row mb-3">
-      <div class="col">
-        <div class="card shadow-sm">
+  <form class="needs-validation" [formGroup]="formularioVSO003" (ngSubmit)="onSubmit($event)" novalidate>
+        <div class="card shadow-sm mb-3">
           <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
           <div class="card-body">
-            <div class="row mb-3">
-              <div class="col-6">
+            <div class="row ">
+              <div class="col-md-6 mb-3">
                 <label for="nombreEstudianteInput" class="form-label"
                   >Nombre:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="nombreEstudianteInput"
                   [value]="infoEvaluacionDirector.nombre_estudiante"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label class="form-label">Carrera:</label>
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="escuelaInput"
                   [value]="infoEvaluacionDirector.escuela"
-                  readonly
+                  readonly disabled
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label class="form-label">Nivel/Ciclo:</label>
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="nivelInput"
                   [value]="infoEvaluacionDirector.nivel"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="areaPracticasInput" class="form-label"
                   >Área de la práctica pre-profesional:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="areaPracticasInput"
                   [value]="infoEvaluacionDirector.area_practicas"
-                  readonly
+                  readonly disabled
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="horasPracicasInput" class="form-label"
                   >Número de horas de prácticas realizadas:</label
                 >
                 <input
                   type="number"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="horasPracicasInput"
                   [value]="infoEvaluacionDirector.horas_practicas"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="inicioPracticasInput" class="form-label"
                   >Fecha de inicio:</label
                 >
                 <input
                   type="date"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="inicioPracticasInput"
                   [value]="infoEvaluacionDirector.fecha_inicio"
-                  readonly
+                  readonly disabled
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="finPracicasInput" class="form-label"
                   >Fecha de finalización:</label
                 >
                 <input
                   type="date"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="finPracicasInput"
                   [value]="infoEvaluacionDirector.fecha_fin"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-3">
           <div class="card-header">
             <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
           </div>
           <div class="card-body">
-            <div class="row mb-3">
-              <div class="col-6">
+            <div class="row ">
+              <div class="col-md-6 mb-3">
                 <label for="nombreEmpresaInput" class="form-label"
                   >Nombre / Razón social:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="nombreEmpresaInput"
                   [value]="infoEvaluacionDirector.razon_social"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="representanteEmpresaInput" class="form-label"
                   >Representante legal:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="representanteEmpresaInput"
                   [value]="infoEvaluacionDirector.representante_legal"
-                  readonly
+                  readonly disabled
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="areaEmpresaInput" class="form-label"
                   >Área de dedicación:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="areaEmpresaInput"
                   [value]="infoEvaluacionDirector.area_dedicacion"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label
                   for="representantePracticaEmpresaInput"
                   class="form-label"
@@ -161,39 +155,35 @@
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="representantePracticaEmpresaInput"
                   [value]="infoEvaluacionDirector.representante"
-                  readonly
+                  readonly disabled
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="areaPracticaEmpresaInput" class="form-label"
                   >Área de las prácticas:</label
                 >
                 <input
                   type="text"
-                  class="form-control inputCompletado"
+                  class="form-control "
                   id="areaPracticaEmpresaInput"
                   [value]="infoEvaluacionDirector.area_practicas"
-                  readonly
+                  readonly disabled
                 />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row mb-3" formGroupName="calificacion">
-      <div class="col">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-3" formGroupName="calificacion">
           <div class="card-header"><b>VALORACIÓN:</b></div>
           <div class="card-body">
-            <table class="table table-striped">
+            <table class="table table-striped table-md">
               <thead>
                 <tr>
-                  <th colspan="2" scope="col" class="text-center">CRITERIOS</th>
-                  <th scope="col" class="text-center">SOBRE / 30</th>
+                  <th colspan="2" scope="col-md" class="text-center">CRITERIOS</th>
+                  <th scope="col-md" class="text-center">SOBRE / 30</th>
                 </tr>
               </thead>
               <tbody formArrayName="criterios">
@@ -223,6 +213,7 @@
                       (blur)="calcularNotaPromedio()"
                       max="30"
                       min="0"
+                      required
                     />
                   </td>
                 </tr>
@@ -233,7 +224,7 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control inputCompletado"
+                      class="form-control "
                       formControlName="nota_promedio"
                       readonly
                     />
@@ -246,9 +237,9 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control inputCompletado"
+                      class="form-control "
                       [value]="infoEvaluacionDirector.nota_organizacion"
-                      readonly
+                      readonly disabled
                     />
                   </td>
                 </tr>
@@ -257,7 +248,7 @@
                   <td>
                     <input
                       type="number"
-                      class="form-control inputCompletado"
+                      class="form-control "
                       formControlName="nota_final"
                       readonly
                     />
@@ -266,8 +257,8 @@
               </tbody>
             </table>
             <br />
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="asistenciaInput" class="form-label"
                   ><span style="color: red">*</span> Asistencia (%):</label
                 >
@@ -275,12 +266,14 @@
                   type="number"
                   class="form-control"
                   id="asistenciaInput"
+                  (blur)="calcularHorasAprobadas()"
                   formControlName="porcentaje_asistencia"
                   min="0"
                   max="100"
+                  required
                 />
               </div>
-              <div class="col">
+              <div class="col-md mb-3">
                 <label for="numeroHorasPracticasInput" class="form-label"
                   ><span style="color: red">*</span> Horas aprobadas de
                   prácticas pre profesionales:</label
@@ -289,12 +282,14 @@
                   type="number"
                   class="form-control"
                   id="numeroHorasPracticasInput"
-                  formControlName="numero_horas_practicas"
+                  [value]="horasAprobadas"
+                  disabled
+                  required
                 />
               </div>
             </div>
-            <div class="row mb-3">
-              <div class="col">
+            <div class="row ">
+              <div class="col-md mb-3">
                 <label for="reprobadoRazonesInput" class="form-label"
                   >Reprobado (Razones):</label
                 >
@@ -308,16 +303,12 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="d-grid gap-2 mb-3">
+    <div class="d-grid gap-2  d-flex justify-content-end  mb-3">
       <button
-        class="btn btn-primary btn-lg"
-        type="button"
-        (click)="guardarInformacion()"
-        [disabled]="formularioVSO003.invalid"
+        class="btn btn-primary"
+        type="submit"
       >
-        Guardar
+      CONTINUAR <i class="fa-solid fa-circle-check"></i>
       </button>
     </div>
   </form>

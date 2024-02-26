@@ -1,12 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h1 class="text-center text-primary">
+    <div class="col-md mb-3">
+      <h1 class="text-center text-primary titulo-principal">
         SOLICITUD DEL ESTUDIANTE PARA REALIZAR PRÁCTICAS PRE-PROFESIONALES
       </h1>
     </div>
   </div>
   <form
+    class="needs-validation"
     [formGroup]="formGroupSolicitudPracticas"
     (ngSubmit)="onSubmit($event)"
     novalidate
@@ -15,44 +16,44 @@
       <div class="card-header"><b>DATOS DEL ESTUDIANTE:</b></div>
       <div class="card-body">
         <div>
-          <div class="row mb-3">
-            <div class="col-6">
+          <div class="row ">
+            <div class="col-md-6 mb-3">
               <label for="nombreInput" class="form-label">Nombre:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="nombreInput"
-                readonly
+                readonly disabled
                 [value]="estudiante.nombre"
               />
             </div>
           </div>
-          <div class="row mb-3">
-            <div class="col">
+          <div class="row ">
+            <div class="col-md mb-3">
               <label for="escuelaInput" class="form-label">Escuela:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="escuelaInput"
-                readonly
+                readonly disabled
                 [value]="estudiante.escuela"
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="nivelInput" class="form-label">Nivel/Ciclo:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="nivelInput"
-                readonly
+                readonly disabled
                 [value]="estudiante.nivel"
               />
             </div>
           </div>
         </div>
 
-        <div class="row mb-3" formGroupName="practicaPreprofesional">
-          <div class="col">
+        <div class="row " formGroupName="practicaPreprofesional">
+          <div class="col-md mb-3">
             <label for="areaEstudianteInput" class="form-label"
               ><span style="color: red">*</span> Área propuesta para la
               práctica:</label
@@ -62,9 +63,10 @@
               class="form-control"
               id="areaEstudianteInput"
               formControlName="areaPropuesta"
+              required
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="numeroHorasEstudianteInput" class="form-label"
               ><span style="color: red">*</span> Número de horas
               solicitadas:</label
@@ -76,6 +78,7 @@
               class="form-control"
               id="numeroHorasEstudianteInput"
               formControlName="horasSolicitadas"
+              required
             />
           </div>
         </div>
@@ -87,87 +90,87 @@
         <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
       </div>
       <div class="card-body">
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="nombreOrganizacionInput" class="form-label"
               >Nombre / Razón Social:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="nombreOrganizacionInput"
               [value]="organizacion.razon_social"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md-6 mb-3">
             <label for="representanteOrganizacionInput" class="form-label"
               >Representante Legal:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="representanteOrganizacionInput"
               [value]="organizacion.representante_legal"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="areaOrganizacionInput" class="form-label"
               >Área de Dedicación:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="areaOrganizacionInput"
               [value]="organizacion.area_dedicacion"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="direccionOrganizacionInput" class="form-label"
               >Dirección:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="direccionOrganizacionInput"
               [value]="organizacion.direccion"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="telefonoOrganizacionInput" class="form-label"
               >Télefono:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="telefonoOrganizacionInput"
               [value]="organizacion.telefono"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="emailOrganizacionInput" class="form-label"
               >E-mail:</label
             >
             <input
               type="text"
-              class="form-control inputCompletado"
+              class="form-control"
               id="emailOrganizacionInput"
               [value]="organizacion.email"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
 
         <div class="row">
-          <div class="col">
+          <div class="col-md-6 mb-3">
             <label for="areaEstudianteInput" class="form-label"
               ><span style="color: red">*</span> Representante para la práctica
               del estudiante:</label
@@ -176,6 +179,7 @@
               class="form-select"
               aria-label="Selecciona representante"
               formControlName="representante"
+              required
             >
               <option disabled>Selecciona un representante</option>
               <option
@@ -192,8 +196,8 @@
     <div class="card shadow-sm mb-3">
       <div class="card-header"><b>COMPROMISO DEL ESTUDIANTE</b></div>
       <div class="card-body">
-        <div class="row mb-3" formGroupName="compromisoEstudiante">
-          <div class="col">
+        <div class="row " formGroupName="compromisoEstudiante">
+          <div class="col-md mb-3">
             <p style="text-align: justify">
               Me comprometo a cumplir con el Reglamento de Prácticas Pre
               profesionales de la Universidad, así como los objetivos,
@@ -202,12 +206,13 @@
               practicas preprofesionales. Mi conducta, en todo momento, será de
               responsabilidad, honestidad, puntualidad y colaboración.
             </p>
-            <div class="form-check mb-3">
+            <div class="form-check ">
               <input
                 class="form-check-input"
                 type="checkbox"
                 formControlName="acepta"
                 id="aceptarCompromisoCheckbox"
+                required
               />
               <label for="aceptarCompromisoCheckbox">
                 <p><span style="color: red">*</span> Aceptar Compromiso</p>
@@ -217,17 +222,10 @@
         </div>
       </div>
     </div>
-    <div class="d-grid gap-2 mb-3">
+    <div class="d-grid gap-2  d-flex justify-content-end  mb-3">
       <button
         class="btn btn-primary btn-lg"
-        [disabled]="
-          formGroupSolicitudPracticas.invalid ||
-          formGroupSolicitudPracticas.get('compromisoEstudiante.acepta')
-            ?.value == false
-        "
-      >
-        Solicitar Prácticas Pre-Profesionales
-      </button>
+      >CONTINUAR <i class="fa-solid fa-circle-check"></i></button>
     </div>
   </form>
 </div>

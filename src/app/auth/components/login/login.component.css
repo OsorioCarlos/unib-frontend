@@ -1,12 +1,12 @@
 .fondo {
   background-color: #f9f9f9;
-  height: 100vh;
 }
 .logo {
-  height: 350px;
-  padding: 50px;
-  margin: auto;
+object-fit: cover;
+height: max-content;
+margin: auto;
 }
+
 
 .form-sesion {
   display: flex;
@@ -14,8 +14,6 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.31);
-  width: 80%;
-  margin: auto;
   padding: 30px;
 }
 
@@ -26,13 +24,9 @@
 .form-sesion > a {
   text-decoration: none;
 }
-
-.flex-inicio-sesion {
-  position: absolute;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  top: 50%;
-  transform: translateY(-50%);
+.navbar{
+  position: fixed;
+  width: 100%;
 }
 
 .login {
@@ -40,10 +34,9 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0%;
   width: 100%;
-  font-size: 0.8rem;
 }
 
 .logo-unibe {
@@ -52,4 +45,14 @@
   margin: auto;
   font-weight: 400 !important;
   color: white;
+}
+
+@media only screen and (min-width: 768px) {
+  
+  .flex-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

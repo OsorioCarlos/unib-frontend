@@ -17,7 +17,6 @@ export class CartaCompromisoComponent {
   formularioCartaCompromiso: FormGroup;
   apiUrl: string = environment.apiUrl;
   meses: string[];
-  niveles: any;
   compromisoBioseguridad: CompromisoBioseguridad;
   nivelOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
@@ -56,19 +55,6 @@ export class CartaCompromisoComponent {
       'diciembre',
     ];
 
-    this.niveles = {
-      'PRIMER NIVEL': '1',
-      'SEGUNDO NIVEL': '2',
-      'TERCER NIVEL': '3',
-      'CUARTO NIVEL': '4',
-      'QUINTO NIVEL': '5',
-      'SEXTO NIVEL': '6',
-      'SEPTIMO NIVEL': '7',
-      'OCTAVO NIVEL': '8',
-      'NOVENO NIVEL': '9',
-      'DÉCIMO NIVEL': '10',
-    };
-
     this.compromisoBioseguridad = {
       carrera: '',
       nombreCompleto: '',
@@ -77,16 +63,19 @@ export class CartaCompromisoComponent {
       razonSocial: '',
     };
 
-    this.obtenerCarreras();
-    this.obtenerNiveles();
+    this.obtenerInfoCartaCompromiso();
     this.obtenerOrganizaciones();
     this.buildformGroupInformacionEstudiante();
   }
 
   onSubmit(event: Event) {
-    console.log(this.formGroupInformacionEstudiante);
-    event.preventDefault();
-    if (this.formGroupInformacionEstudiante.valid) {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso('Completa el formulario', 'Revisa los campos requeridos');
+    }else if (this.formGroupInformacionEstudiante.valid) {
       const datos = this.formGroupInformacionEstudiante.value;
       this.privateAppService
         .crear('estudiantes/generarCartaCompromiso', datos)
@@ -100,7 +89,9 @@ export class CartaCompromisoComponent {
           }
         );
     }
+    forms!.classList.add('was-validated');
   }
+
 
   public generarCartaCompromiso(): void {
     if (this.formularioCartaCompromiso.valid) {
@@ -132,8 +123,7 @@ export class CartaCompromisoComponent {
           }
         );
     }
-    this.router.navigateByUrl('/app/student');
-    this.appService.alertaExito('OK', 'Carta de compromiso aceptada');
+    this.router.navigateByUrl('/app/estudiante');
   }
 
   private completarCartaComprmiso(): void {
@@ -181,38 +171,23 @@ export class CartaCompromisoComponent {
 
   private buildformGroupInformacionEstudiante(): void {
     this.formGroupInformacionEstudiante = this.fb.group({
-      estudiante: this.fb.group({
-        carrera: ['', Validators.required],
-        semestre: ['', Validators.required],
-      }),
       organizacion: this.fb.group({
         nombreRazonSocial: ['', Validators.required],
       }),
     });
   }
-  private obtenerCarreras(): void {
-    this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(
-      (res) => {
-        this.carreraOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener carreras');
-        console.error(error);
-      }
-    );
-  }
 
-  private obtenerNiveles(): void {
-    this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(
-      (res) => {
-        this.nivelOpciones = res.data;
-      },
-      (error) => {
-        this.appService.alertaError('ERROR', 'Error al obtener niveles');
-        console.error(error);
-      }
-    );
+  public obtenerInfoCartaCompromiso(): void {
+    this.privateAppService
+      .obtener('estudiantes/obtenerInfoCompromiso')
+      .subscribe(
+        (res) => {
+          this.compromisoBioseguridad = res.data;
+        },
+        (error) => {
+          this.appService.alertaError('ERROR', error.error.mensaje);
+          console.error(error);
+        }
+      );
   }
 }

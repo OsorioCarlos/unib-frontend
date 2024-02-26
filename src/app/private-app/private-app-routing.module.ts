@@ -6,14 +6,114 @@ import { AdminComponent } from './components/admin/admin.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { StudentComponent } from './components/student/student.component';
 import { DirectorComponent } from './components/director/director.component';
+import { CartaCompromisoComponent } from './formularios/components/carta-compromiso/carta-compromiso.component';
+import { VSO001Component } from './formularios/components/VSO-001/vso-001.component';
+import { VSO002Component } from './formularios/components/VSO-002/vso-002.component';
+import { VSO004Component } from './formularios/components/VSO-004/vso-004.component';
+import { VSO003Component } from './formularios/components/VSO-003/vso-003.component';
+import { VSO005Component } from './formularios/components/VSO-005/vso-005.component';
+import { SeguimientoEvaluacionComponent } from './components/director/seguimiento-evaluacion/seguimiento-evaluacion.component';
+import { ResumenPracticaComponent } from './components/student/resumen-practica/resumen-practica.component';
 
 const routes: Routes = [
   {
-    path: 'student',
-    component: StudentComponent,
+    path: 'estudiante',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     data: { expectedRoles: 'ESTUDIANTE' },
+    children: [
+      {
+        path: '',
+        component: StudentComponent,
+        title: 'Inicio',
+      },
+      {
+        path: 'carta-compromiso',
+        component: CartaCompromisoComponent,
+        title: 'Carta Compromiso',
+      },
+      {
+        path: 'solicitud',
+        component: VSO001Component,
+        title: 'Solictud de Prácticas Preprofesionales',
+      },
+      {
+        path: 'informe-final',
+        component: VSO005Component,
+        title: 'Informe Final',
+      },
+      {
+        path: 'resumen-practica',
+        component: ResumenPracticaComponent,
+        title: 'Resumen',
+      },
+      {
+        path: '**',
+        component: StudentComponent,
+        title: 'Inicio',
+      },
+    ],
+  },
+  {
+    path: 'representante',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    data: { expectedRoles: 'REPRESENTANTE PRÁCTICAS' },
+    children: [
+      {
+        path: '',
+        component: OrganizationComponent,
+        title: 'Inicio',
+      },
+      {
+        path: 'compromiso-recepcion/:id',
+        component: VSO002Component,
+        title: 'Compromiso de Recepción',
+      },
+      {
+        path: 'seguimiento-evaluacion/:id',
+        component: VSO004Component,
+        title: 'Seguimiento y Evaluación',
+      },
+      {
+        path: '**',
+        component: OrganizationComponent,
+        title: 'Inicio'
+      }
+    ]
+  },
+  {
+    path: 'director',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    data: { expectedRoles: 'DIRECTOR DE CARRERA' },
+    children: [
+      {
+        path: '',
+        component: DirectorComponent,
+        title: 'Inicio',
+      },
+      {
+        path: 'seguimiento-evaluacion',
+        component: SeguimientoEvaluacionComponent,
+        title: 'Inicio',
+      },
+      {
+        path: 'seguimiento-evaluacion/:id',
+        component: VSO003Component,
+        title: 'Seguimiento y Evaluación',
+      },
+      {
+        path: 'informacion-practica/:id',
+        component: ResumenPracticaComponent,
+        title: 'Resumen Práctica',
+      },
+      {
+        path: '**',
+        component: DirectorComponent,
+        title: 'Inicio'
+      }
+    ]
   },
   {
     path: 'formularios',
@@ -37,20 +137,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     data: { expectedRoles: 'ADMINISTRADOR' },
-  },
-  {
-    path: 'organization',
-    component: OrganizationComponent,
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    data: { expectedRoles: 'REPRESENTANTE PRÁCTICAS' },
-  },
-  {
-    path: 'director',
-    component: DirectorComponent,
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    data: { expectedRoles: 'DIRECTOR DE CARRERA' },
   },
   {
     path: 'administrar-usuarios',

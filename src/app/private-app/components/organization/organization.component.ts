@@ -63,7 +63,7 @@ export class OrganizationComponent {
         .subscribe(
           (res) => {
             this.representanteCompletoInformacionBasica = true;
-            this.router.navigateByUrl('/app/organization');
+            this.router.navigateByUrl('/app/representante');
           },
           (err) => {
             console.log(err);

@@ -34,13 +34,13 @@ export class LoginComponent {
       if (data.estado == 'ok') {
         switch (data.rol) {
           case 'ADMINISTRADOR':
-            this.router.navigateByUrl('/app/admin');
+            this.router.navigateByUrl('/app/administrador');
             break;
           case 'ESTUDIANTE':
-            this.router.navigateByUrl('/app/student');
+            this.router.navigateByUrl('/app/estudiante');
             break;
           case 'REPRESENTANTE PRÁCTICAS':
-            this.router.navigateByUrl('/app/organization');
+            this.router.navigateByUrl('/app/representante');
             break;
           case 'DIRECTOR DE CARRERA':
             this.router.navigateByUrl('/app/director');

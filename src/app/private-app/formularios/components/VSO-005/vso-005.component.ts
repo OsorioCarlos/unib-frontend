@@ -53,16 +53,22 @@ export class VSO005Component {
     this.obtenerInformeEstudiante();
   }
 
-  public guardarInformacion(): void {
+  onSubmit(event:Event) {
+    let forms: HTMLFormElement = document.querySelector('.needs-validation')!;
+    if (!forms!.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.appService.alertaAviso(
+        'Completa el formulario',
+        'Revisa los campos requeridos'
+      );
+    } else {
+      if(this.formularioVSO005.valid) {
     const datos = this.formularioVSO005.value;
     this.privateAppService
       .crear('estudiantes/enviarInformeFinal', datos)
       .subscribe(
         (res) => {
-          this.appService.alertaExito(
-            'OK',
-            'Se ha guardado la información correctamente'
-          );
           this.generarVso005(this.informeEstudiante.identificacion);
         },
         (err) => {
@@ -70,6 +76,9 @@ export class VSO005Component {
           console.error(err);
         }
       );
+      }
+    }
+    forms!.classList.add('was-validated');
   }
 
   public buscarEstudiante(): void {
@@ -116,7 +125,7 @@ export class VSO005Component {
         console.error(error);
       }
     );
-    this.route.navigateByUrl('/app/student');
+    this.route.navigateByUrl('/app/estudiante');
   }
 
   private obtenerInformeEstudiante(): void {

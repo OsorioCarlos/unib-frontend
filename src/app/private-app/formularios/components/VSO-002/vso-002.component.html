@@ -1,13 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h1 class="text-center text-primary">
+    <div class="col-md mb-3">
+      <h1 class="text-center text-primary  titulo-principal">
         COMPROMISO DE RECEPCIÓN DE PRÁCTICAS PRE PROFESIONALES ESTUDIANTILES POR
         PARTE DE UNA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA
       </h1>
     </div>
   </div>
   <form
+    class="needs-validation"
     [formGroup]="formCompromisoRecepcion"
     (ngSubmit)="onSubmit($event)"
     novalidate
@@ -17,89 +18,89 @@
         <b>DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:</b>
       </div>
       <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-6">
+        <div class="row ">
+          <div class="col-md-6 mb-3">
             <label for="razonSocialInput" class="form-label"
               >Nombre / Razón Social:</label
             >
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="razonSocialInput"
               [value]="infoCompromisoRecepcion.razon_social"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="representanteInput" class="form-label"
               >Representante legal:</label
             >
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="representanteInput"
               [value]="infoCompromisoRecepcion.representante_legal"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="areaInput" class="form-label">Area dedicación:</label>
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="areaInput"
               [value]="infoCompromisoRecepcion.area_dedicacion"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="telefonoInput" class="form-label"
               >Télefono de la organización, entidad o persona jurídica:</label
             >
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="telefonoInput"
               [value]="infoCompromisoRecepcion.telefono"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="direccionInput" class="form-label">Dirección:</label>
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="direccionInput"
               [value]="infoCompromisoRecepcion.direccion"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col">
+        <div class="row ">
+          <div class="col-md mb-3">
             <label for="diasHabilesInput" class="form-label"
               >Días hábiles:</label
             >
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="diasHabilesInput"
               [value]="infoCompromisoRecepcion.dias_habiles"
-              readonly
+              readonly disabled
             />
           </div>
-          <div class="col">
+          <div class="col-md mb-3">
             <label for="horarioInput" class="form-label">Horario:</label>
             <input
               type="text"
-              class="form-control input-readonly inputCompletado"
+              class="form-control input-readonly"
               id="horarioInput"
               [value]="infoCompromisoRecepcion.horario"
-              readonly
+              readonly disabled
             />
           </div>
         </div>
@@ -110,52 +111,50 @@
         <b>DATOS DEL REPRESENTANTE DE LA PRÁCTICA:</b>
       </div>
       <div class="card-body">
-        <div>
-          <div class="row mb-3">
-            <div class="col">
+          <div class="row ">
+            <div class="col-md mb-3">
               <label for="nombreInput" class="form-label">Nombre:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="nombreInput"
                 [value]="infoCompromisoRecepcion.nombre_representante"
-                readonly
+                readonly disabled
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="funcionInput" class="form-label">Función:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="funcionInput"
                 [value]="infoCompromisoRecepcion.funcion"
-                readonly
+                readonly disabled
               />
             </div>
           </div>
-          <div class="row mb-3">
-            <div class="col">
+          <div class="row ">
+            <div class="col-md mb-3">
               <label for="telefonoInput" class="form-label">Télefono:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="telefonoInput"
                 [value]="infoCompromisoRecepcion.telefono_representante"
-                readonly
+                readonly disabled
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="emailInput" class="form-label">Email:</label>
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="emailInput"
                 [value]="infoCompromisoRecepcion.email_representante"
-                readonly
+                readonly disabled
               />
             </div>
           </div>
-        </div>
       </div>
     </div>
     <div formGroupName="compromisoRecepcion">
@@ -167,35 +166,34 @@
           >
         </div>
         <div class="card-body">
-          <div class="row mb-3">
-            <div class="col">
+          <div class="row ">
+            <div class="col-md mb-3">
               <label for="nombreEstudianteInput" class="form-label"
                 >Nombre del estudiante:</label
               >
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="nombreEstudianteInput"
                 [value]="infoCompromisoRecepcion.nombre_estudiante"
-                readonly
+                readonly disabled
               />
             </div>
-            <div class="col">
+            <div class="col-md mb-3">
               <label for="areaPracticaInput" class="form-label"
                 >Área propuesta para la práctica pre profesional:</label
               >
               <input
                 type="text"
-                class="form-control input-readonly inputCompletado"
+                class="form-control input-readonly"
                 id="areaPracticaInput"
                 [value]="infoCompromisoRecepcion.area_estudiante"
-                readonly
+                readonly disabled
               />
             </div>
           </div>
-          <div class="row mb-3"></div>
           <div class="row">
-            <div class="mb-3">
+            <div class="col-md mb-3">
               <label for="objetivosInput" class="form-label"
                 ><span style="color: red">*</span> Objetivos de la práctica pre
                 profesional:</label
@@ -207,10 +205,11 @@
                 formControlName="objetivos"
                 cols="30"
                 rows="3"
+                required
               ></textarea>
             </div>
             <div class="row">
-              <div class="mb-3">
+              <div class="col-md mb-3">
                 <label for="tareaInput" class="form-label"
                   ><span style="color: red">*</span> Tareas:</label
                 >
@@ -221,12 +220,13 @@
                   formControlName="tareas"
                   cols="30"
                   rows="4"
+                  required
                 ></textarea>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="mb-3 col">
+            <div class="col-md mb-3">
               <label for="fechaInicioInput" class="form-label"
                 ><span style="color: red">*</span> Fecha de Inicio:</label
               >
@@ -239,7 +239,7 @@
                 required
               />
             </div>
-            <div class="mb-3 col">
+            <div class="col-md mb-3">
               <label for="fechaFinInput" class="form-label"
                 ><span style="color: red">*</span> Fecha de Finalización:</label
               >
@@ -254,18 +254,18 @@
             </div>
           </div>
           <div class="row">
-            <div class="mb-3 col">
+            <div class="col-md mb-3">
               <label for="diasInput" class="form-label"
                 ><span style="color: red">*</span> Días Laborales de las
                 prácticas pre profesionales:
               </label>
               <br />
-              <div class="d-flex justify-content-around">
-                <div class="form-check-inline m-0">
+              <div class="d-sm-flex justify-content-sm-center d-md-flex flex-md-row justify-content-md-around ">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
-                    id="lunesCheckBox"
+                    id="btn-check-lun-outlined"
                     autocomplete="off"
                     [checked]="diasLaborables.lunes"
                     #lunesCheckBox
@@ -277,7 +277,7 @@
                     >Lun</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -293,7 +293,7 @@
                     >Mar</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -311,7 +311,7 @@
                     >Mie</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -327,7 +327,7 @@
                     >Jue</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -345,7 +345,7 @@
                     >Vie</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -361,7 +361,7 @@
                     >Sab</label
                   ><br />
                 </div>
-                <div class="form-check-inline m-0">
+                <div class="form-check-inline m-2">
                   <input
                     type="checkbox"
                     class="btn-check"
@@ -381,12 +381,12 @@
                 </div>
               </div>
             </div>
-            <div class="mb-3 col">
+            <div class="col-md mb-3">
               <label for="areaInput" class="form-label"
                 ><span style="color: red">*</span> Horario:</label
               >
               <div class="row form-group">
-                <div class="col">
+                <div class="col-md mb-3">
                   <input
                     type="time"
                     class="form-control"
@@ -395,10 +395,10 @@
                     required
                   />
                 </div>
-                <label for="hasta" class="col-1 col-form-label text-center"
+                <label for="hasta" class="col-md-1 col-md-form-label text-center"
                   >a</label
                 >
-                <div class="col">
+                <div class="col-md mb-3">
                   <input
                     type="time"
                     class="form-control"
@@ -422,7 +422,7 @@
             respectivas, y recibir a la autoridad de la Universidad para la
             supervisión al estudiante.
           </p>
-          <div class="form-check mb-3">
+          <div class="form-check ">
             <input
               class="form-check-input"
               type="checkbox"
@@ -438,14 +438,12 @@
         </div>
       </div>
     </div>
+    <div class="d-grid gap-2  d-flex justify-content-end  mb-3">
     <button
-      [disabled]="
-        formCompromisoRecepcion.invalid ||
-        formCompromisoRecepcion.get('aceptarCompromiso')?.value == false
-      "
-      class="btn btn-primary w-100 mb-3"
+      class="btn btn-primary"
     >
-      Recibir Estudiante
+    CONTINUAR <i class="fa-solid fa-circle-check"></i>
     </button>
+    </div>
   </form>
 </div>
