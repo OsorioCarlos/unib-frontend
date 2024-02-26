@@ -136,6 +136,6 @@ export class VSO001Component {
         console.error(error);
       }
     );
-    this.router.navigateByUrl('/app/student');
+    this.router.navigateByUrl('/app/estudiante');
   }
 }

@@ -22,6 +22,7 @@ export class VSO003Component {
   formularioVSO003: FormGroup;
   identificacionEstudiante: string = '';
   infoEvaluacionDirector: InfoEvaluacion;
+  horasAprobadas: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +56,6 @@ export class VSO003Component {
           '',
           [Validators.required, Validators.min(0), Validators.max(100)],
         ],
-        numero_horas_practicas: ['', Validators.required],
         observaciones: [''],
       }),
     });
@@ -101,7 +101,9 @@ export class VSO003Component {
     }
     forms!.classList.add('was-validated');
   }
-
+  public calcularHorasAprobadas(){
+    this.horasAprobadas = (parseInt(this.formularioVSO003.get('calificacion.porcentaje_asistencia')?.value) * this.infoEvaluacionDirector.horas_practicas)/100;
+  }
   public buscarEstudiante(): void {
     this.privateAppService
       .obtener(

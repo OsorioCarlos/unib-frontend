@@ -123,7 +123,7 @@ export class CartaCompromisoComponent {
           }
         );
     }
-    this.router.navigateByUrl('/app/student');
+    this.router.navigateByUrl('/app/estudiante');
   }
 
   private completarCartaComprmiso(): void {

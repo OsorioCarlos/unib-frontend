@@ -125,7 +125,7 @@ export class VSO005Component {
         console.error(error);
       }
     );
-    this.route.navigateByUrl('/app/student');
+    this.route.navigateByUrl('/app/estudiante');
   }
 
   private obtenerInformeEstudiante(): void {

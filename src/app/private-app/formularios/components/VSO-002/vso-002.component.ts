@@ -116,7 +116,7 @@ export class VSO002Component {
                 'OK',
                 'Se ha notificado el comprobante de recepción al estudiantes'
               );
-              this.router.navigateByUrl('/app/organization');
+              this.router.navigateByUrl('/app/representante');
             },
             (err) => {
               this.appService.alertaError('ERROR', err.error.mensaje);

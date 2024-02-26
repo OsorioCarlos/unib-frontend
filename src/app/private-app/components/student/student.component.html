@@ -114,7 +114,7 @@
             *ngIf="estadosProcesos.cartaCompromiso != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
           ></i> CARTA DE COMPROMISO</span
           >
@@ -138,8 +138,8 @@
           <a
             href="#"
             *ngIf="estadosProcesos.cartaCompromiso == 'Pendiente'"
-            class="btn btn-warning estado-estudiante"
-            routerLink="/app/formularios/carta-compromiso"
+            class="btn btn-primary estado-estudiante"
+            [routerLink]="['/app/estudiante/carta-compromiso']"
             >COMPLETAR <i class="fa-solid fa-file-import"></i>
             </a>
           <div *ngIf="estadosProcesos.cartaCompromiso != 'Pendiente'">
@@ -173,7 +173,7 @@
             *ngIf="estadosProcesos.solicitud != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.solicitud == 'Pendiente'"
           ></i> SOLICITUD</span>
         </button>
@@ -195,7 +195,7 @@
             href="#"
             *ngIf="estadosProcesos.solicitud == 'Pendiente'"
             class="btn btn-primary estado-estudiante"
-            routerLink="/app/formularios/vso-001"
+            [routerLink]="['/app/estudiante/solicitud']"
             >COMPLETAR <i class="fa-solid fa-file-import"></i></a>
           <div *ngIf="estadosProcesos.solicitud != 'Pendiente'">
             <button
@@ -228,7 +228,7 @@
             *ngIf="estadosProcesos.compromisoRecepcion != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.compromisoRecepcion == 'Pendiente'"
           ></i> COMPROMISO DE
             RECEPCIÓN</span
@@ -289,7 +289,7 @@
             *ngIf="estadosProcesos.evaluacionRepresentante != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.evaluacionRepresentante == 'Pendiente'"
           ></i> SEGUIMIENTO Y
             EVALUACIÓN</span
@@ -351,7 +351,7 @@
             *ngIf="estadosProcesos.evaluacionDirector != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.evaluacionDirector == 'Pendiente'"
           ></i> SEGUIMIENTO Y EVALUACIÓN</span
           >
@@ -411,7 +411,7 @@
             *ngIf="estadosProcesos.informeFinal != 'Pendiente'"
           ></i>
           <i
-            class="fa-regular fa-circle-exclamation"
+            class="fa-regular fa-circle-user"
             *ngIf="estadosProcesos.informeFinal == 'Pendiente'"
           ></i> INFORME FINAL</span>
         </button>
@@ -434,7 +434,7 @@
             href="#"
             *ngIf="estadosProcesos.informeFinal == 'Pendiente'"
             class="btn btn-primary estado-estudiante"
-            routerLink="/app/formularios/vso-005"
+            routerLink="/app/estudiante/informe-final"
             >COMPLETAR <i class="fa-solid fa-file-import"></i>
            </a>
           <div *ngIf="estadosProcesos.informeFinal != 'Pendiente'">

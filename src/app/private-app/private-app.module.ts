@@ -9,6 +9,8 @@ import { StudentComponent } from './components/student/student.component';
 import { PrivateAppRoutingModule } from './private-app-routing.module';
 import { PrivateAppComponent } from './private-app.component';
 import { DirectorComponent } from './components/director/director.component';
+import { SeguimientoEvaluacionComponent } from './components/director/seguimiento-evaluacion/seguimiento-evaluacion.component';
+import { ResumenPracticaComponent } from './components/student/resumen-practica/resumen-practica.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { DirectorComponent } from './components/director/director.component';
     AdminComponent,
     OrganizationComponent,
     DirectorComponent,
+    SeguimientoEvaluacionComponent,
+    ResumenPracticaComponent
   ],
   imports: [CommonModule, PrivateAppRoutingModule, ReactiveFormsModule],
 })

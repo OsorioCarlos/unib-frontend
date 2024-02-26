@@ -1,0 +1,750 @@
+<div class="container">
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br /><span class="titulo-bienvenida"
+      >RESUMEN DE PRÁCTICA DEL ESTUDIANTE: {{resumen.estudiante.nombre}}</span
+    >
+  </h1>
+  <div class="accordion accordion-flush" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+          DATOS DEL ESTUDIANTE:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"  data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombreInput" class="form-label">Nombre:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="nombreInput"
+                  [value]="resumen.estudiante.nombre"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="identificacionInput" class="form-label">Identificación:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="identificacionInput"
+                  [value]="resumen.estudiante.identificacion"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="emailEstudianteInput" class="form-label">Email:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="emailEstudianteInput"
+                  [value]="resumen.estudiante.email"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="escuelaInput" class="form-label">Carrera:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="escuelaInput"
+                  [value]="resumen.estudiante.carrera"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="nivelInput" class="form-label">Nivel/Ciclo:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="nivelInput"
+                  [value]="resumen.estudiante.nivel"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="areaEstudianteInput" class="form-label">
+                  Área propuesta para la práctica:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="areaEstudianteInput"
+                  required
+                  [value]="resumen.estudiante.areaPropuesta"
+                  disabled
+                  readonly
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="numeroHorasEstudianteInput" class="form-label">
+                  Número de horas solicitadas:</label
+                >
+                <input
+                  type="number"
+                  min="0"
+                  max="400"
+                  class="form-control"
+                  id="numeroHorasEstudianteInput"
+                  [value]="resumen.estudiante.horasSolicitadas"
+                  disabled
+                  required
+                />
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          DATOS DE LA ORGANIZACIÓN, ENTIDAD O PERSONA JURÍDICA:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="nombreOrganizacionInput" class="form-label"
+                  >Nombre / Razón Social:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreOrganizacionInput"
+                  [value]="resumen.organizacion.razonSocial"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="representanteOrganizacionInput" class="form-label"
+                  >Representante Legal:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="representanteOrganizacionInput"
+                  [value]="resumen.organizacion.representanteLegal"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="areaOrganizacionInput" class="form-label"
+                  >Área de Dedicación:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="areaOrganizacionInput"
+                  [value]="resumen.organizacion.areaDedicacion"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="direccionOrganizacionInput" class="form-label"
+                  >Dirección:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="direccionOrganizacionInput"
+                  [value]="resumen.organizacion.direccion"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="telefonoOrganizacionInput" class="form-label"
+                  >Télefono:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="telefonoOrganizacionInput"
+                  [value]="resumen.organizacion.telefono"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="emailOrganizacionInput" class="form-label"
+                  >E-mail:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emailOrganizacionInput"
+                  [value]="resumen.organizacion.email"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="diasHabilesInput" class="form-label"
+                  >Días hábiles:</label
+                >
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="diasHabilesInput"
+                  [value]="resumen.organizacion.diasHabiles"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="horarioInput" class="form-label">Horario:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="horarioInput"
+                  [value]="resumen.organizacion.horario"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+          DATOS DEL REPRESENTANTE DE LA PRÁCTICA:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="nombreInput" class="form-label">Nombre:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="nombreInput"
+                  [value]="resumen.representante.nombre"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="funcionInput" class="form-label">Función:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="funcionInput"
+                  [value]="resumen.representante.funcion"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="identificacionRepresentanteInput" class="form-label">Identificación:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="identificacionRepresentanteInput"
+                  [value]="resumen.representante.identificacion"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="emailInput" class="form-label">Email:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="emailInput"
+                  [value]="resumen.representante.email"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="telefonoInput" class="form-label">Télefono:</label>
+                <input
+                  type="text"
+                  class="form-control input-readonly"
+                  id="telefonoInput"
+                  [value]="resumen.representante.telefono"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+          DATOS DE LA PRÁCTICA DEL ESTUDIANTE:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="areaPracticasInput" class="form-label"
+                  >Área de la práctica pre-profesional:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="areaPracticasInput"
+                  [value]="resumen.practica.areaPractica"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="objetivosInput" class="form-label">
+                  Objetivos de la práctica pre profesional:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="objetivosInput"
+                  name=""
+                  cols="30"
+                  rows="3"
+                  [value]="resumen.practica.objetivos"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="tareaInput" class="form-label"> Tareas:</label>
+                  <textarea
+                    class="form-control"
+                    id="tareaInput"
+                    name=""
+                    cols="30"
+                    rows="4"
+                    [value]="resumen.practica.tareas"
+                    disabled
+                    required
+                  ></textarea>
+                </div>
+              </div>        
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="inicioPracticasInput" class="form-label"
+                  >Fecha de inicio:</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="inicioPracticasInput"
+                  [value]="resumen.practica.fechaInicio"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="finPracicasInput" class="form-label"
+                  >Fecha de finalización:</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="finPracicasInput"
+                  [value]="resumen.practica.fechaFin"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="diasInput" class="form-label">
+                  Días Laborales de las prácticas pre profesionales:
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="diasInput"
+                  [value]="resumen.practica.diasLaborables"
+                  readonly
+                  disabled
+                />
+              </div>
+              <div class="col-md mb-3">
+                <label for="horarioInput" class="form-label">
+                  Horario:
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="horarioInput"
+                  [value]="resumen.practica.horario"
+                  readonly
+                  disabled
+                />
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+          VALORACIÓN:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="card shadow-sm mb-3">
+            <div class="card-header"><b>VALORACIÓN DE LA ORGANIZACIÓN:</b></div>
+            <div class="card-body">
+              <table class="table table-striped table-md">
+                <thead>
+                  <tr>
+                    <th colspan="2" scope="col-md" class="text-center">CRITERIOS</th>
+                    <th scope="col-md" class="text-center">SOBRE / 30</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let criterioForm of resumen.valoracion?.organizacion?.calificaciones;index as i"
+                  >
+                    <th scope="row" class="text-center">{{ i + 1 }}.</th>
+                    <td>
+                      <label
+                        for="{{ 'criterioCalificacion' + i }}"
+                        class="form-label"
+                        >{{ criterioForm.criterio }}</label
+                      >
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="{{ 'criterioCalificacion' + i }}"
+                        [value]="criterioForm.calificacion"
+                        disabled
+                        required
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th colspan="2" scope="row" class="text-end">TOTAL:</th>
+                    <td>
+                      <input type="text" class="form-control" [value]="resumen.valoracion?.organizacion?.nota" disabled readonly />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="asistenciaInput" class="form-label">
+                    Asistencia (%):</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="asistenciaInput"
+                    min="0"
+                    max="100"
+                    [value]="resumen.valoracion?.organizacion?.asistencia"
+                    disabled
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="observacionesInput" class="form-label">
+                    Observaciones:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="observacionesInput"
+                    rows="3"
+                    [value]="resumen.valoracion?.organizacion?.observaciones"
+                    disabled
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="recomendacionesInput" class="form-label">
+                    Recomendaciones:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="recomendacionesInput"
+                    rows="3"
+                    [value]="resumen.valoracion?.organizacion?.recomendaciones"
+                    disabled
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow-sm mb-3">
+            <div class="card-header"><b>VALORACIÓN DEL DIRECTOR DE CARRERA:</b></div>
+            <div class="card-body">
+              <table class="table table-striped table-md">
+                <thead>
+                  <tr>
+                    <th colspan="2" scope="col-md" class="text-center">CRITERIOS</th>
+                    <th scope="col-md" class="text-center">SOBRE / 30</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                  *ngFor="let criterioForm of resumen.valoracion?.director?.calificaciones;index as i"
+                  >
+                    <th scope="row" class="text-center">{{ i + 1 }}.</th>
+                    <td>
+                      <label
+                        for="{{ 'criterioCalificacion' + i }}"
+                        class="form-label"
+                        >{{  criterioForm.criterio}}</label
+                      >
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="{{ 'criterioCalificacion' + i }}"
+                        [value]="criterioForm.calificacion"
+                        max="30"
+                        min="0"
+                        disabled
+                        required
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th colspan="2" scope="row" class="text-end">TOTAL:</th>
+                    <td>
+                      <input type="number" class="form-control" [value]="resumen.valoracion?.director?.nota" disabled readonly />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="asistenciaInput" class="form-label">
+                    Asistencia (%):</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="asistenciaInput"
+                    min="0"
+                    max="100"
+                    [value]="resumen.valoracion?.director?.asistencia"
+                    disabled
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="reprobadoRazonesInput" class="form-label"
+                    >Reprobado (Razones):</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="reprobadoRazonesInput"
+                    rows="3"
+                    [value]="resumen.valoracion?.director?.observaciones"
+                    disabled
+                    readonly
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow-sm mb-3">
+            <div class="card-header"><b>VALORACIÓN PROMEDIO:</b></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="notaFinalInput" class="form-label">Total:</label>
+                  <input
+                    type="text"
+                    class="form-control input-readonly"
+                    id="notaFinalInput"
+                    [value]="resumen.valoracion?.promedio?.promedio"
+                    readonly
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md mb-3">
+                  <label for="asistenciaInput" class="form-label">
+                    Asistencia (%):</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="asistenciaInput"
+                    [value]="resumen.valoracion?.promedio?.asistencia"
+                    disabled
+                    required
+                  />
+                </div>
+                <div class="col-md mb-3">
+                  <label for="numeroHorasPracticasInput" class="form-label">
+                    Horas aprobadas de prácticas pre profesionales:</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="numeroHorasPracticasInput"
+                    [value]="resumen.valoracion?.promedio?.horasAprobadas"
+                    disabled
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+          INFORME DEL ESTUDIANTE DE LAS PRÁCTICAS PRE PROFESIONALES:
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="cumplimientoObjetivosTextarea" class="form-label">
+                  Cumplimiento de los objetivos de las prácticas:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="cumplimientoObjetivosTextarea"
+                  rows="3"
+                  [value]="resumen.informe.cumplimientosObjetivos"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="beneficiosFormacionTextarea" class="form-label">
+                  Beneficios para su formación profesional:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="beneficiosFormacionTextarea"
+                  rows="3"
+                  [value]="resumen.informe.beneficios"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="nuevosAprendizajesTextarea" class="form-label">
+                  Nuevos aprendizajes:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="nuevosAprendizajesTextarea"
+                  rows="3"
+                  [value]="resumen.informe.aprendizajes"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="desarrolloPersonalTextarea" class="form-label">
+                  Incidencia en su desarrollo personal:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="desarrolloPersonalTextarea"
+                  rows="3"
+                  [value]="resumen.informe.desarrolloPersonal"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="comentariosTextarea" class="form-label">
+                  Comentarios del estudiante:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="comentariosTextarea"
+                  rows="3"
+                  [value]="resumen.informe.comentarios"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md mb-3">
+                <label for="recomendacionesTextarea" class="form-label">
+                  Recomendaciones:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="recomendacionesTextarea"
+                  rows="3"
+                  [value]="resumen.informe.recomendaciones"
+                  disabled
+                  required
+                ></textarea>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,3 +16,7 @@ nav{
 .fa-right-from-bracket{
   font-size: 1.3rem;
 }
+
+.activebutton{
+  color: #f7ba00;
+}

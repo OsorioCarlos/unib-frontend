@@ -6,8 +6,6 @@ import { AuthUser } from '../../interfaces/auth-user';
 import { EstadosProcesos } from '../../interfaces/estados-procesos';
 import { PrivateAppService } from '../../services/private-app.service';
 
-// declare var bootstrap: any; // Declarar bootstrap para evitar errores de TypeScript
-
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -60,29 +58,59 @@ export class StudentComponent {
         (res) => {
           this.estadosProcesos = res.data;
 
-          if(this.estadosProcesos.cartaCompromiso == 'Completado' && this.estadosProcesos.solicitud == 'Pendiente'){
+          if (
+            this.estadosProcesos.cartaCompromiso == 'Completado' &&
+            this.estadosProcesos.solicitud == 'Pendiente'
+          ) {
             this.collapse2 = true;
-            this.appService.alertaAviso('INICIO DEL PROCESO', 'Ya puedes solicitar tus prácticas preprofesionales');
+            this.appService.alertaAviso(
+              'INICIO DEL PROCESO',
+              'Ya puedes solicitar tus prácticas preprofesionales'
+            );
           }
-          
-          if(this.estadosProcesos.solicitud == 'Completado' && this.estadosProcesos.compromisoRecepcion == 'Pendiente'){
+
+          if (
+            this.estadosProcesos.solicitud == 'Completado' &&
+            this.estadosProcesos.compromisoRecepcion == 'Pendiente'
+          ) {
             this.collapse3 = true;
-            this.appService.alertaAviso('INICIO DEL PROCESO', 'Se te enviará una notificación por correo cuando tu representante envíe el compromiso de recepción.');
+            this.appService.alertaAviso(
+              'INICIO DEL PROCESO',
+              'Se te enviará una notificación por correo cuando tu representante envíe el compromiso de recepción.'
+            );
           }
 
-          if(this.estadosProcesos.compromisoRecepcion == 'Completado' && this.estadosProcesos.evaluacionRepresentante == 'Pendiente'){
+          if (
+            this.estadosProcesos.compromisoRecepcion == 'Completado' &&
+            this.estadosProcesos.evaluacionRepresentante == 'Pendiente'
+          ) {
             this.collapse4 = true;
-            this.appService.alertaAviso('PRÁCTICAS EN PROCESO', 'Se te enviará una notificación por correo cuando tu representante envíe la evaluación');
+            this.appService.alertaAviso(
+              'PRÁCTICAS EN PROCESO',
+              'Se te enviará una notificación por correo cuando tu representante envíe la evaluación'
+            );
           }
 
-          if(this.estadosProcesos.evaluacionRepresentante == 'Completado' && this.estadosProcesos.evaluacionDirector == 'Pendiente'){
+          if (
+            this.estadosProcesos.evaluacionRepresentante == 'Completado' &&
+            this.estadosProcesos.evaluacionDirector == 'Pendiente'
+          ) {
             this.collapse5 = true;
-            this.appService.alertaAviso('PRÁCTICAS EN PROCESO', 'Se te enviará una notificación por correo cuando tu director de carrera envíe la evaluación');
+            this.appService.alertaAviso(
+              'PRÁCTICAS EN PROCESO',
+              'Se te enviará una notificación por correo cuando tu director de carrera envíe la evaluación'
+            );
           }
 
-          if(this.estadosProcesos.evaluacionDirector == 'Completado' && this.estadosProcesos.informeFinal == 'Pendiente'){
+          if (
+            this.estadosProcesos.evaluacionDirector == 'Completado' &&
+            this.estadosProcesos.informeFinal == 'Pendiente'
+          ) {
             this.collapse6 = true;
-            this.appService.alertaAviso('PRÁCTICAS FINALIZADAS', 'Ya puedes completar tu informe final');
+            this.appService.alertaAviso(
+              'PRÁCTICAS FINALIZADAS',
+              'Ya puedes completar tu informe final'
+            );
           }
           if (
             this.estadosProcesos.cartaCompromiso == 'Completado' &&
@@ -99,7 +127,10 @@ export class StudentComponent {
           }
         },
         (err) => {
-          this.appService.alertaAviso('INICIO DEL PROCESO', 'Por favor completa la carta de compromiso para continuar con el proceso.');
+          this.appService.alertaAviso(
+            'INICIO DEL PROCESO',
+            'Por favor completa la carta de compromiso para continuar con el proceso.'
+          );
           this.collapse1 = true;
         }
       );
@@ -143,10 +174,7 @@ export class StudentComponent {
         window.open(`${this.apiUrl}/${res.data}`, '_blank');
       },
       (error) => {
-        this.appService.alertaError(
-          'ERROR',
-          error.error.data
-        );
+        this.appService.alertaError('ERROR', error.error.data);
         console.error(error);
       }
     );

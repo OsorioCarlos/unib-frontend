@@ -266,6 +266,7 @@
                   type="number"
                   class="form-control"
                   id="asistenciaInput"
+                  (blur)="calcularHorasAprobadas()"
                   formControlName="porcentaje_asistencia"
                   min="0"
                   max="100"
@@ -281,7 +282,8 @@
                   type="number"
                   class="form-control"
                   id="numeroHorasPracticasInput"
-                  formControlName="numero_horas_practicas"
+                  [value]="horasAprobadas"
+                  disabled
                   required
                 />
               </div>
