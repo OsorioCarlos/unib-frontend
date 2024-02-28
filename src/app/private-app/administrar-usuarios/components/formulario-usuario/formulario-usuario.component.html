@@ -8,12 +8,12 @@
         <div class="col">
             <form [formGroup]="formularioUsuario">
                 <div class="card shadow-sm">
-                    <div class="card-header">INFORMACION DEL USUARIO</div>
+                    <div class="card-header">INFORMACIÓN DEL USUARIO</div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="identificacionInput" class="form-label">Cédula:</label>
-                                <input type="text" class="form-control" id="identificacionInput" formControlName="identificacion">
+                                <input type="text" class="form-control" id="identificacionInput" formControlName="identificacion" (blur)="validarCedulaUnica()">
                             </div>
                             <div class="col">
                                 <label for="nombreCompletoInput" class="form-label">Nombre Completo:</label>

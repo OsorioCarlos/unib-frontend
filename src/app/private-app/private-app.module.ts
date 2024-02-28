@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
+
 import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrganizationComponent } from './components/organization/organization.component';
@@ -26,6 +28,13 @@ import { FormsModule } from '@angular/forms';
     ResumenPracticaComponent,
 
   ],
-  imports: [CommonModule, PrivateAppRoutingModule, ReactiveFormsModule,TableModule, FormsModule],
+  imports: [
+    CommonModule,
+    PrivateAppRoutingModule,
+    ReactiveFormsModule,
+    TableModule,
+    FormsModule,
+    SharedComponentsModule
+  ]
 })
 export class PrivateAppModule {}

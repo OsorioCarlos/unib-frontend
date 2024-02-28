@@ -97,6 +97,19 @@ export class FormularioUsuarioComponent {
     this.formularioUsuario.get('organizacion_id')?.updateValueAndValidity();
   }
 
+  public validarCedulaUnica(): void {
+    const cedula = this.formularioUsuario.get('identificacion')?.value;
+    this.privateAppService.obtener(`usuarios/validarUsuarioDuplicado/${cedula}`).subscribe(res => {
+      if (res.data == false) {
+        this.appService.alertaAviso('CEDULA DUPLICADA', 'Ya existe un usuario con esta cédula');
+        this.formularioUsuario.get('identificacion')?.setValue(null);
+      }
+    }, err => {
+      this.appService.alertaError('ERROR', 'Error al validar la cédula');
+      console.error(err);
+    });
+  }
+
   public guardarInformacion(): void {
     const datos = {
       usuario: this.formularioUsuario.value
@@ -193,7 +206,7 @@ export class FormularioUsuarioComponent {
         //
       }
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener los usuarios');
+      this.appService.alertaError('ERROR', 'Error al obtener el usuario');
       console.error(err);
     });
   }

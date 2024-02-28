@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col">
+      <h1 class="text-center text-warning">Listado de Catalogos</h1>
+    </div>
+  </div>
+  <table class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Recurso</th>
+        <th scope="col">Fecha de Creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let catalogo of catalogos; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{catalogo.nombre}}</td>
+        <td>{{recurso?.nombre}}</td>
+        <td>{{catalogo.created_at | date:'yyy-MM-dd'}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination [total]="total_pages" [current_page]="current_page"
+    (changePageEvent)="cambiarPagina($event)"></app-pagination>
+</div>

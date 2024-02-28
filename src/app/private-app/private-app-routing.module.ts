@@ -132,7 +132,7 @@ const routes: Routes = [
       import('./reportes/reportes.module').then((m) => m.ReportesModule),
   },
   {
-    path: 'admin',
+    path: 'home',
     component: AdminComponent,
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
@@ -143,7 +143,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('./administrar-usuarios/administrar-usuarios.module').then(
         (m) => m.AdministrarUsuariosModule
-      ),
+      )
+  },
+  {
+    path: 'administrar-catalogos',
+    loadChildren: () =>
+      import('./administrar-catalogos/administrar-catalogos.module').then(
+        (m) => m.AdministrarCatalogosModule
+      )
+  },
+  {
+    path: 'administrar-organizaciones',
+    loadChildren: () =>
+      import('./administrar-organizaciones/administrar-organizaciones.module').then(
+        (m) => m.AdministrarOrganizacionesModule
+      )
   },
   {
     path: '**',

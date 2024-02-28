@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center text-warning">Formulario del Catálogo</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <form [formGroup]="formularioRecurso">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">INFORMACIÓN DEL RECURSO</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="nombreInput" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreInput" formControlName="nombre">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header">INFORMACIÓN DE LOS CATÁLOGOS</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-8"></div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-success" (click)="agregarCatalogoControl()">Agregar Catálogo</button>
+                            </div>
+                        </div>
+                        <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre:</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="catalogos">
+                                <tr *ngFor="let catalogoControl of covertirAbstractControlEnFormArray(formularioRecurso.get('catalogos')).controls; index as i" [formGroup]="covertirAbstractControlEnFormGroup(catalogoControl)">
+                                    <th scope="row">{{i + 1}}</th>
+                                    <td><input type="text" class="form-control" formControlName="nombre"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" (click)="eliminarCatalogoControl(i)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-3">
+        <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioRecurso.invalid">Guardar</button>
+    </div>
+</div>
