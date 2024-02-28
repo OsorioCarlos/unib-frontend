@@ -9,13 +9,9 @@ import { AuthUser } from '../../interfaces/auth-user';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  @Input() authUser: AuthUser; 
+  @Input() authUser: AuthUser | null; 
   constructor(private authService: AuthService, private router: Router) {
-    this.authUser = {
-      cedula: '',
-      nombre: '',
-      tipo_usuario: '',
-    };
+    this.authUser = null;
   }
 
   public logout(): void {

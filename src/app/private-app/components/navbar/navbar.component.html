@@ -9,39 +9,40 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- MENU ESTUDIANTE -->
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'ESTUDIANTE'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'ESTUDIANTE'">
           <a class="nav-link" [routerLink]="['/app/estudiante']" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Inicio</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'ESTUDIANTE'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'ESTUDIANTE'">
           <a class="nav-link" [routerLink]="['/app/estudiante/resumen-practica']" routerLinkActive="activebutton" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Resumen de práctica</a>
         </li>
         <!-- MENU REPRESENTANTE -->
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'REPRESENTANTE PRÁCTICAS'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'REPRESENTANTE PRÁCTICAS'">
           <a class="nav-link" [routerLink]="['/app/representante']" routerLinkActive="activebutton" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Inicio</a>
         </li>
         <!-- MENU DIRECTOR -->
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'DIRECTOR DE CARRERA'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'DIRECTOR DE CARRERA'">
           <a class="nav-link" [routerLink]="['/app/director']" routerLinkActive="activebutton" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Inicio</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'DIRECTOR DE CARRERA'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'DIRECTOR DE CARRERA'">
           <a class="nav-link" [routerLink]="['/app/director/seguimiento-evaluacion']" routerLinkActive="activebutton" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">Seguimiento y Evaluación</a>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'ADMINISTRADOR'">
+        <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'ADMINISTRADOR'">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Administrar
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="administrar-categorias/listado">Categorías</a></li>
+            <li><a class="dropdown-item" routerLink="administrar-catalogos/listado">Catálogos</a></li>
+            <li><a class="dropdown-item" routerLink="administrar-organizaciones/listado">Organizaciones</a></li>
             <li><a class="dropdown-item" routerLink="administrar-usuarios/listado">Usuarios</a></li>
           </ul>
         </li>
-        <!-- <li class="nav-item dropdown" *ngIf="authUser.tipo_usuario == 'DIRECTOR DE CARRERA'">
+        <!-- <li class="nav-item dropdown" *ngIf="authUser?.tipo_usuario == 'DIRECTOR DE CARRERA'">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Reportes
           </a>
@@ -53,6 +54,7 @@
         </li> -->
       </ul>
       <span class="navbar-text">
+        {{authUser?.nombre}}
         <button type="button" class="btn" (click)="logout()">
           <i class="fa-solid fa-right-from-bracket"></i>
         </button>

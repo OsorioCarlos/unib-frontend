@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center text-warning">Formulario de Organización</h1>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <form [formGroup]="formularioOrganizacion">
+                <div class="card shadow-sm">
+                    <div class="card-header">INFORMACIÓN DE LA ORGANIZACIÓN</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="rucInput" class="form-label">RUC:</label>
+                                <input type="text" class="form-control" id="rucInput" formControlName="ruc" (blur)="validarRucUnico()">
+                            </div>
+                            <div class="col">
+                                <label for="razonSocialInput" class="form-label">Razón Socal:</label>
+                                <input type="text" class="form-control" id="razonSocialInput" formControlName="razon_social">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="representanteLegalInput" class="form-label">Representante Legal:</label>
+                                <input type="text" class="form-control" id="representanteLegalInput" formControlName="representante_legal">
+                            </div>
+                            <div class="col">
+                                <label for="direccionInput" class="form-label">Dirección:</label>
+                                <input type="text" class="form-control" id="direccionInput" formControlName="direccion">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="telefonoInput" class="form-label">Teléfono:</label>
+                                <input type="text" class="form-control" id="telefonoInput" formControlName="telefono">
+                            </div>
+                            <div class="col">
+                                <label for="emailInput" class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="emailInput" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="areaDedicacionInput" class="form-label">Área de Dedicación:</label>
+                                <input type="text" class="form-control" id="areaDedicacionInput" formControlName="area_dedicacion">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="horarioInput" class="form-label">Horario:</label>
+                                <input type="text" class="form-control" id="horarioInput" formControlName="horario">
+                            </div>
+                            <div class="col">
+                                <label for="diasLaborablesInput" class="form-label">Días Laborables:</label>
+                                <input type="text" class="form-control" id="diasLaborablesInput" formControlName="dias_laborables">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-3">
+        <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioOrganizacion.invalid">Guardar</button>
+    </div>
+</div>

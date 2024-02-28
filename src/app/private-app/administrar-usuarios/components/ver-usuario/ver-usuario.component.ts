@@ -36,7 +36,7 @@ export class VerUsuarioComponent {
       const data: Usuario = res.data;
       this.usuario = data;
     }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener los usuarios');
+      this.appService.alertaError('ERROR', 'Error al obtener el usuario');
       console.error(err);
     });
   }

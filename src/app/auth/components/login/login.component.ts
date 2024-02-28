@@ -34,7 +34,7 @@ export class LoginComponent {
       if (data.estado == 'ok') {
         switch (data.rol) {
           case 'ADMINISTRADOR':
-            this.router.navigateByUrl('/app/administrador');
+            this.router.navigateByUrl('/app/home');
             break;
           case 'ESTUDIANTE':
             this.router.navigateByUrl('/app/estudiante');
