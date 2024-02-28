@@ -127,7 +127,7 @@ export class VSO004Component {
 
   private obtenerCriteriosCalificacion(): void {
     this.privateAppService
-      .obtener('catalogos?nombre=CRITERIOS CALIFFICACIÓN')
+      .obtener('catalogos?nombre=CRITERIOS CALIFICACIÓN')
       .subscribe(
         (res) => {
           const criterioCalificacionCatalogos: Catalogo[] = res.data;

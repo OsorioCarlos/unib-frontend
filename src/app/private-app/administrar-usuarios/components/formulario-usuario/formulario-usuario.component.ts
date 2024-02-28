@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
+import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
 import { Usuario } from 'src/app/private-app/interfaces/usuario';
 
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
@@ -19,7 +20,7 @@ export class FormularioUsuarioComponent {
   estadoUsuarioOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
-  organizacionOpciones: Catalogo[];
+  organizacionOpciones: Organizacion[];
   tipoUsuarioTemp: string;
 
   constructor(
@@ -68,6 +69,7 @@ export class FormularioUsuarioComponent {
     this.obtenerEstadosUsuarios();
     this.obtenerCarreras();
     this.obtenerNiveles();
+    this.obtenerOrganizaciones();
   }
 
   public validarTipoUsuario(event: any): void {
@@ -207,6 +209,16 @@ export class FormularioUsuarioComponent {
       }
     }, err => {
       this.appService.alertaError('ERROR', 'Error al obtener el usuario');
+      console.error(err);
+    });
+  }
+
+  private obtenerOrganizaciones(): void {
+    this.organizacionOpciones = [];
+    this.privateAppService.obtener('organizaciones').subscribe(res => {
+      this.organizacionOpciones = res.data;
+    }, err => {
+      this.appService.alertaError('ERROR', 'Error al obtener organizaciones');
       console.error(err);
     });
   }
