@@ -17,7 +17,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   private apiUrl: string = environment.apiUrl + '/api';
   private activeRequest = 0;
 
-  constructor(private ngxUILoaderService: NgxUiLoaderService) {}
+  constructor(private ngxUILoaderService: NgxUiLoaderService) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -29,12 +29,14 @@ export class HeaderInterceptor implements HttpInterceptor {
         this.ngxUILoaderService.start();
       }
       this.activeRequest++;
-      req = req.clone({
-        setHeaders: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+      if (req.method === 'POST' && !req.url.endsWith('carga_masiva')) {
+        req = req.clone({
+          setHeaders: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        });
+      }
     }
 
     return next.handle(req).pipe(finalize(() => this.detenerLoader()));
