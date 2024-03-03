@@ -68,40 +68,49 @@ export class FormularioCatalogoComponent {
     };
 
     if (this.formularioRecurso.get('id')?.value) {
-      this.privateAppService.actualizar('recursos', this.formularioRecurso.get('id')?.value, datos).subscribe(() => {
-        this.formularioRecurso.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-catalogos/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.actualizar('recursos', this.formularioRecurso.get('id')?.value, datos).subscribe({
+        next: () => {
+          this.formularioRecurso.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-catalogos/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     } else {
-      this.privateAppService.crear('recursos', datos).subscribe(res => {
-        this.formularioRecurso.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-catalogos/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.crear('recursos', datos).subscribe({
+        next: () => {
+          this.formularioRecurso.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-catalogos/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     }
   }
 
   private obtenerRecurso(): void {
     const recurso_id = this.formularioRecurso.get('id')?.value;
-    this.privateAppService.obtener(`recursos/${recurso_id}`).subscribe(res => {
-      const recurso: Recurso = res.data;
-      recurso.catalogues?.forEach(c => {
-        this.agregarCatalogoControl();
-      });
-      this.formularioRecurso.get('nombre')?.setValue(recurso.nombre);
-      this.formularioRecurso.get('catalogos')?.patchValue(recurso.catalogues);
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener el recurso');
-      console.error(err);
+    this.privateAppService.obtener(`recursos/${recurso_id}`).subscribe({
+      next: res => {
+        const recurso: Recurso = res.data;
+        recurso.catalogues?.forEach(c => {
+          this.agregarCatalogoControl();
+        });
+        this.formularioRecurso.get('nombre')?.setValue(recurso.nombre);
+        this.formularioRecurso.get('catalogos')?.patchValue(recurso.catalogues);
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener el recurso');
+        console.error(err);
+      }
     });
   }
 }

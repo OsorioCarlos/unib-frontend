@@ -7,7 +7,8 @@
     <div class="row mb-3">
         <div class="col-8"></div>
         <div class="col text-end">
-            <button type="button" class="btn btn-success" (click)="redireccionar('nuevo')">Nuevo Recurso</button>
+            <p-button label="Nuevo Recurso" severity="success" (onClick)="redireccionar('nuevo')"></p-button>
+            <!--<button type="button" class="btn btn-success" (click)="redireccionar('nuevo')">Nuevo Recurso</button>-->
         </div>
     </div>
     <table class="table table-striped align-middle">
@@ -25,7 +26,12 @@
                 <td>{{recurso.nombre}}</td>
                 <td>{{recurso.created_at | date:'yyy-MM-dd'}}</td>
                 <td>
-                    <div class="btn-group" role="group" aria-label="Button group">
+                    <span class="p-buttonset">
+                        <p-button icon="pi pi-info-circle" severity="info" (onClick)="redireccionar('ver/' + recurso.id)"></p-button>
+                        <p-button icon="pi pi-pencil" severity="warning" (onClick)="redireccionar('editar/' + recurso.id)"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger" (onClick)="abrirVentanaConfirmacion(recurso.id)"></p-button>
+                    </span>
+                    <!--<div class="btn-group" role="group" aria-label="Button group">
                         <button type="button" class="btn btn-info" (click)="redireccionar('ver/' + recurso.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -42,7 +48,7 @@
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                             </svg>
                         </button>
-                    </div>
+                    </div>-->
                 </td>
             </tr>
         </tbody>

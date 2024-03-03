@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Catalogo } from 'src/app/private-app/interfaces/catalogo';
+import { Organizacion } from 'src/app/private-app/interfaces/organizacion';
 import { Usuario } from 'src/app/private-app/interfaces/usuario';
 
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
@@ -19,7 +20,7 @@ export class FormularioUsuarioComponent {
   estadoUsuarioOpciones: Catalogo[];
   carreraOpciones: Catalogo[];
   nivelOpciones: Catalogo[];
-  organizacionOpciones: Catalogo[];
+  organizacionOpciones: Organizacion[];
   tipoUsuarioTemp: string;
 
   constructor(
@@ -68,6 +69,7 @@ export class FormularioUsuarioComponent {
     this.obtenerEstadosUsuarios();
     this.obtenerCarreras();
     this.obtenerNiveles();
+    this.obtenerOrganizaciones();
   }
 
   public validarTipoUsuario(event: any): void {
@@ -99,14 +101,17 @@ export class FormularioUsuarioComponent {
 
   public validarCedulaUnica(): void {
     const cedula = this.formularioUsuario.get('identificacion')?.value;
-    this.privateAppService.obtener(`usuarios/validarUsuarioDuplicado/${cedula}`).subscribe(res => {
-      if (res.data == false) {
-        this.appService.alertaAviso('CEDULA DUPLICADA', 'Ya existe un usuario con esta cédula');
-        this.formularioUsuario.get('identificacion')?.setValue(null);
+    this.privateAppService.obtener(`usuarios/validarUsuarioDuplicado/${cedula}`).subscribe({
+      next: res => {
+        if (res.data == false) {
+          this.appService.alertaAviso('CEDULA DUPLICADA', 'Ya existe un usuario con esta cédula');
+          this.formularioUsuario.get('identificacion')?.setValue(null);
+        }
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al validar la cédula');
+        console.error(err);
       }
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al validar la cédula');
-      console.error(err);
     });
   }
 
@@ -115,99 +120,133 @@ export class FormularioUsuarioComponent {
       usuario: this.formularioUsuario.value
     };
     if (this.formularioUsuario.get('id')?.value) {
-      this.privateAppService.actualizar('usuarios', this.formularioUsuario.get('id')?.value, datos).subscribe(res => {
-        this.formularioUsuario.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-usuarios/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.actualizar('usuarios', this.formularioUsuario.get('id')?.value, datos).subscribe({
+        next: () => {
+          this.formularioUsuario.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-usuarios/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     } else {
-      this.privateAppService.crear('usuarios', datos).subscribe(res => {
-        this.formularioUsuario.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-usuarios/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.crear('usuarios', datos).subscribe({
+        next: () => {
+          this.formularioUsuario.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-usuarios/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     }
   }
 
   private obtenerTiposUsuarios(): void {
     this.tipoUsuarioOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=TIPOS USUARIO').subscribe(res => {
-      this.tipoUsuarioOpciones = res.data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener carreras');
-      console.error(err);
+    this.privateAppService.obtener('catalogos?nombre=TIPOS USUARIO').subscribe({
+      next: res => {
+        this.tipoUsuarioOpciones = res.data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener carreras');
+        console.error(err);
+      }
     });
   }
 
   private obtenerEstadosUsuarios(): void {
     this.estadoUsuarioOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=ESTADOS USUARIO').subscribe(res => {
-      this.estadoUsuarioOpciones = res.data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener carreras');
-      console.error(err);
+    this.privateAppService.obtener('catalogos?nombre=ESTADOS USUARIO').subscribe({
+      next: res => {
+        this.estadoUsuarioOpciones = res.data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener carreras');
+        console.error(err);
+      }
     });
   }
 
   private obtenerCarreras(): void {
     this.carreraOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe(res => {
-      this.carreraOpciones = res.data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener carreras');
-      console.error(err);
+    this.privateAppService.obtener('catalogos?nombre=CARRERAS').subscribe({
+      next: res => {
+        this.carreraOpciones = res.data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener carreras');
+        console.error(err);
+      }
     });
   }
 
   private obtenerNiveles(): void {
     this.nivelOpciones = [];
-    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe(res => {
-      this.nivelOpciones = res.data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener niveles');
-      console.error(err);
+    this.privateAppService.obtener('catalogos?nombre=NIVELES').subscribe({
+      next: res => {
+        this.nivelOpciones = res.data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener niveles');
+        console.error(err);
+      }
+    });
+  }
+
+  private obtenerOrganizaciones(): void {
+    this.organizacionOpciones = [];
+    this.privateAppService.obtener('organizaciones?all=true').subscribe({
+      next: res => {
+        this.organizacionOpciones = res.data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener organizaciones');
+        console.error(err);
+      }
     });
   }
 
   private obtenerUsuario(): void {
     const usuario_id = this.formularioUsuario.get('id')?.value;
-    this.privateAppService.obtener(`usuarios/${usuario_id}`).subscribe(res => {
-      const usuario: Usuario = res.data;
-      this.tipoUsuarioTemp = usuario.tipo_catalogo?.nombre!;
-      this.formularioUsuario.patchValue({
-        identificacion: usuario.identificacion,
-        nombre_completo: usuario.nombre_completo,
-        email: usuario.email,
-        tipo_id: usuario.tipo_id,
-        estado_id: usuario.estado_id
-      });
-      if (this.tipoUsuarioTemp === 'ESTUDIANTE') {
+    this.privateAppService.obtener(`usuarios/${usuario_id}`).subscribe({
+      next: res => {
+        const usuario: Usuario = res.data;
+        this.tipoUsuarioTemp = usuario.tipo_catalogo?.nombre!;
         this.formularioUsuario.patchValue({
-          carrera_id: usuario.student?.carrera_id,
-          nivel_id: usuario.student?.nivel_id
+          identificacion: usuario.identificacion,
+          nombre_completo: usuario.nombre_completo,
+          email: usuario.email,
+          tipo_id: usuario.tipo_id,
+          estado_id: usuario.estado_id
         });
-      } else if (this.tipoUsuarioTemp === 'DIRECTOR DE CARRERA') {
-        this.formularioUsuario.patchValue({
-          carrera_id: usuario.career_director?.carrera_id
-        });
-      } else if (this.tipoUsuarioTemp === 'REPRESENTANTE PRÁCTICAS') {
-        this.formularioUsuario.patchValue({
-          organizacion_id: usuario.internship_representative?.organization?.id
-        });
-      } else {
-        //
+        if (this.tipoUsuarioTemp === 'ESTUDIANTE') {
+          this.formularioUsuario.patchValue({
+            carrera_id: usuario.student?.carrera_id,
+            nivel_id: usuario.student?.nivel_id
+          });
+        } else if (this.tipoUsuarioTemp === 'DIRECTOR DE CARRERA') {
+          this.formularioUsuario.patchValue({
+            carrera_id: usuario.career_director?.carrera_id
+          });
+        } else if (this.tipoUsuarioTemp === 'REPRESENTANTE PRÁCTICAS') {
+          this.formularioUsuario.patchValue({
+            organizacion_id: usuario.internship_representative?.organization?.id
+          });
+        } else {
+          //
+        }
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener el usuario');
+        console.error(err);
       }
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener el usuario');
-      console.error(err);
     });
   }
 }

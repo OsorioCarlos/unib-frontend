@@ -50,14 +50,17 @@ export class FormularioOrganizacionComponent {
 
   public validarRucUnico(): void {
     const ruc = this.formularioOrganizacion.get('ruc')?.value;
-    this.privateAppService.obtener(`organizaciones/validarOrganizacionDuplicada/${ruc}`).subscribe(res => {
-      if (res.data == false) {
-        this.appService.alertaAviso('RUC DUPLICADO', 'Ya existe una organización con este RUC');
-        this.formularioOrganizacion.get('ruc')?.setValue(null);
+    this.privateAppService.obtener(`organizaciones/validarOrganizacionDuplicada/${ruc}`).subscribe({
+      next: res => {
+        if (res.data == false) {
+          this.appService.alertaAviso('RUC DUPLICADO', 'Ya existe una organización con este RUC');
+          this.formularioOrganizacion.get('ruc')?.setValue(null);
+        }
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al validar el RUC');
+        console.error(err);
       }
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al validar el RUC');
-      console.error(err);
     });
   }
 
@@ -66,36 +69,45 @@ export class FormularioOrganizacionComponent {
       organizacion: this.formularioOrganizacion.value
     };
     if (this.formularioOrganizacion.get('id')?.value) {
-      this.privateAppService.actualizar('organizaciones', this.formularioOrganizacion.get('id')?.value, datos).subscribe(res => {
-        this.formularioOrganizacion.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-organizaciones/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.actualizar('organizaciones', this.formularioOrganizacion.get('id')?.value, datos).subscribe({
+        next: () => {
+          this.formularioOrganizacion.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-organizaciones/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     } else {
-      this.privateAppService.crear('organizaciones', datos).subscribe(res => {
-        this.formularioOrganizacion.reset();
-        this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
-          this.router.navigateByUrl('/app/administrar-organizaciones/listado');
-        });
-      }, err => {
-        this.appService.alertaError('ERROR', 'Error al guardar la información');
-        console.error(err);
+      this.privateAppService.crear('organizaciones', datos).subscribe({
+        next: () => {
+          this.formularioOrganizacion.reset();
+          this.appService.alertaExito('OK', 'Se ha guardado la informacion correctamente').then(() => {
+            this.router.navigateByUrl('/app/administrar-organizaciones/listado');
+          });
+        },
+        error: err => {
+          this.appService.alertaError('ERROR', 'Error al guardar la información');
+          console.error(err);
+        }
       });
     }
   }
 
   private obtenerOrganizacion(): void {
     const organizacion_id = this.formularioOrganizacion.get('id')?.value;
-    this.privateAppService.obtener(`organizaciones/${organizacion_id}`).subscribe(res => {
-      const organizacion: Organizacion = res.data;
-      this.formularioOrganizacion.patchValue(organizacion);
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener la organización');
-      console.error(err);
+    this.privateAppService.obtener(`organizaciones/${organizacion_id}`).subscribe({
+      next: res => {
+        const organizacion: Organizacion = res.data;
+        this.formularioOrganizacion.patchValue(organizacion);
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener la organización');
+        console.error(err);
+      }
     });
   }
 }

@@ -40,11 +40,14 @@ export class ListadoCatalogoComponent {
   public abrirVentanaConfirmacion(recurso_id: number): void {
     this.appService.alertaConfirmacion('ELIMINAR RECURSO Y CATÁLOGOS', '¿Seguro que desea eliminar este registro?').then(res => {
       if (res.isConfirmed) {
-        this.privateAppService.eliminar('recursos', recurso_id).subscribe(() => {
-          this.obtenerRecursos();
-        }, err => {
-          this.appService.alertaError('ERROR', 'Error al eliminar el recurso');
-          console.error(err);
+        this.privateAppService.eliminar('recursos', recurso_id).subscribe({
+          next: () => {
+            this.obtenerRecursos();
+          },
+          error: err => {
+            this.appService.alertaError('ERROR', 'Error al eliminar el recurso');
+            console.error(err);
+          }
         });
       }
     });
@@ -69,15 +72,18 @@ export class ListadoCatalogoComponent {
   }
 
   private obtenerRecursos(pagina=1): void {
-    this.privateAppService.obtener(`recursos?page=${pagina}`).subscribe(res => {
-      const dataPagination: Pagination = res.data;
-      this.total_pages = dataPagination.last_page;
-      this.current_page = dataPagination.current_page;
-      const dataRecursos: Recurso[] = dataPagination.data;
-      this.recursos = dataRecursos;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener los recursos');
-      console.error(err);
+    this.privateAppService.obtener(`recursos?page=${pagina}`).subscribe({
+      next: res => {
+        const dataPagination: Pagination = res.data;
+        this.total_pages = dataPagination.last_page;
+        this.current_page = dataPagination.current_page;
+        const dataRecursos: Recurso[] = dataPagination.data;
+        this.recursos = dataRecursos;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener los recursos');
+        console.error(err);
+      }
     });
   }
 
