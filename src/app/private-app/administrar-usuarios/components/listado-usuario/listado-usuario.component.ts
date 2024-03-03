@@ -40,26 +40,32 @@ export class ListadoUsuarioComponent {
   public abrirVentanaConfirmacion(usuario_id: number): void {
     this.appService.alertaConfirmacion('ELIMINAR USUARIO', '¿Seguro que desea eliminar este registro?').then(res => {
       if (res.isConfirmed) {
-        this.privateAppService.eliminar('usuarios', usuario_id).subscribe(res => {
-          this.obtenerUsuarios();
-        }, err => {
-          this.appService.alertaError('ERROR', 'Error al eliminar el usuario');
-          console.error(err);
+        this.privateAppService.eliminar('usuarios', usuario_id).subscribe({
+          next: () => {
+            this.obtenerUsuarios();
+          },
+          error: err => {
+            this.appService.alertaError('ERROR', 'Error al eliminar el usuario');
+            console.error(err);
+          }
         });
       }
     });
   }
 
   private obtenerUsuarios(pagina=1): void {
-    this.privateAppService.obtener(`usuarios?page=${pagina}`).subscribe(res => {
-      const dataPagination: Pagination = res.data;
-      this.total_pages = dataPagination.last_page;
-      this.current_page = dataPagination.current_page;
-      const dataUsuarios: Usuario[] = dataPagination.data;
-      this.usuarios = dataUsuarios;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener los usuarios');
-      console.error(err);
+    this.privateAppService.obtener(`usuarios?page=${pagina}`).subscribe({
+      next: res => {
+        const dataPagination: Pagination = res.data;
+        this.total_pages = dataPagination.last_page;
+        this.current_page = dataPagination.current_page;
+        const dataUsuarios: Usuario[] = dataPagination.data;
+        this.usuarios = dataUsuarios;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener los usuarios');
+          console.error(err);
+      }
     });
   }
 

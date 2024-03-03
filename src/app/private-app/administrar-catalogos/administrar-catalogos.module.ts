@@ -9,6 +9,8 @@ import { FormularioCatalogoComponent } from './components/formulario-catalogo/fo
 import { VerCatalogoComponent } from './components/ver-catalogo/ver-catalogo.component';
 import { ListadoCatalogoComponent } from './components/listado-catalogo/listado-catalogo.component';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
     declarations: [
       FormularioCatalogoComponent,
@@ -19,7 +21,8 @@ import { ListadoCatalogoComponent } from './components/listado-catalogo/listado-
       CommonModule,
       ReactiveFormsModule,
       SharedComponentsModule,
-      AdministrarCatalogosRoutingModule
+      AdministrarCatalogosRoutingModule,
+      ButtonModule
     ]
   })
   export class AdministrarCatalogosModule { }

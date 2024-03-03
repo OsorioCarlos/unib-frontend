@@ -32,12 +32,15 @@ export class VerOrganizacionComponent {
     this.activatedRoute.params.subscribe((params: Params) => {
       id = params['id'];
     });
-    this.privateAppService.obtener(`organizaciones/${id}`).subscribe(res => {
-      const data: Organizacion = res.data;
-      this.organizacion = data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener la organización');
-      console.error(err);
+    this.privateAppService.obtener(`organizaciones/${id}`).subscribe({
+      next: res => {
+        const data: Organizacion = res.data;
+        this.organizacion = data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener la organización');
+        console.error(err);
+      }
     });
   }
 

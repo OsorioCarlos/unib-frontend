@@ -32,12 +32,15 @@ export class VerUsuarioComponent {
     this.activatedRoute.params.subscribe((params: Params) => {
       id = params['id'];
     });
-    this.privateAppService.obtener(`usuarios/${id}`).subscribe(res => {
-      const data: Usuario = res.data;
-      this.usuario = data;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener el usuario');
-      console.error(err);
+    this.privateAppService.obtener(`usuarios/${id}`).subscribe({
+      next: res => {
+        const data: Usuario = res.data;
+        this.usuario = data;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener el usuario');
+        console.error(err);
+      }
     });
   }
 

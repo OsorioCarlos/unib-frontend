@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CargaMasivaOrganizacionComponent } from './carga-masiva-organizacion/carga-masiva-organizacion.component';
+import { CargaMasivaOrganizacionComponent } from './components/carga-masiva-organizacion/carga-masiva-organizacion.component';
 import { FormularioOrganizacionComponent } from './components/formulario-organizacion/formulario-organizacion.component';
 import { ListadoOrganizacionComponent } from './components/listado-organizacion/listado-organizacion.component';
 import { VerOrganizacionComponent } from './components/ver-organizacion/ver-organizacion.component';

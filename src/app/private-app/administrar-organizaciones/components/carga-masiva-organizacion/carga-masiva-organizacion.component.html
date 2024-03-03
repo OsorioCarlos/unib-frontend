@@ -12,8 +12,18 @@
       </div>
     </div>
   </div>
-  <div class="d-grid gap-2 col-6 mx-auto">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <p-button label="Cargar Archivo" severity="success" (onClick)="cargarArchivo()" [disabled]="formularioCargaMasiva.invalid"></p-button>
+    </div>
+    <div class="col-3">
+      <p-button label="Descargar Formato" severity="info" (onClick)="descargarFormato()" [disabled]="formularioCargaMasiva.invalid"></p-button>
+    </div>
+    <div class="col-3"></div>
+  </div>
+  <!--<div class="d-grid gap-2 col-6 mx-auto">
     <button class="btn btn-success" type="button" (click)="cargarArchivo()" [disabled]="formularioCargaMasiva.invalid">Cargar Archivo</button>
     <button class="btn btn-info" type="button" (click)="descargarFormato()" [disabled]="formularioCargaMasiva.invalid">Descargar Formato</button>
-  </div>
+  </div>-->
 </div>

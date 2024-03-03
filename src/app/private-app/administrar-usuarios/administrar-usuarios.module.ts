@@ -10,6 +10,8 @@ import { FormularioUsuarioComponent } from './components/formulario-usuario/form
 import { ListadoUsuarioComponent } from './components/listado-usuario/listado-usuario.component';
 import { VerUsuarioComponent } from './components/ver-usuario/ver-usuario.component';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
     declarations: [
       CargaMasivaUsuarioComponent,
@@ -21,7 +23,8 @@ import { VerUsuarioComponent } from './components/ver-usuario/ver-usuario.compon
       CommonModule,
       ReactiveFormsModule,
       SharedComponentsModule,
-      AdministrarUsuariosRoutingModule
+      AdministrarUsuariosRoutingModule,
+      ButtonModule
     ]
   })
   export class AdministrarUsuariosModule { }

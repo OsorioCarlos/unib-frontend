@@ -40,26 +40,32 @@ export class ListadoOrganizacionComponent {
   public abrirVentanaConfirmacion(organizacion_id: number): void {
     this.appService.alertaConfirmacion('ELIMINAR ORGANIZACIÓN', '¿Seguro que desea eliminar este registro?').then(res => {
       if (res.isConfirmed) {
-        this.privateAppService.eliminar('organizaciones', organizacion_id).subscribe(res => {
-          this.obtenerOrganizaciones();
-        }, err => {
-          this.appService.alertaError('ERROR', 'Error al eliminar la organización');
-          console.error(err);
+        this.privateAppService.eliminar('organizaciones', organizacion_id).subscribe({
+          next: () => {
+            this.obtenerOrganizaciones();
+          },
+          error: err => {
+            this.appService.alertaError('ERROR', 'Error al eliminar la organización');
+            console.error(err);
+          }
         });
       }
     });
   }
 
   private obtenerOrganizaciones(pagina=1): void {
-    this.privateAppService.obtener(`organizaciones?page=${pagina}`).subscribe(res => {
-      const dataPagination: Pagination = res.data;
-      this.total_pages = dataPagination.last_page;
-      this.current_page = dataPagination.current_page;
-      const dataOrganizaciones: Organizacion[] = dataPagination.data;
-      this.organizaciones = dataOrganizaciones;
-    }, err => {
-      this.appService.alertaError('ERROR', 'Error al obtener las organizaciones');
-      console.error(err);
+    this.privateAppService.obtener(`organizaciones?page=${pagina}`).subscribe({
+      next: res => {
+        const dataPagination: Pagination = res.data;
+        this.total_pages = dataPagination.last_page;
+        this.current_page = dataPagination.current_page;
+        const dataOrganizaciones: Organizacion[] = dataPagination.data;
+        this.organizaciones = dataOrganizaciones;
+      },
+      error: err => {
+        this.appService.alertaError('ERROR', 'Error al obtener las organizaciones');
+        console.error(err);
+      }
     });
   }
 
