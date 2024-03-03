@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center text-warning">Carga Masiva de Organizaciones</h1>
+    </div>
+  </div>
+  <div class="row" [formGroup]="formularioCargaMasiva">
+    <div class="col">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Carga un archivo de Excel:</label>
+        <input class="form-control" type="file" id="formFile" accept=".xlsx" (change)="seleccionarArchivo($event)">
+      </div>
+    </div>
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-success" type="button" (click)="cargarArchivo()" [disabled]="formularioCargaMasiva.invalid">Cargar Archivo</button>
+    <button class="btn btn-info" type="button" (click)="descargarFormato()" [disabled]="formularioCargaMasiva.invalid">Descargar Formato</button>
+  </div>
+</div>
