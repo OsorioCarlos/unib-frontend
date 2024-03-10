@@ -15,9 +15,12 @@ export interface PracticaPreProfesional {
   asistencia: number;
   estado_id: number;
   area_practicas: string;
+  area_practicas_solicitadas: string
   objetivos_practicas: string;
   tareas: string;
   numero_horas_practicas: number;
+  horas_practicas_solicitadas: number;
+  horas_practicas_realizadas: number;
   fecha_inicio: Date;
   fecha_fin: Date;
   dias_laborables: string;

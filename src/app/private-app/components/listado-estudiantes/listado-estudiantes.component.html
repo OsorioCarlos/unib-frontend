@@ -1,0 +1,68 @@
+<div class="container mt-2">
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br />
+  </h1>
+  <br />
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-primary">
+        INFORMACIÓN DE ESTUDIANTES
+      </h5>
+      <p-table #dt [value]="practicasPreprofesionales" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['identificacion','nombre']" styleClass="p-datatable-sm" responsiveLayout="scroll"
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="identificacion">Identificacion <p-sortIcon field="identificacion"></p-sortIcon></th>
+            <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+            <th pSortableColumn="carrera">Carrera <p-sortIcon field="carrera"></p-sortIcon></th>
+            <th pSortableColumn="nivel">Nivel <p-sortIcon field="nivel"></p-sortIcon></th>
+            <th pSortableColumn="fecha_inicio">Inicio Prácticas <p-sortIcon field="fecha_inicio"></p-sortIcon></th>
+            <th pSortableColumn="fecha_fin">Fin Prácticas<p-sortIcon field="fecha_fin"></p-sortIcon></th>
+            <th pSortableColumn="estado">Estado Prácticas<p-sortIcon field="estado"></p-sortIcon></th>
+          </tr>
+          <tr>
+            <th>
+              <input class="form-control" pInputText type="text" #identificacionfilter
+                (input)="dt.filter(identificacionfilter.value, 'identificacion', 'startsWith')">
+            </th>
+            <th>
+              <input class="form-control" pInputText type="text" #nombrefilter
+                (input)="dt.filter(nombrefilter.value, 'nombre', 'startsWith')">
+            </th>
+            <th>
+              <input class="form-control" pInputText type="text" #carrerafilter
+                (input)="dt.filter(carrerafilter.value, 'carrera', 'startsWith')">
+            </th>
+            <th>
+              <input class="form-control" pInputText type="text" #nivelfilter
+                (input)="dt.filter(nivelfilter.value, 'nivel', 'startsWith')">
+            </th>
+            <th></th>
+            <th></th>
+            <th>
+              <input class="form-control" pInputText type="text" #estadofilter
+                (input)="dt.filter(estadofilter.value, 'estado', 'startsWith')">
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-practica>
+          <tr>
+            <td>{{practica.student.user.identificacion}}</td>
+            <td>{{practica.student.user.nombre_completo}}</td>
+            <td>{{practica.student.carrera_catalogo.nombre}}</td>
+            <td>{{practica.student.nivel_catalogo.nombre}}</td>
+            <td>{{practica.fecha_inicio}}</td>
+            <td>{{practica.fecha_fin}}</td>
+            <td>{{practica.estado_catalogo.nombre}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            Total: {{practicasPreprofesionales ? practicasPreprofesionales.length : 0 }} prácticas de estudiantes.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

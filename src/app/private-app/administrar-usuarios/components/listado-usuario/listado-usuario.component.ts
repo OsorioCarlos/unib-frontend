@@ -64,7 +64,7 @@ export class ListadoUsuarioComponent {
       },
       error: err => {
         this.appService.alertaError('ERROR', 'Error al obtener los usuarios');
-          console.error(err);
+        console.error(err);
       }
     });
   }

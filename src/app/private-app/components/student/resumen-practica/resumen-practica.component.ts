@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthUser } from 'src/app/private-app/interfaces/auth-user';
-import { Calificacione, Director, Organizacion2, ResumenEstudiante } from 'src/app/private-app/interfaces/resumen-estudiante';
+import { ResumenEstudiante } from 'src/app/private-app/interfaces/resumen-estudiante';
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class ResumenPracticaComponent {
   authUser : AuthUser;
   resumen : ResumenEstudiante;
   identificacionEstudiante: string;
-  calificacionesOrganizacion!:Calificacione[];
+  id: string | null;
   constructor(private privateAppService: PrivateAppService, private route: ActivatedRoute,
     private router: Router ) { 
     this.authUser = {
@@ -22,6 +22,7 @@ export class ResumenPracticaComponent {
       tipo_usuario: '',
     };
     this.identificacionEstudiante = '';
+    this.id = '';
     this.resumen = {
       estudiante: {
         nombre: '',
@@ -77,9 +78,9 @@ export class ResumenPracticaComponent {
   obtenerInfoEstudiante(){
     this.route.paramMap.subscribe((params) => {
       this.identificacionEstudiante = params.get('id') ?? this.authUser.cedula;
+      this.id = params.get('id');
     });
-    if(this.authUser.tipo_usuario == 'ESTUDIANTE'){
-    this.privateAppService.obtener(`estudiantes/obtenerInfo/${this.authUser.cedula}`).subscribe(
+    this.privateAppService.obtener(`practicas_preprofesionales/${this.id}`).subscribe(
       res=>{
         this.resumen = res.data;
       },
@@ -87,16 +88,6 @@ export class ResumenPracticaComponent {
         console.error(err);
       }
     );
-    }else{
-      this.privateAppService.obtener(`estudiantes/obtenerInfoEstudiante/${this.identificacionEstudiante}`).subscribe(
-        res=>{
-          this.resumen = res.data;
-        },
-        err=>{
-          console.error(err);
-        }
-      );
-    }
   }
 
   obtenerInfoUsuario(){

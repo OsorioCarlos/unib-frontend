@@ -37,10 +37,10 @@ export class LoginComponent {
             this.router.navigateByUrl('/app/home');
             break;
           case 'ESTUDIANTE':
-            this.router.navigateByUrl('/app/estudiante');
+            this.router.navigateByUrl('/app/estudiante/pendientes');
             break;
           case 'REPRESENTANTE PRÁCTICAS':
-            this.router.navigateByUrl('/app/representante');
+            this.router.navigateByUrl('/app/home');
             break;
           case 'DIRECTOR DE CARRERA':
             this.router.navigateByUrl('/app/director');

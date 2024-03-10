@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
@@ -20,7 +21,8 @@ export class CargaMasivaOrganizacionComponent {
   constructor(
     private privateAppService: PrivateAppService,
     private fb: FormBuilder,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {
     this.archivo = null;
     this.formularioCargaMasiva = this.fb.group({
@@ -69,6 +71,10 @@ export class CargaMasivaOrganizacionComponent {
         console.error(err);
       }
     });
+  }
+
+  public redireccionar(ruta: string): void {
+    this.router.navigateByUrl(`/app/administrar-organizaciones/${ruta}`)
   }
   
 }

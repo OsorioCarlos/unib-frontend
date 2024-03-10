@@ -113,4 +113,8 @@ export class FormularioCatalogoComponent {
       }
     });
   }
+
+  public redireccionar(ruta: string): void {
+    this.router.navigateByUrl(`/app/administrar-catalogos/${ruta}`)
+  }
 }

@@ -40,7 +40,9 @@ export class FormularioUsuarioComponent {
       estado_id: ['', Validators.required],
       carrera_id: [''],
       nivel_id: [''],
-      organizacion_id: ['']
+      organizacion_id: [''],
+      funcion_laboral: [''],
+      telefono: ['']
     });
 
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -80,23 +82,33 @@ export class FormularioUsuarioComponent {
       this.formularioUsuario.get('carrera_id')?.setValidators([Validators.required]);
       this.formularioUsuario.get('nivel_id')?.setValidators([Validators.required]);
       this.formularioUsuario.get('organizacion_id')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('funcion_laboral')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('telefono')?.removeValidators(Validators.required);
     } else if (this.tipoUsuarioTemp === 'DIRECTOR DE CARRERA') {
       this.formularioUsuario.get('carrera_id')?.setValidators([Validators.required]);
       this.formularioUsuario.get('nivel_id')?.removeValidators(Validators.required);
       this.formularioUsuario.get('organizacion_id')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('funcion_laboral')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('telefono')?.removeValidators(Validators.required);
     } else if (this.tipoUsuarioTemp === 'REPRESENTANTE PRÁCTICAS') {
       this.formularioUsuario.get('carrera_id')?.removeValidators(Validators.required);
       this.formularioUsuario.get('nivel_id')?.removeValidators(Validators.required);
       this.formularioUsuario.get('organizacion_id')?.setValidators([Validators.required]);
+      this.formularioUsuario.get('funcion_laboral')?.setValidators([Validators.required]);
+      this.formularioUsuario.get('telefono')?.setValidators([Validators.required]);
     } else {
       this.formularioUsuario.get('carrera_id')?.removeValidators(Validators.required);
       this.formularioUsuario.get('nivel_id')?.removeValidators(Validators.required);
       this.formularioUsuario.get('organizacion_id')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('funcion_laboral')?.removeValidators(Validators.required);
+      this.formularioUsuario.get('telefono')?.removeValidators(Validators.required);
     }
 
     this.formularioUsuario.get('carrera_id')?.updateValueAndValidity();
     this.formularioUsuario.get('nivel_id')?.updateValueAndValidity();
     this.formularioUsuario.get('organizacion_id')?.updateValueAndValidity();
+    this.formularioUsuario.get('funcion_laboral')?.updateValueAndValidity();
+    this.formularioUsuario.get('telefono')?.updateValueAndValidity();
   }
 
   public validarCedulaUnica(): void {
@@ -237,7 +249,9 @@ export class FormularioUsuarioComponent {
           });
         } else if (this.tipoUsuarioTemp === 'REPRESENTANTE PRÁCTICAS') {
           this.formularioUsuario.patchValue({
-            organizacion_id: usuario.internship_representative?.organization?.id
+            organizacion_id: usuario.internship_representative?.organization?.id,
+            funcion_laboral: usuario.internship_representative?.funcion_laboral,
+            telefono: usuario.internship_representative?.telefono
           });
         } else {
           //
@@ -248,5 +262,9 @@ export class FormularioUsuarioComponent {
         console.error(err);
       }
     });
+  }
+
+  public redireccionar(ruta: string): void {
+    this.router.navigateByUrl(`/app/administrar-usuarios/${ruta}`)
   }
 }

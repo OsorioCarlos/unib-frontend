@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
-import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrganizationComponent } from './components/organization/organization.component';
 import { StudentComponent } from './components/student/student.component';
@@ -16,17 +15,20 @@ import { ResumenPracticaComponent } from './components/student/resumen-practica/
 import {TableModule} from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 
+import { ListadoEstudiantesComponent } from './components/listado-estudiantes/listado-estudiantes.component';
+import { HomeComponent } from './components/home/home.component';
+
 @NgModule({
   declarations: [
     PrivateAppComponent,
     StudentComponent,
     NavbarComponent,
-    AdminComponent,
+    HomeComponent,
     OrganizationComponent,
     DirectorComponent,
     SeguimientoEvaluacionComponent,
     ResumenPracticaComponent,
-
+    ListadoEstudiantesComponent
   ],
   imports: [
     CommonModule,
