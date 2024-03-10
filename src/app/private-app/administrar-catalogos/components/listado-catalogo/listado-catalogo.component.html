@@ -28,8 +28,8 @@
                 <td>
                     <span class="p-buttonset">
                         <p-button icon="pi pi-info-circle" severity="info" (onClick)="redireccionar('ver/' + recurso.id)"></p-button>
-                        <p-button icon="pi pi-pencil" severity="warning" (onClick)="redireccionar('editar/' + recurso.id)"></p-button>
-                        <p-button icon="pi pi-trash" severity="danger" (onClick)="abrirVentanaConfirmacion(recurso.id)"></p-button>
+                        <p-button icon="pi pi-pencil" severity="warning" (onClick)="redireccionar('editar/' + recurso.id)" [disabled]="restringirModificacionRegistro(recurso.id)"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger" (onClick)="abrirVentanaConfirmacion(recurso.id)"  [disabled]="restringirEliminadoRegistro(recurso.id)"></p-button>
                     </span>
                     <!--<div class="btn-group" role="group" aria-label="Button group">
                         <button type="button" class="btn btn-info" (click)="redireccionar('ver/' + recurso.id)">

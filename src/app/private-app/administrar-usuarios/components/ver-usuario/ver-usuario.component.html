@@ -18,10 +18,12 @@
             <b>Nivel:</b> {{usuario?.student?.nivel_catalogo?.nombre}}
           </p>
           <p class="card-text" *ngIf="usuario?.career_director">
-            <b>Carrera:</b> {{usuario?.career_director?.carrera_catalogo?.nombre}}<br>
+            <b>Carrera:</b> {{usuario?.career_director?.carrera_catalogo?.nombre}}
           </p>
           <p class="card-text" *ngIf="usuario?.internship_representative">
-            <b>Carrera:</b> {{usuario?.internship_representative?.organization?.ruc}}<br>
+            <b>Organización:</b> {{usuario?.internship_representative?.organization?.razon_social}}<br>
+            <b>Función Laboral:</b> {{usuario?.internship_representative?.funcion_laboral}}<br>
+            <b>Teléfono:</b> {{usuario?.internship_representative?.telefono}}
           </p>
         </div>
     </div>

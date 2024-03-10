@@ -110,4 +110,8 @@ export class FormularioOrganizacionComponent {
       }
     });
   }
+
+  public redireccionar(ruta: string): void {
+    this.router.navigateByUrl(`/app/administrar-organizaciones/${ruta}`)
+  }
 }

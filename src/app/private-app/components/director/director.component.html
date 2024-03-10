@@ -42,7 +42,8 @@
                 <td>{{estudiante.nombre}}</td>
                 <td>{{estudiante.nivel}}</td>
                 <td>{{estudiante.estadoPractica}}</td>
-                <td><a class="btn btn-primary" [routerLink]="['/app/director/informacion-practica',estudiante.identificacion]" role="button" data-bs-toggle="dropdown"
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/app/director/informacion-practica',estudiante.identificacion]" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">Ver</a>
                 </td>
             </tr>

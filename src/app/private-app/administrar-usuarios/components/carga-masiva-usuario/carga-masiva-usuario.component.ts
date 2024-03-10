@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { PrivateAppService } from 'src/app/private-app/services/private-app.service';
 import { AppService } from 'src/app/services/app.service';
@@ -19,6 +20,7 @@ export class CargaMasivaUsuarioComponent {
   public apiUrl: string = environment.apiUrl;
 
   constructor(
+    private router: Router, 
     private privateAppService: PrivateAppService,
     private fb: FormBuilder,
     private appService: AppService
@@ -77,6 +79,10 @@ export class CargaMasivaUsuarioComponent {
         console.error(err);
       }
     });
+  }
+
+  public redireccionar(ruta: string): void {
+    this.router.navigateByUrl(`/app/administrar-usuarios/${ruta}`)
   }
   
 }

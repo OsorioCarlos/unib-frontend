@@ -1,0 +1,44 @@
+<div class="container mt-2">
+  <h1 class="text-primary">
+    PRÁCTICAS PREPROFESIONALES <br />
+  </h1>
+  <br />
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-primary">
+        INFORMACIÓN DE PRÁCTICAS
+      </h5>
+      <p-table #dt [value]="practicasPreprofesionales" [rows]="10" [paginator]="true" styleClass="p-datatable-sm" responsiveLayout="scroll"
+        [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Organización</th>
+            <th>Inicio Prácticas</th>
+            <th>Fin Prácticas</th>
+            <th>Nota Final</th>
+            <th>Estado Prácticas</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-practica>
+          <tr>
+            <td>{{practica.organization.razon_social}}</td>
+            <td>{{practica.fecha_inicio}}</td>
+            <td>{{practica.fecha_fin}}</td>
+            <td>{{practica.nota_final}}</td>
+            <td>{{practica.estado_catalogo.nombre}}</td>
+            <td>
+              <a class="btn btn-primary" [routerLink]="['/app/estudiante/resumen-practica', practica.id]" role="button"
+                aria-expanded="false">Ver</a>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            Total: {{practicasPreprofesionales ? practicasPreprofesionales.length : 0 }} prácticas.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

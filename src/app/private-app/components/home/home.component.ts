@@ -7,11 +7,11 @@ import { User } from '../../interfaces/user';
 import { PrivateAppService } from '../../services/private-app.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
-export class AdminComponent {
+export class HomeComponent {
   agregarUsuarioForm!: FormGroup;
   listaUsuarios!: User[];
   constructor(

@@ -17,7 +17,7 @@
                             </div>
                             <div class="col">
                                 <label for="nombreCompletoInput" class="form-label">Nombre Completo:</label>
-                                <input type="text" class="form-control" id="nombreCompletoInput" formControlName="nombre_completo">
+                                <input type="text" class="form-control" id="nombreCompletoInput" formControlName="nombre_completo" pattern="[A-Z]">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -61,12 +61,24 @@
                                     <option *ngFor="let opcion of nivelOpciones" value="{{opcion.id}}">{{opcion.nombre}}</option>
                                 </select>
                             </div>
-                            <div class="col" *ngIf="tipoUsuarioTemp==='REPRESENTANTE PRÁCTICAS'">
+                        </div>
+                        <div class="row mb-3" *ngIf="tipoUsuarioTemp==='REPRESENTANTE PRÁCTICAS'">
+                            <div class="col">
                                 <label class="form-label">Organización:</label>
                                 <select class="form-select" aria-label="Default select example" formControlName="organizacion_id">
                                     <option disabled>Selecciona una opción</option>
                                     <option *ngFor="let opcion of organizacionOpciones" value="{{opcion.id}}">{{opcion.razon_social}}</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3" *ngIf="tipoUsuarioTemp==='REPRESENTANTE PRÁCTICAS'">
+                            <div class="col">
+                                <label for="funcionLaboralInput" class="form-label">Función Laboral:</label>
+                                <input type="text" class="form-control" id="funcionLaboralInput" formControlName="funcion_laboral">
+                            </div>
+                            <div class="col">
+                                <label for="telefonoInput" class="form-label">Teléfono:</label>
+                                <input type="text" class="form-control" id="telefonoInput" formControlName="telefono">
                             </div>
                         </div>
                     </div>
@@ -76,5 +88,6 @@
     </div>
     <div class="d-grid gap-2 mb-3">
         <button class="btn btn-primary btn-lg" type="button" (click)="guardarInformacion()" [disabled]="formularioUsuario.invalid">Guardar</button>
+        <button class="btn btn-outline-secondary btn-lg" type="button" (click)="redireccionar('listado')">Regresar</button>
     </div>
 </div>
